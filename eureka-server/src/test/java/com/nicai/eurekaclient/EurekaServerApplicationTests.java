@@ -1,4 +1,4 @@
-package com.nicai.eurekaserver;
+package com.nicai.eurekaclient;
 
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

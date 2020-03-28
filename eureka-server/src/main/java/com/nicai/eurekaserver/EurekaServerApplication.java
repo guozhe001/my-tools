@@ -1,4 +1,4 @@
-package com.nicai.eurekaclient;
+package com.nicai.eurekaserver;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.WebApplicationType;

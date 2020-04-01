@@ -20,6 +20,7 @@
         <module>eureka-server</module>
         <module>eureka-client</module>
         <module>ribbon-consumer</module>
+        <module>experience</module>
     </modules>
 
     <properties>
@@ -80,6 +81,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-actuator</artifactId>
                 <version>${org.springframework.boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -34,4 +34,14 @@ public class CheckPhoneNumber {
         return false;
     }
 
+    /**
+     * 判断手机号码是否有超过四个连续的数字
+     *
+     * @param phoneNumber 手机号
+     * @return 如果有超过四个连续的数字则返回true，否则返回false
+     */
+    public static boolean check2(String phoneNumber) {
+        return ILLEGAL_STR.parallelStream().anyMatch(phoneNumber::contains);
+    }
+
 }

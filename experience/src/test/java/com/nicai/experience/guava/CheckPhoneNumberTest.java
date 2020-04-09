@@ -30,15 +30,15 @@ public class CheckPhoneNumberTest {
 
     @Test
     public void test() {
-        List<String> collect = IntStream.range(0, 100000).parallel()
+        List<String> collect = IntStream.range(0, 1000000).parallel()
                 .mapToObj(i -> getTel()).collect(Collectors.toList());
         Stopwatch stopwatch = Stopwatch.createStarted();
-        collect.forEach(phoneNumber -> {
-            if (CheckPhoneNumber.check(phoneNumber)) {
-                System.out.println(phoneNumber);
-            }
-        });
-        System.out.println("spend " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
+        collect.forEach(CheckPhoneNumber::check);
+        System.out.println("check spend " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
+
+        Stopwatch stopwatch2 = Stopwatch.createStarted();
+        collect.forEach(CheckPhoneNumber::check2);
+        System.out.println("check2 spend " + stopwatch2.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
     }
 
     @Test

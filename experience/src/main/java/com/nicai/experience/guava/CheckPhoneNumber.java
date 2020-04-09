@@ -2,11 +2,12 @@ package com.nicai.experience.guava;
 
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+@Slf4j
 public class CheckPhoneNumber {
-
     private static final String FORMAT = "%s%s%s%s";
     private static final List<String> ILLEGAL_STR = Lists.newArrayList();
 
@@ -16,7 +17,7 @@ public class CheckPhoneNumber {
             ILLEGAL_STR.add(str);
             ILLEGAL_STR.add(StrUtil.reverse(str));
         }
-        ILLEGAL_STR.forEach(System.out::println);
+        ILLEGAL_STR.forEach(s -> log.info("{}", s));
     }
 
     /**

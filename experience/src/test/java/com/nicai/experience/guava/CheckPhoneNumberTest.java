@@ -1,6 +1,7 @@
 package com.nicai.experience.guava;
 
 import com.google.common.base.Stopwatch;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,6 +11,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+@Slf4j
 public class CheckPhoneNumberTest {
 
     /**
@@ -41,17 +43,21 @@ public class CheckPhoneNumberTest {
     private void print(List<String> collect, Consumer<? super String> function, String methodName) {
         Stopwatch stopwatch = Stopwatch.createStarted();
         collect.forEach(function);
-        System.out.println("methodName = " + methodName + " spend " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
+        log.info("methodName = {} spend {} MILLISECONDS", methodName, stopwatch.elapsed(TimeUnit.MILLISECONDS));
     }
 
     @Test
     public void check() {
         Assert.assertTrue(CheckPhoneNumber.check("12345678901"));
+        Assert.assertTrue(CheckPhoneNumber.check2("12345678901"));
+        Assert.assertTrue(CheckPhoneNumber.check3("12345678901"));
     }
 
     @Test
     public void check1() {
         Assert.assertFalse(CheckPhoneNumber.check("18651866593"));
+        Assert.assertFalse(CheckPhoneNumber.check2("18651866593"));
+        Assert.assertFalse(CheckPhoneNumber.check3("18651866593"));
     }
 
 }

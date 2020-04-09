@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -32,13 +33,15 @@ public class CheckPhoneNumberTest {
     public void test() {
         List<String> collect = IntStream.range(0, 1000000).parallel()
                 .mapToObj(i -> getTel()).collect(Collectors.toList());
-        Stopwatch stopwatch = Stopwatch.createStarted();
-        collect.forEach(CheckPhoneNumber::check);
-        System.out.println("check spend " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
+        print(collect, CheckPhoneNumber::check, "check");
+        print(collect, CheckPhoneNumber::check2, "check2");
+        print(collect, CheckPhoneNumber::check3, "check3");
+    }
 
-        Stopwatch stopwatch2 = Stopwatch.createStarted();
-        collect.forEach(CheckPhoneNumber::check2);
-        System.out.println("check2 spend " + stopwatch2.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
+    private void print(List<String> collect, Consumer<? super String> function, String methodName) {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        collect.forEach(function);
+        System.out.println("methodName = " + methodName + " spend " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
     }
 
     @Test

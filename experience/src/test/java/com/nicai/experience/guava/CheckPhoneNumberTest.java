@@ -33,7 +33,11 @@ public class CheckPhoneNumberTest {
         List<String> collect = IntStream.range(0, 100000).parallel()
                 .mapToObj(i -> getTel()).collect(Collectors.toList());
         Stopwatch stopwatch = Stopwatch.createStarted();
-        collect.forEach(phoneNumber -> System.out.println(phoneNumber + ":" + CheckPhoneNumber.check("12345678901")));
+        collect.forEach(phoneNumber -> {
+            if (CheckPhoneNumber.check(phoneNumber)) {
+                System.out.println(phoneNumber);
+            }
+        });
         System.out.println("spend " + stopwatch.elapsed(TimeUnit.MILLISECONDS) + " MILLISECONDS");
     }
 

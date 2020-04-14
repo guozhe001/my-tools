@@ -1,4 +1,4 @@
-package com.nicai.experience.guava;
+package com.nicai.experience.other;
 
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;

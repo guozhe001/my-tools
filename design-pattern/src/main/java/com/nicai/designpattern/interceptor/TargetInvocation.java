@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
+ * 被拦截的类的调用方法
+ *
  * @author guozhe
  * @date 2020-04-23
  */
@@ -41,9 +43,10 @@ public class TargetInvocation {
     public Response invoke() {
         if (interceptorIterator.hasNext()) {
             Interceptor interceptor = interceptorIterator.next();
-            interceptor.intercept(this);
+            return interceptor.intercept(this);
+        } else {
+            return target.executeBiz(request);
         }
-        return target.executeBiz(request);
     }
 
     public Target getTarget() {

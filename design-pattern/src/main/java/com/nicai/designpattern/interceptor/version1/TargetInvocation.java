@@ -1,6 +1,9 @@
-package com.nicai.designpattern.interceptor;
+package com.nicai.designpattern.interceptor.version1;
 
 import com.google.common.collect.Lists;
+import com.nicai.designpattern.interceptor.Request;
+import com.nicai.designpattern.interceptor.Response;
+import com.nicai.designpattern.interceptor.Target;
 
 import java.util.Iterator;
 import java.util.List;

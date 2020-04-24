@@ -1,6 +1,7 @@
-package com.nicai.designpattern.interceptor;
+package com.nicai.designpattern.interceptor.version2;
 
 import cn.hutool.core.lang.Assert;
+import com.nicai.designpattern.interceptor.Response;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -15,10 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 public class AuditInterceptorImpl implements Interceptor {
 
     @Override
-    public Response intercept(TargetInvocation targetInvocation) {
+    public void before(TargetInvocation targetInvocation) {
         Assert.notNull(targetInvocation.getTarget());
         log.info("审计拦截器执行成功");
-        return targetInvocation.invoke();
+    }
+
+    @Override
+    public void after(TargetInvocation targetInvocation, Response response) {
+        // do nothing
     }
 
 }

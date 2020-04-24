@@ -1,4 +1,6 @@
-package com.nicai.designpattern.interceptor;
+package com.nicai.designpattern.interceptor.version1;
+
+import com.nicai.designpattern.interceptor.Response;
 
 /**
  * 拦截器接口

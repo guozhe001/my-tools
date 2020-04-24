@@ -10,8 +10,14 @@
     </parent>
 
     <artifactId>design-pattern</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>design-pattern</name>
     <description>设计模式</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

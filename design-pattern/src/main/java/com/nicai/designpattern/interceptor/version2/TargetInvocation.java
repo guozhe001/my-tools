@@ -24,11 +24,14 @@ public class TargetInvocation {
     private List<Interceptor> interceptors = Lists.newArrayList();
 
     /**
+     * 拦截器列表迭代器
+     */
+    private Iterator<Interceptor> interceptorIterator = interceptors.iterator();
+
+    /**
      * 被拦截的类
      */
     private Target target;
-
-    private Iterator<Interceptor> interceptorIterator = interceptors.iterator();
 
     /**
      * 当前的Target请求

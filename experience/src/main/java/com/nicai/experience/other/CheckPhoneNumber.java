@@ -6,6 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+/**
+ * 检查手机号码是否有至少四个连续数字
+ *
+ * @author guozhe
+ */
 @Slf4j
 public class CheckPhoneNumber {
     private static final String FORMAT = "%s%s%s%s";

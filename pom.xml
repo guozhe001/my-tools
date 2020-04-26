@@ -17,11 +17,9 @@
 
     <modules>
         <module>dao</module>
-        <module>experience</module>
-        <module>suanfa</module>
-        <module>design-pattern</module>
         <module>my-spring-boot</module>
         <module>my-spring-cloud</module>
+        <module>my-learn</module>
     </modules>
 
     <properties>

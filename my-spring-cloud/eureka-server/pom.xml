@@ -4,26 +4,22 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.nicai</groupId>
-        <artifactId>my-tools</artifactId>
+        <artifactId>my-spring-cloud</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>ribbon-consumer</artifactId>
-    <name>ribbon-consumer</name>
-    <description>ribbon-consumer test</description>
+    <artifactId>eureka-server</artifactId>
+    <name>eureka-server</name>
+    <description>eureka-server test</description>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -41,13 +37,6 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.pivotal.spring.cloud</groupId>
-                <artifactId>spring-cloud-services-dependencies</artifactId>
-                <version>${spring-cloud-services.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -4,14 +4,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.nicai</groupId>
-        <artifactId>my-tools</artifactId>
+        <artifactId>my-spring-cloud</artifactId>
         <version>1.0</version>
     </parent>
 
     <artifactId>eureka-client</artifactId>
     <name>eureka-client</name>
     <description>eureka-client test</description>
-
 
     <dependencies>
         <dependency>

@@ -17,12 +17,11 @@
 
     <modules>
         <module>dao</module>
-        <module>eureka-server</module>
-        <module>eureka-client</module>
-        <module>ribbon-consumer</module>
         <module>experience</module>
         <module>suanfa</module>
         <module>design-pattern</module>
+        <module>my-spring-boot</module>
+        <module>my-spring-cloud</module>
     </modules>
 
     <properties>

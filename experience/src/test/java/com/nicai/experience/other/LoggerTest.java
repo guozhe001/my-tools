@@ -46,7 +46,8 @@ public class LoggerTest {
 
     private static String getJsonString(Object o) {
         try {
-            Thread.sleep(1000L);
+            // 为了让客户端感受到调用此方法可能很慢
+            Thread.sleep(10L);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -5,10 +5,7 @@ import mockit.integration.junit4.JMockit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.BlockingDeque;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 /**
@@ -53,14 +50,24 @@ public class LinkedBlockingDequeTest {
         // 多个线程去put
         IntStream.range(0, 100).parallel().forEach(i -> putExecutorService.submit(() -> {
             try {
-                Thread.sleep(100);
+                Thread.sleep(1L);
                 blockingDeque.put(String.valueOf(i));
                 log.info("put value i = {}", i);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }));
-
-        Thread.sleep(10000);
+        waitAllThreadDone(putExecutorService);
+        takeExecutorService.awaitTermination(1000L, TimeUnit.MILLISECONDS);
     }
+
+    private void waitAllThreadDone(ExecutorService executorService) {
+        executorService.shutdown();
+        while (true) {
+            if (executorService.isTerminated()) {
+                break;
+            }
+        }
+    }
+
 }

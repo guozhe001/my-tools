@@ -18,14 +18,9 @@ public class TernaryOperatorTest {
         TernaryOperator.getResultInteger(true);
     }
 
-    @Test(expected = NullPointerException.class)
-    public void getResultIntFalse() {
-        TernaryOperator.getResultInt(false);
-    }
-
     @Test
-    public void getResultIntTrue() {
-        TernaryOperator.getResultInt(true);
+    public void getResultInteger1() {
+        TernaryOperator.getResultInteger1(false);
     }
 
 }

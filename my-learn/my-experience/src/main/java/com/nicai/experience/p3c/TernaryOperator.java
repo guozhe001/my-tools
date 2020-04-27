@@ -19,13 +19,19 @@ public class TernaryOperator {
      * @return
      */
     static Integer getResultInteger(Boolean flag) {
+        // a + b计算之后的返回结果为int类型
         Integer result = flag ? a + b : c;
         return result;
     }
 
-    static int getResultInt(Boolean flag) {
-        int result = flag ? a + b : c;
-        return result;
+    /**
+     * 当flag为false时，不会报NPE
+     *
+     * @param flag
+     * @return
+     */
+    static Integer getResultInteger1(Boolean flag) {
+        return flag ? a : c;
     }
 
 }

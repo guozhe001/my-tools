@@ -16,7 +16,6 @@
     <version>1.0</version>
 
     <modules>
-        <module>dao</module>
         <module>my-spring-boot</module>
         <module>my-spring-cloud</module>
         <module>my-learn</module>

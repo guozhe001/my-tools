@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.nicai</groupId>
-        <artifactId>my-tools</artifactId>
+        <artifactId>my-spring-boot</artifactId>
         <version>1.0</version>
     </parent>
 

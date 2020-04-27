@@ -11,7 +11,13 @@
 
     <artifactId>my-spring-boot</artifactId>
     <name>my-spring-boot</name>
+    <packaging>pom</packaging>
     <description>spring-boot特性实践</description>
+
+    <modules>
+        <module>feature-practice</module>
+        <module>dao</module>
+    </modules>
 
     <dependencies>
         <dependency>
@@ -29,11 +35,15 @@
     </dependencies>
 
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>

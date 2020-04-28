@@ -38,6 +38,7 @@ class CollectionToMap {
     /**
      * 列表转换成map
      * 如果列表中有重复的key则抛异常
+     * 如果value中存在null值会抛NPE
      *
      * @param pairs 列表
      * @return map
@@ -49,6 +50,7 @@ class CollectionToMap {
     /**
      * 列表转换成map
      * 如果列表中有重复的key则使用后面的一个覆盖前面的值
+     * 如果value中存在null值会抛NPE
      *
      * @param pairs 列表
      * @return map

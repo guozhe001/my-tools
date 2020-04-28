@@ -21,6 +21,7 @@ public class CollectionToMapTest {
 
     private static final String KEY1 = "version1";
     private static final String KEY2 = "version2";
+    private static final String KEY3 = "version3";
 
     @BeforeClass
     public static void initList() {
@@ -39,7 +40,7 @@ public class CollectionToMapTest {
     }
 
     /**
-     * 没有重复的key，转换正常
+     * 没有重复的key并且value没有为null的数据转换正常
      */
     @Test
     public void collectToMap() {
@@ -52,10 +53,21 @@ public class CollectionToMapTest {
     }
 
     /**
+     * 没有重复的key，但是value存在null值
+     */
+    @Test(expected = NullPointerException.class)
+    public void collectToMapNullValue() {
+        List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
+        myPairs.remove(2);
+        myPairs.add(new CollectionToMap.Pair(KEY3, null));
+        CollectionToMap.collectToMap(myPairs);
+    }
+
+    /**
      * 有重复的key,
      */
     @Test
-    public void collectToMapFixDuplicateKey() {
+    public void collectToMapMergeDuplicateKeyHaveDuplicateKey() {
         Map<String, Double> stringDoubleMap = CollectionToMap.collectToMapMergeDuplicateKey(PAIRS);
         Assert.assertEquals(2, stringDoubleMap.size());
         Assert.assertTrue(stringDoubleMap.containsKey(KEY1));
@@ -66,13 +78,24 @@ public class CollectionToMapTest {
      * 没有重复的key，转换正常
      */
     @Test
-    public void collectToMapFix() {
+    public void collectToMapMergeDuplicateKey() {
         List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
         myPairs.remove(2);
         Map<String, Double> stringDoubleMap = CollectionToMap.collectToMapMergeDuplicateKey(myPairs);
         Assert.assertEquals(2, stringDoubleMap.size());
         Assert.assertTrue(stringDoubleMap.containsKey(KEY1));
         Assert.assertTrue(stringDoubleMap.containsKey(KEY2));
+    }
+
+    /**
+     * 没有重复的key，但是value存在null值
+     */
+    @Test(expected = NullPointerException.class)
+    public void collectToMapMergeDuplicateKeyNullValue() {
+        List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
+        myPairs.remove(2);
+        myPairs.add(new CollectionToMap.Pair(KEY3, null));
+        CollectionToMap.collectToMapMergeDuplicateKey(myPairs);
     }
 
 }

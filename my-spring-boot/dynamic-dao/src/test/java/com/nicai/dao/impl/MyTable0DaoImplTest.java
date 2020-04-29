@@ -8,11 +8,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 
 /**
  * @author guozhe
  * @date 2020-04-27
  */
+@ActiveProfiles("dev")
 public class MyTable0DaoImplTest extends BaseTest {
 
     @Rule

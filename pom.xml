@@ -88,6 +88,12 @@
             <artifactId>spring-boot-starter-logging</artifactId>
             <version>${org.springframework.boot.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-core</artifactId>
+            <version>2.0.7</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>

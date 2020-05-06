@@ -1,12 +1,15 @@
 package com.nicai.experience.nio;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author guozhe
@@ -15,31 +18,19 @@ import java.nio.channels.SocketChannel;
 @Slf4j
 public class ServerSocketChannelPractice {
 
+    private static final ExecutorService EXECUTOR_SERVICE = new ThreadPoolExecutor(2, 2, 0, TimeUnit.MILLISECONDS, new LinkedBlockingDeque<>(1024)
+            , new ThreadFactoryBuilder().setNameFormat("ServerSocketChannelPractice-%s").build());
+
     public static void main(String[] args) throws IOException {
-        test();
+        listen();
     }
 
-    public static void test() throws IOException {
+    public static void listen() throws IOException {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         serverSocketChannel.socket().bind(new InetSocketAddress(8080));
         while (true) {
-            SocketChannel accept = serverSocketChannel.accept();
-            print(accept);
+            EXECUTOR_SERVICE.execute(new SocketHandler(serverSocketChannel.accept()));
         }
-
     }
 
-    private static void print(SocketChannel socketChannel) throws IOException {
-        ByteBuffer buffer = ByteBuffer.allocate(1024);
-        while (true) {
-            int read = socketChannel.read(buffer);
-            if (read <= 0) {
-                break;
-            }
-            buffer.flip();
-            log.info("{}", new String(buffer.array()));
-        }
-
-
-    }
 }

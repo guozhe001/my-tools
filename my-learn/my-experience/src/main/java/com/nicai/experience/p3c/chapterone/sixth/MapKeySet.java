@@ -1,4 +1,4 @@
-package com.nicai.experience.p3c.collection;
+package com.nicai.experience.p3c.chapterone.sixth;
 
 import com.nicai.experience.constans.MyConstant;
 
@@ -23,9 +23,13 @@ import java.util.Set;
  * @author guozhe
  * @date 2020-04-28
  */
-class MapKeySet {
+public class MapKeySet {
 
-    static void addKeySet(Map<Integer, Double> map) {
+    private MapKeySet() {
+
+    }
+
+    public static void addKeySet(Map<Integer, Double> map) {
         Set<Integer> keys = map.keySet();
         keys.add(MyConstant.RANDOM.nextInt());
     }
@@ -35,12 +39,12 @@ class MapKeySet {
      *
      * @param map 待操作的map
      */
-    static void removeKeySet(Map<Integer, Double> map) {
+    public static void removeKeySet(Map<Integer, Double> map) {
         Set<Integer> keys = map.keySet();
         keys.remove(0);
     }
 
-    static void addValues(Map<Integer, Double> map) {
+    public static void addValues(Map<Integer, Double> map) {
         Collection<Double> values = map.values();
         values.add(MyConstant.RANDOM.nextDouble());
     }
@@ -50,12 +54,12 @@ class MapKeySet {
      *
      * @param map 待操作的map
      */
-    static void removeValues(Map<Integer, Double> map) {
+    public static void removeValues(Map<Integer, Double> map) {
         Collection<Double> values = map.values();
-        values.remove(0);
+        values.remove(0d);
     }
 
-    static void addEntrySet(Map<Integer, Double> map) {
+    public static void addEntrySet(Map<Integer, Double> map) {
         Set<Map.Entry<Integer, Double>> entries = map.entrySet();
         entries.add(new Map.Entry<Integer, Double>() {
             @Override
@@ -90,9 +94,9 @@ class MapKeySet {
      *
      * @param map 待操作的map
      */
-    static void removeEntrySet(Map<Integer, Double> map) {
+    public static void removeEntrySet(Map<Integer, Double> map) {
         Set<Map.Entry<Integer, Double>> entries = map.entrySet();
-        entries.remove(0);
+        entries.removeIf(integerDoubleEntry -> 0 == integerDoubleEntry.getKey());
     }
 
 }

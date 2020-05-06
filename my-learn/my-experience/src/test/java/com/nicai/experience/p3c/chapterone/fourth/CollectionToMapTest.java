@@ -1,6 +1,7 @@
-package com.nicai.experience.p3c.collection;
+package com.nicai.experience.p3c.chapterone.fourth;
 
 import com.google.common.collect.Lists;
+import com.nicai.experience.p3c.chapterone.sixth.CollectionToMap;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

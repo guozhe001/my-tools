@@ -23,10 +23,14 @@ public class SocketChannelPracticeTest {
      * @throws IOException IO异常
      */
     @Test
-    public void test1() throws IOException {
-        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 8081));
-        SocketChannelPractice.sendSomething(socketChannel, "得到的点点滴滴");
-        readSocketChannel(socketChannel);
+    public void test1() {
+        try {
+            SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 8081));
+            SocketChannelPractice.sendSomething(socketChannel, "得到的点点滴滴");
+            readSocketChannel(socketChannel);
+        } catch (Exception e) {
+            log.error("failed", e);
+        }
     }
 
     private void readSocketChannel(SocketChannel socketChannel) throws IOException {

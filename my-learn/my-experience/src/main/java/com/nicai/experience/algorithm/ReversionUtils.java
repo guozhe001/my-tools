@@ -25,7 +25,7 @@ public class ReversionUtils {
     public static int intReversion(int num) {
 
         Assert.isTrue(num >= 0);
-        int temp = Integer.valueOf(num).intValue();
+        int temp = num;
         int result = 0;
         while (true) {
             // 获取此数字的位数

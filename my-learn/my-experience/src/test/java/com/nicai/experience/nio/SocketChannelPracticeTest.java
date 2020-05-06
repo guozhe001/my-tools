@@ -24,7 +24,7 @@ public class SocketChannelPracticeTest {
      */
     @Test
     public void test1() throws IOException {
-        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 8080));
+        SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", 8081));
         SocketChannelPractice.sendSomething(socketChannel, "得到的点点滴滴");
         readSocketChannel(socketChannel);
     }

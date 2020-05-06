@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
 
@@ -36,5 +37,15 @@ public class ChannelUtils {
             log.info("bizName={} printSocketChannel={}", bizName, string);
             byteBuffer.clear();
         }
+    }
+
+    /**
+     * 读取并输出SocketChannel中的内容
+     *
+     * @param bizName       业务名称
+     * @param socketChannel 需要读取并输出的SocketChannel
+     * @throws IOException IO异常
+     */
+    public static void printAsynchronousSocketChannel(String bizName, AsynchronousSocketChannel socketChannel) throws IOException {
     }
 }

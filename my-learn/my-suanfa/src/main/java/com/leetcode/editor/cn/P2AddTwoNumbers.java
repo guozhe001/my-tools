@@ -25,6 +25,8 @@ class P2AddTwoNumbers {
         }
 
         /**
+         * 递归调用addTwoNumbers，直到两个链表的末尾并且上个数字之和小于0
+         *
          * @param l1    链表1
          * @param l2    链表2
          * @param carry 是否进位

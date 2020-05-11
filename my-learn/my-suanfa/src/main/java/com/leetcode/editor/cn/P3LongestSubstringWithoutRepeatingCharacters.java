@@ -54,9 +54,9 @@ public class P3LongestSubstringWithoutRepeatingCharacters {
         /**
          * 从下标为i开始向后获取不重复的字符
          *
-         * @param chars
-         * @param start
-         * @param unRepeatLength
+         * @param chars          需要查找的字符数组
+         * @param start          开始查找的下标
+         * @param unRepeatLength 不循环的字符串长度map
          * @return 下次开始循环的下标
          */
         int getNoRepeatMap(char[] chars, int start, Map<Integer, Integer> unRepeatLength) {

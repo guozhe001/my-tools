@@ -17,6 +17,7 @@
     <modules>
         <module>feature-practice</module>
         <module>dynamic-dao</module>
+        <module>ehcache-demo</module>
     </modules>
 
     <dependencies>

@@ -23,7 +23,7 @@ public class FileChannelPracticeTest {
 
     private static final List<String> CONTEXT = IntStream.range(0, 10000).mapToObj(i -> UUID.randomUUID().toString()).collect(Collectors.toList());
 
-    private static final File file = FileUtil.writeUtf8Lines(CONTEXT, "BufferPracticeFile.txt");
+    static final File FILE = FileUtil.writeUtf8Lines(CONTEXT, "BufferPracticeFile.txt");
 
     @Test
     public void backup() throws IOException {
@@ -31,7 +31,7 @@ public class FileChannelPracticeTest {
         File backup = FileChannelPractice.backupWithNio(FileUtil.writeUtf8Lines(CONTEXT, "BufferPracticeFile.txt"), "BufferPracticeFile_backup.txt");
         log.info("nio backupWithNio file with {} lines of data spend {} MILLISECONDS", CONTEXT.size(), stopwatch.elapsed(TimeUnit.MILLISECONDS));
         printFileContext(backup);
-        FileUtil.del(file);
+        FileUtil.del(FILE);
         FileUtil.del(backup);
     }
 

@@ -3,7 +3,6 @@ package com.nicai.experience.other;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author guozhe
@@ -34,7 +33,6 @@ public class LambdaPractice {
      * @return 列表中前缀为传入前缀的第一个
      */
     static String findOrElseGetRightWay(List<String> strings, final String prefix) {
-        Optional<String> first = strings.stream().filter(str -> StringUtils.startsWith(str, prefix)).findFirst();
-        return first.isPresent() ? first.get() : null;
+        return strings.stream().filter(str -> StringUtils.startsWith(str, prefix)).findFirst().orElse(null);
     }
 }

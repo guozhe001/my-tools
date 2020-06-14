@@ -30,13 +30,13 @@ public class FileChannelWithMemoryMapPractice {
         MappedByteBuffer buffer;
         try (FileChannel readChannel = FileChannel.open(file.toPath(), StandardOpenOption.WRITE, StandardOpenOption.READ)) {
             // 内存映射：方式是读写，从位置为0的地方开始，大小为2048位
-            buffer = readChannel.map(FileChannel.MapMode.READ_WRITE, 0L, 2048);
+            buffer = readChannel.map(FileChannel.MapMode.READ_WRITE, 0L, 128);
             // 循环添加内存
             String writeContext = "hello mmap-" + UUID.randomUUID().toString();
-            log.info("写入内容={}", writeContext);
-            // 增加文件内容
+            log.info("写入内容={} time={}", writeContext, System.currentTimeMillis());
+            // 增加文件内容，在buffer中增加内容相当于把数据写入文件中
             buffer.put(writeContext.getBytes());
-            Thread.sleep(1000L);
+            Thread.sleep(10000L);
         }
     }
 
@@ -47,11 +47,21 @@ public class FileChannelWithMemoryMapPractice {
          * java.io.IOException: Channel not open for writing - cannot extend file to required size
          */
         try (FileChannel fileChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ, StandardOpenOption.WRITE)) {
-            mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 2048);
+            mappedByteBuffer = fileChannel.map(FileChannel.MapMode.READ_WRITE, 0, 128);
+            int count = 1;
+            while (true) {
+                if (mappedByteBuffer.isLoaded()) {
+                    break;
+                }
+                log.info("内容尚未加载到内存中,count={}", count);
+                count++;
+            }
             // 一直循环尝试读取文件内容
             while (mappedByteBuffer.hasRemaining()) {
                 System.out.print((char) mappedByteBuffer.get());
             }
+            System.out.println();
+            System.out.println(String.format("read time = %s", System.currentTimeMillis()));
         }
     }
 

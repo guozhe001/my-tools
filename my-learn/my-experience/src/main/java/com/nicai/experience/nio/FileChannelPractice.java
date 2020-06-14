@@ -54,6 +54,7 @@ public class FileChannelPractice {
             i++;
         }
         writeChannel.close();
+        readChannel.close();
         return backupFile;
     }
 

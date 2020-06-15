@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author guozhe
  */
 @Slf4j
-public class JustAServiceImpl implements JustAService {
+public class HelloServiceImpl implements HelloService {
 
     @Override
     public void hello() {

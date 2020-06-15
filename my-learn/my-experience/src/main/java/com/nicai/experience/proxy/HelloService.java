@@ -3,7 +3,7 @@ package com.nicai.experience.proxy;
 /**
  * @author guozhe
  */
-public interface JustAService {
+public interface HelloService {
 
     /**
      * print hello world

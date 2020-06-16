@@ -12,13 +12,13 @@ public class DynamicProxyDemo {
     private DynamicProxyDemo() {
     }
 
-    static void consumer(JustAService justAService) {
-        justAService.hello();
-        justAService.hello("nicai");
+    static void consumer(HelloService helloService) {
+        helloService.hello();
+        helloService.hello("nicai");
     }
 
     static void testProxy() {
-        consumer((JustAService) Proxy.newProxyInstance(JustAService.class.getClassLoader(),
-                new Class[]{JustAService.class}, new JustAInvocationHandler(new JustAServiceImpl())));
+        consumer((HelloService) Proxy.newProxyInstance(HelloService.class.getClassLoader(),
+                new Class[]{HelloService.class}, new HelloInvocationHandler(new HelloServiceImpl())));
     }
 }

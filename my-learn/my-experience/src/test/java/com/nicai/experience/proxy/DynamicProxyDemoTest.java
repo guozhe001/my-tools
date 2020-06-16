@@ -11,7 +11,7 @@ public class DynamicProxyDemoTest {
 
     @Test
     public void consumer() {
-        DynamicProxyDemo.consumer(new JustAServiceImpl());
+        DynamicProxyDemo.consumer(new HelloServiceImpl());
     }
 
 }

@@ -11,17 +11,17 @@ import java.lang.reflect.Method;
  * @author guozhe
  */
 @Slf4j
-public class JustAInvocationHandler implements InvocationHandler {
+public class HelloInvocationHandler implements InvocationHandler {
 
-    private JustAService justAService;
+    private final HelloService helloService;
 
-    public JustAInvocationHandler(JustAService justAService) {
-        this.justAService = justAService;
+    public HelloInvocationHandler(HelloService helloService) {
+        this.helloService = helloService;
     }
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.info("this is JustAInvocationHandler, then invoke justAService");
-        return method.invoke(justAService, args);
+        return method.invoke(helloService, args);
     }
 }

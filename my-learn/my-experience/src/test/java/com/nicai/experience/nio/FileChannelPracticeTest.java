@@ -21,28 +21,65 @@ import java.util.stream.IntStream;
 @Slf4j
 public class FileChannelPracticeTest {
 
-    private static final List<String> CONTEXT = IntStream.range(0, 10000).mapToObj(i -> UUID.randomUUID().toString()).collect(Collectors.toList());
+    private static List<String> CONTEXT;
 
-    static final File FILE = FileUtil.writeUtf8Lines(CONTEXT, "BufferPracticeFile.txt");
+    static {
+        CONTEXT = getContext();
+    }
 
     @Test
     public void backup() throws IOException {
         Stopwatch stopwatch = Stopwatch.createStarted();
-        File backup = FileChannelPractice.backupWithNio(FileUtil.writeUtf8Lines(CONTEXT, "BufferPracticeFile.txt"), "BufferPracticeFile_backup.txt");
+        File file = getSourceFile();
+        printAndAssert(file);
+        File backup = FileChannelPractice.backupWithNio(file, "BufferPracticeFile_backup.txt");
         log.info("nio backupWithNio file with {} lines of data spend {} MILLISECONDS", CONTEXT.size(), stopwatch.elapsed(TimeUnit.MILLISECONDS));
-        printFileContext(backup);
-        FileUtil.del(FILE);
+        printAndAssert(backup);
+        FileUtil.del(file);
+        FileUtil.del(backup);
+    }
+
+    File getSourceFile() {
+        return FileUtil.writeUtf8Lines(CONTEXT, FileUtil.touch("BufferPracticeFile.txt"));
+    }
+
+    private static List<String> getContext() {
+        return IntStream.range(0, 10000).mapToObj(i -> UUID.randomUUID().toString()).collect(Collectors.toList());
+    }
+
+    @Test
+    public void backupFileTransferFrom() throws IOException {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        File sourceFile = getSourceFile();
+        printAndAssert(sourceFile);
+        File backup = FileChannelPractice.backupFileTransferFrom(sourceFile, "BufferPracticeFile_backup.txt");
+        log.info("nio backupWithNio file with {} lines of data spend {} MILLISECONDS", CONTEXT.size(), stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        printAndAssert(backup);
+        FileUtil.del(sourceFile);
+        FileUtil.del(backup);
+    }
+
+    @Test
+    public void backupFileTransferTo() throws IOException {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        File sourceFile = getSourceFile();
+        printAndAssert(sourceFile);
+        File backup = FileChannelPractice.backupFileTransferTo(sourceFile, "BufferPracticeFile_backup.txt");
+        log.info("nio backupWithNio file with {} lines of data spend {} MILLISECONDS", CONTEXT.size(), stopwatch.elapsed(TimeUnit.MILLISECONDS));
+        printAndAssert(backup);
+        FileUtil.del(sourceFile);
         FileUtil.del(backup);
     }
 
     /**
      * 打印文件中的数据
      */
-    private static void printFileContext(File file) {
+    private static void printAndAssert(File file) {
         List<String> list = FileUtil.readUtf8Lines(file);
         Assert.assertEquals(CONTEXT.size(), list.size());
         for (int i = 0; i < CONTEXT.size(); i++) {
             Assert.assertEquals(CONTEXT.get(i), list.get(i));
+            log.info("{}", list.get(i));
         }
     }
 

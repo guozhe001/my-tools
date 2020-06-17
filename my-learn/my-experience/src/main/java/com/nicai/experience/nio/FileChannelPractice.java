@@ -58,4 +58,41 @@ public class FileChannelPractice {
         return backupFile;
     }
 
+
+    /**
+     * 使用NIO方式读取一个文件
+     *
+     * @param file 待备份的源文件
+     */
+    static File backupFileTransferFrom(File file, String backupFileName) throws IOException {
+        // 打开一个读通道
+        File backupFile;
+        try (FileChannel readChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ)) {
+            // 打开一个写通道
+            backupFile = FileUtil.touch(backupFileName);
+            try (FileChannel writeChannel = FileChannel.open(backupFile.toPath(), StandardOpenOption.WRITE)) {
+                writeChannel.transferFrom(readChannel, 0, readChannel.size());
+            }
+        }
+        return backupFile;
+    }
+
+    /**
+     * 使用NIO方式读取一个文件
+     *
+     * @param file 待备份的源文件
+     */
+    static File backupFileTransferTo(File file, String backupFileName) throws IOException {
+        // 打开一个读通道
+        File backupFile;
+        try (FileChannel readChannel = FileChannel.open(file.toPath(), StandardOpenOption.READ)) {
+            // 打开一个写通道
+            backupFile = FileUtil.touch(backupFileName);
+            try (FileChannel writeChannel = FileChannel.open(backupFile.toPath(), StandardOpenOption.WRITE)) {
+                readChannel.transferTo(0, readChannel.size(), writeChannel);
+            }
+        }
+        return backupFile;
+    }
+
 }

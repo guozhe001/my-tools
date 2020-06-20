@@ -38,24 +38,19 @@ package com.leetcode.editor.cn;
 //
 // Related Topics 数组 二分查找 分治算法
 
+import java.util.Arrays;
+
 public class P4MedianOfTwoSortedArrays {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-            int[] midNums1 = getMidNums(nums1);
-            int[] midNums2 = getMidNums(nums2);
-            // 现在有了两个新的数组，这两个数组的长度在1和2之间
-            // 合并两个数组，然后让他们排序，排序之后再获取新的数组的中位数
-            int[] nums = new int[midNums1.length + midNums2.length];
+            int[] nums = new int[nums1.length + nums2.length];
+            System.arraycopy(nums1, 0, nums, 0, nums1.length);
+            System.arraycopy(nums2, 0, nums, nums1.length, nums2.length);
             // 排序
-            int[] sortedNums = erfenpaixu(nums);
+            int[] sortedNums = sort(nums);
             int[] midNums = getMidNums(sortedNums);
-            return (midNums[0] + midNums[midNums.length - 1]) >> 1;
-        }
-
-        private int[] erfenpaixu(int[] nums) {
-
-            return new int[0];
+            return ((midNums[0] + midNums[midNums.length - 1])) / 2.0;
         }
 
         private int[] getMidNums(int[] nums1) {
@@ -84,6 +79,42 @@ public class P4MedianOfTwoSortedArrays {
             }
             return midNums;
         }
+
+        /**
+         * 快速排序
+         *
+         * @param a
+         * @return
+         */
+        public int[] sort(int[] a) {
+            if (a.length < 2) {
+                return a;
+            }
+            int jizhun = a[0];
+            // 小于的位置
+            int xiaoyuPosion = 0;
+            // 大于的位置
+            int dayuPosion = 0;
+            int[] xiaoyu = new int[a.length];
+            int[] dayu = new int[a.length];
+            for (int i = 1; i < a.length; i++) {
+                if (a[i] <= jizhun) {
+                    xiaoyu[xiaoyuPosion] = a[i];
+                    xiaoyuPosion++;
+                } else {
+                    dayu[dayuPosion] = a[i];
+                    dayuPosion++;
+                }
+            }
+
+            int[] result = new int[a.length];
+            // System.arraycopy(源数组名称，源数组开始点，目标数组名称，目标数组开始点，拷贝长度)
+            System.arraycopy(sort(Arrays.copyOf(xiaoyu, xiaoyuPosion)), 0, result, 0, xiaoyuPosion);
+            result[xiaoyuPosion] = jizhun;
+            System.arraycopy(sort(Arrays.copyOf(dayu, dayuPosion)), 0, result, xiaoyuPosion + 1, dayuPosion);
+            return result;
+        }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

@@ -14,7 +14,6 @@ import java.util.Arrays;
  * @date 2018/11/19
  */
 public class KuaiSu extends Print implements Sort {
-
     /**
      * 快速排序
      *

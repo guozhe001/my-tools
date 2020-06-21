@@ -1,6 +1,6 @@
 package com.nicai.experience.nio;
 
-import com.nicai.experience.threadpool.ThreadPoolUtils;
+import com.nicai.experience.util.ThreadPoolUtil;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -18,7 +18,7 @@ public class AsynchronousSocketChannelPractice {
 
     public static void main(String[] args) throws IOException, ExecutionException, InterruptedException {
         AsynchronousSocketChannel asynchronousSocketChannel = AsynchronousSocketChannel.open(
-                AsynchronousChannelGroup.withThreadPool(ThreadPoolUtils.getThreadPoolExecutor("client-%s", 2)));
+                AsynchronousChannelGroup.withThreadPool(ThreadPoolUtil.getThreadPoolExecutor("client-%s", 2)));
         Future<?> connect = asynchronousSocketChannel.connect(new InetSocketAddress(8080));
         connect.get();
         ByteBuffer buffer = ByteBuffer.allocate(2048);

@@ -1,5 +1,6 @@
 package com.nicai.experience;
 
+import com.nicai.experience.util.ThreadPoolUtil;
 import lombok.extern.slf4j.Slf4j;
 import mockit.integration.junit4.JMockit;
 import org.junit.Test;
@@ -57,17 +58,8 @@ public class LinkedBlockingDequeTest {
                 e.printStackTrace();
             }
         }));
-        waitAllThreadDone(putExecutorService);
+        ThreadPoolUtil.waitAllThreadDone(putExecutorService);
         takeExecutorService.awaitTermination(1000L, TimeUnit.MILLISECONDS);
-    }
-
-    public static void waitAllThreadDone(ExecutorService executorService) {
-        executorService.shutdown();
-        while (true) {
-            if (executorService.isTerminated()) {
-                break;
-            }
-        }
     }
 
 }

@@ -1,6 +1,6 @@
 package com.nicai.experience.nio;
 
-import com.nicai.experience.threadpool.ThreadPoolUtils;
+import com.nicai.experience.util.ThreadPoolUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -69,7 +69,7 @@ public class AsynchronousServerSocketChannelPractice {
 
     private static AsynchronousServerSocketChannel getAsynchronousServerSocketChannel() throws IOException {
         AsynchronousServerSocketChannel asynchronousServerSocketChannel = AsynchronousServerSocketChannel.open(
-                AsynchronousChannelGroup.withThreadPool(ThreadPoolUtils.getThreadPoolExecutor("server-%s", 2)));
+                AsynchronousChannelGroup.withThreadPool(ThreadPoolUtil.getThreadPoolExecutor("server-%s", 2)));
         asynchronousServerSocketChannel.bind(new InetSocketAddress(8080));
         return asynchronousServerSocketChannel;
     }

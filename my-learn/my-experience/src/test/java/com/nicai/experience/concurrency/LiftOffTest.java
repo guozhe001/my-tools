@@ -1,7 +1,7 @@
 package com.nicai.experience.concurrency;
 
-import com.nicai.experience.LinkedBlockingDequeTest;
 import com.nicai.experience.fibonacci.Fibonacci;
+import com.nicai.experience.util.ThreadPoolUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -57,19 +57,19 @@ public class LiftOffTest {
         for (int i = 0; i < 5; i++) {
             executorService.execute(new LiftOff());
         }
-        LinkedBlockingDequeTest.waitAllThreadDone(executorService);
+        ThreadPoolUtil.waitAllThreadDone(executorService);
     }
 
     /**
      * 使用线程池运行，如果提交的任务特别多会导致内存消耗完而无法创新更多线程
      */
-    @Test(expected = OutOfMemoryError.class)
+//    @Test(expected = OutOfMemoryError.class)
     public void testCachedThreadPoolMoreThread() {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < 50000; i++) {
             executorService.execute(new LiftOff());
         }
-        LinkedBlockingDequeTest.waitAllThreadDone(executorService);
+        ThreadPoolUtil.waitAllThreadDone(executorService);
     }
 
     /**
@@ -81,7 +81,7 @@ public class LiftOffTest {
         for (int i = 0; i < 5; i++) {
             executorService.execute(new LiftOff());
         }
-        LinkedBlockingDequeTest.waitAllThreadDone(executorService);
+        ThreadPoolUtil.waitAllThreadDone(executorService);
     }
 
     /**
@@ -93,6 +93,6 @@ public class LiftOffTest {
         for (int i = 0; i < 5; i++) {
             executorService.execute(new LiftOff());
         }
-        LinkedBlockingDequeTest.waitAllThreadDone(executorService);
+        ThreadPoolUtil.waitAllThreadDone(executorService);
     }
 }

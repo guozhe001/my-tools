@@ -61,7 +61,7 @@ public class LinkedBlockingDequeTest {
         takeExecutorService.awaitTermination(1000L, TimeUnit.MILLISECONDS);
     }
 
-    private void waitAllThreadDone(ExecutorService executorService) {
+    public static void waitAllThreadDone(ExecutorService executorService) {
         executorService.shutdown();
         while (true) {
             if (executorService.isTerminated()) {

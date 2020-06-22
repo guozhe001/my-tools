@@ -8,6 +8,10 @@ import java.util.concurrent.Executors;
 
 public class SimplePriorityTest {
 
+    /**
+     * 使用mac操作系统版本为10.15.4 (19E287)
+     * 测试线程优先级不生效
+     */
     @Test
     public void run() {
         ExecutorService executorService = Executors.newCachedThreadPool();

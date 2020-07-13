@@ -12,4 +12,11 @@
     <artifactId>feature-practice</artifactId>
     <description>spring-boot特性实践</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

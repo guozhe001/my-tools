@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.stream.IntStream;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author guozhe
@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 @RequestMapping("/api/redis/")
 public class RedisController {
 
+    private static final int PUBLISH_TIMES = 5;
     private final RedisPublish redisPublish;
 
     public RedisController(RedisPublish redisPublish) {
@@ -27,7 +28,16 @@ public class RedisController {
 
     @PostMapping("publish")
     @ResponseBody
-    public void publish() {
-        IntStream.range(0, 5).forEach(i -> redisPublish.publish(RedisListener.CHANNEL, String.format("message-%s", i)));
+    public void publish() throws InterruptedException {
+        for (int i = 0; i < PUBLISH_TIMES; i++) {
+            try {
+                // 等待监听器接收到
+                TimeUnit.MILLISECONDS.sleep(100L);
+            } catch (InterruptedException e) {
+                log.error("Interrupted error_message = {}", e.getMessage(), e);
+                throw e;
+            }
+            redisPublish.publish(RedisListener.CHANNEL, String.format("message-%s", i));
+        }
     }
 }

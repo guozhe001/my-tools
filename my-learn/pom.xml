@@ -18,6 +18,7 @@
         <module>my-experience</module>
         <module>my-suanfa</module>
         <module>design-pattern</module>
+        <module>bean-validation</module>
     </modules>
 
 </project>

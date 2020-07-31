@@ -1,7 +1,6 @@
 package com.nicai.validation;
 
 import cn.hutool.core.util.StrUtil;
-import com.google.common.base.Joiner;
 
 import javax.validation.ConstraintValidatorContext;
 
@@ -25,7 +24,7 @@ public class MyConstraintUtil {
     public static void changeConstraintMessageTemplate(ConstraintValidatorContext context, String extendMessage) {
         String defaultConstraintMessageTemplate = context.getDefaultConstraintMessageTemplate();
         context.disableDefaultConstraintViolation();
-        context.buildConstraintViolationWithTemplate(Joiner.on(";").join(defaultConstraintMessageTemplate, extendMessage)).addConstraintViolation();
+        context.buildConstraintViolationWithTemplate(StrUtil.format("{};{}", defaultConstraintMessageTemplate, extendMessage)).addConstraintViolation();
     }
 
     /**
@@ -36,7 +35,7 @@ public class MyConstraintUtil {
      * @param correctValues 正确的值数组
      */
     public static void changeConstraintMessageTemplate(ConstraintValidatorContext context, String[] correctValues) {
-        String extendMessage = StrUtil.format("正确的值包括：【{} 】", Joiner.on(",").join(correctValues));
+        String extendMessage = StrUtil.format("正确的值包括：【{}】", String.join(",", correctValues));
         changeConstraintMessageTemplate(context, extendMessage);
     }
 }

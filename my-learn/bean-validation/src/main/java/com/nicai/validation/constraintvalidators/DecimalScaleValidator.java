@@ -1,6 +1,6 @@
 package com.nicai.validation.constraintvalidators;
 
-import com.nicai.validation.constraints.ValidBigdecimalScale;
+import com.nicai.validation.constraints.DecimalScaleConstraint;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -13,15 +13,15 @@ import java.math.RoundingMode;
  * @author guozhe
  * @date 2017/11/27
  */
-public class BigDecimalScaleValidator implements ConstraintValidator<ValidBigdecimalScale, BigDecimal> {
+public class DecimalScaleValidator implements ConstraintValidator<DecimalScaleConstraint, BigDecimal> {
     /**
      * 有效数字位数
      */
     private int scale;
 
     @Override
-    public void initialize(ValidBigdecimalScale validBigdecimalScale) {
-        this.scale = validBigdecimalScale.value();
+    public void initialize(DecimalScaleConstraint decimalScaleConstraint) {
+        this.scale = decimalScaleConstraint.value();
     }
 
     @Override

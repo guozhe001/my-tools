@@ -38,7 +38,7 @@ public class ValidationController {
      * 演示入参直接指定对应的枚举类型;
      * 定义接口时不建议使用这种方式，因为如果传错了值会报类型转换错误：
      * java.lang.IllegalArgumentException: No enum constant com.share.enums.PaySource.***
-     * 接口定义可以使用上面的方法，使返回报文更友好，可控
+     * 接口定义可以使用下面的方法，使返回报文更友好，可控
      * <p>
      * 此处的异常已经被ControllerExceptionAdvance#methodArgumentTypeMismatchExceptionHandler拦截处理，如果不做拦截异常信息更不友好
      *

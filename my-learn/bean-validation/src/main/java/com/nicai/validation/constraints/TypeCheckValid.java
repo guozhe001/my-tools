@@ -1,6 +1,6 @@
 package com.nicai.validation.constraints;
 
-import com.nicai.validation.constraintvalidators.BigDecimalScaleValidator;
+import com.nicai.validation.constraintvalidators.DecimalScaleValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {BigDecimalScaleValidator.class})
+@Constraint(validatedBy = {DecimalScaleValidator.class})
 public @interface TypeCheckValid {
     String message() default "有效数字位数不正确";
 

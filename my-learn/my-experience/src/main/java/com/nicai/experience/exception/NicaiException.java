@@ -15,6 +15,10 @@ public class NicaiException extends RuntimeException {
         super();
     }
 
+    public NicaiException(String message) {
+        super(message);
+    }
+
     public NicaiException(String message, Exception e) {
         super(message, e);
     }

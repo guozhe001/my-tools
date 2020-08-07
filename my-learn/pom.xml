@@ -16,7 +16,7 @@
 
     <modules>
         <module>my-experience</module>
-        <module>my-suanfa</module>
+        <module>my-algorithm</module>
         <module>design-pattern</module>
         <module>bean-validation</module>
     </modules>

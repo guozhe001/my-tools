@@ -1,4 +1,4 @@
-package com.nicai.experience.exception;
+package com.nicai.exception;
 
 /**
  * My Exception

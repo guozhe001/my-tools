@@ -1,7 +1,7 @@
 package com.nicai.experience.coffee;
 
-import com.nicai.experience.exception.NicaiException;
-import com.nicai.experience.util.Generator;
+import com.nicai.exception.NicaiException;
+import com.nicai.util.Generator;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Iterator;

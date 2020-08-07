@@ -1,7 +1,7 @@
 package com.nicai.experience.concurrency;
 
 import com.google.common.util.concurrent.*;
-import com.nicai.experience.exception.NicaiException;
+import com.nicai.exception.NicaiException;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Before;

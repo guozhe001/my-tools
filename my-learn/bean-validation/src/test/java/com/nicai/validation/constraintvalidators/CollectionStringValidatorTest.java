@@ -1,7 +1,7 @@
 package com.nicai.validation.constraintvalidators;
 
 
-import com.nicai.exception.MyCommonException;
+import com.nicai.exception.NicaiException;
 import com.nicai.util.ValidatorUtil;
 import com.nicai.validation.constraints.RangeStringConstraint;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ import org.junit.Test;
  */
 public class CollectionStringValidatorTest {
 
-    @Test(expected = MyCommonException.class)
+    @Test(expected = NicaiException.class)
     public void isValid() {
         ValidatorUtil.validateWithException(new Person("nicai"));
     }

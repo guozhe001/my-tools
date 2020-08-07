@@ -1,6 +1,6 @@
 package com.nicai.ao;
 
-import com.nicai.constant.Constant;
+import com.nicai.constant.Constants;
 import com.nicai.enums.PaySource;
 import com.nicai.validation.constraints.ValidEnum;
 import lombok.Data;
@@ -97,11 +97,11 @@ public class RequestAO {
      * <p>
      * {@code NotBlank}和{@code NotEmpty}用在字符串上的时候效果是一样的
      */
-    @Pattern(regexp = Constant.EMAIL_REGEXP)
+    @Pattern(regexp = Constants.EMAIL_REGEXP)
     @Email
     @NotBlank
     @NotEmpty
-    @org.hibernate.validator.constraints.Email
+    @Email
     private String email;
 
     /**

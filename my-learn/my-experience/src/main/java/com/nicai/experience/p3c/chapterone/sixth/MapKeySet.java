@@ -1,12 +1,13 @@
 package com.nicai.experience.p3c.chapterone.sixth;
 
-import com.nicai.experience.constans.MyConstant;
+import com.nicai.constant.Constants;
 
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
 /**
+ * 阿里巴巴Java开发手册
  * 6. 【强制】使用Map的方法keySet()/values()/entrySet()返回集合对象时，
  * 不可以对其进行添 加元素操作，否则会抛出 UnsupportedOperationException 异常。
  * <p>
@@ -31,7 +32,7 @@ public class MapKeySet {
 
     public static void addKeySet(Map<Integer, Double> map) {
         Set<Integer> keys = map.keySet();
-        keys.add(MyConstant.RANDOM.nextInt());
+        keys.add(Constants.RANDOM.nextInt());
     }
 
     /**
@@ -46,7 +47,7 @@ public class MapKeySet {
 
     public static void addValues(Map<Integer, Double> map) {
         Collection<Double> values = map.values();
-        values.add(MyConstant.RANDOM.nextDouble());
+        values.add(Constants.RANDOM.nextDouble());
     }
 
     /**

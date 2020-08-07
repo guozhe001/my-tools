@@ -1,4 +1,4 @@
-package com.nicai.experience.util;
+package com.nicai.util;
 
 public class Hello {
     private static long count = 0;

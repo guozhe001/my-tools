@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static com.nicai.experience.constans.MyConstant.RANDOM;
+import static com.nicai.constant.Constants.RANDOM;
 
 /**
  * @author guozhe

@@ -1,6 +1,6 @@
 package com.nicai.experience.fibonacci;
 
-import com.nicai.experience.util.Generator;
+import com.nicai.util.Generator;
 
 /**
  * 斐波那契数列生成器

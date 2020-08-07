@@ -19,6 +19,7 @@
         <module>my-spring-boot</module>
         <module>my-spring-cloud</module>
         <module>my-learn</module>
+        <module>my-common</module>
     </modules>
 
     <properties>

@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Set;
 
 /**
+ * 阿里巴巴Java开发手册
  * 1. 【强制】关于hashCode和equals的处理，遵循如下规则:
  * 1) 只要重写 equals，就必须重写 hashCode。
  * 2) 因为 Set 存储的是不重复的对象，依据 hashCode 和 equals 进行判断，所以 Set 存储的对象必须重写 这两个方法。

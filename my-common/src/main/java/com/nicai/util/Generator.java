@@ -1,4 +1,4 @@
-package com.nicai.experience.util;
+package com.nicai.util;
 
 /**
  * 生成器

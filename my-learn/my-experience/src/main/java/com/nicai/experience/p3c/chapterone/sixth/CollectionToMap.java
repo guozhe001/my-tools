@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
+ * 阿里巴巴Java开发手册
  * 3. 【强制】在使用java.util.stream.Collectors类的toMap()方法转为Map集合时，一定要使
  * 用含有参数类型为 BinaryOperator，参数名为 mergeFunction 的方法，否则当出现相同 key
  * 值时会抛出 IllegalStateException 异常。

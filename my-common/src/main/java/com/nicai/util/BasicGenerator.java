@@ -1,6 +1,6 @@
-package com.nicai.experience.util;
+package com.nicai.util;
 
-import com.nicai.experience.exception.NicaiException;
+import com.nicai.exception.NicaiException;
 import lombok.extern.slf4j.Slf4j;
 
 /**

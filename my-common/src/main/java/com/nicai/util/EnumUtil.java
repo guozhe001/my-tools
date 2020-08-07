@@ -1,9 +1,13 @@
-package com.nicai.experience.util;
+package com.nicai.util;
 
-import com.nicai.experience.exception.NicaiException;
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.nicai.exception.NicaiException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -13,11 +17,6 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public class EnumUtil {
-
-    /**
-     * 字符串分割符
-     */
-    private static final String SPLIT = ", ";
 
     private EnumUtil() {
 
@@ -33,8 +32,9 @@ public class EnumUtil {
      * @return 字符串对应的枚举值s
      */
     public static <T extends Enum<T>> T getValue(Class<T> enumType, String name, String message) {
+        T result;
         try {
-            return Enum.valueOf(enumType, name);
+            result = Enum.valueOf(enumType, name);
         } catch (NullPointerException e) {
             log.error(e.getMessage(), e);
             throw new NicaiException(String.format("%s不能为空", message), e);
@@ -42,6 +42,7 @@ public class EnumUtil {
             log.error(e.getMessage(), e);
             throw new NicaiException(String.format("不支持的【%s】：【%s】，支持的值包括：【%s】", message, name, getEnumValuesString(enumType)), e);
         }
+        return result;
     }
 
     /**
@@ -52,8 +53,33 @@ public class EnumUtil {
      * @return 枚举类的所有name，以逗号分割
      */
     private static <T extends Enum<T>> String getEnumValuesString(Class<T> enumType) {
-        return Arrays.stream(enumType.getEnumConstants()).map(Enum::name).collect(Collectors.joining(SPLIT));
+        List<String> values = Lists.newArrayList();
+        for (T resultStatus : enumType.getEnumConstants()) {
+            values.add(resultStatus.name());
+        }
+        return Joiner.on(", ").join(values);
     }
+
+    /**
+     * 获取某个枚举类型的所有name列表
+     *
+     * @param enumClass 枚举类型
+     * @return 此类型的name列表
+     */
+    public static Set<String> listAllNames(Class<? extends Enum> enumClass) {
+        return converterToName(enumClass.getEnumConstants());
+    }
+
+    /**
+     * 把枚举值转换成name
+     *
+     * @param enums 枚举数组
+     * @return 枚举数组的name列表
+     */
+    private static Set<String> converterToName(Enum[] enums) {
+        return Arrays.stream(enums).map(Enum::name).collect(Collectors.toSet());
+    }
+
 
 }
 

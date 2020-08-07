@@ -2,7 +2,7 @@ package com.nicai.validation.constraintvalidators;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
-import com.nicai.util.EnumTrait;
+import com.nicai.enums.EnumTrait;
 import com.nicai.validation.constraints.ValidNumberEnum;
 
 import javax.validation.ConstraintValidator;

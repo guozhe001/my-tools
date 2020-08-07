@@ -1,6 +1,6 @@
 package com.nicai.util;
 
-import com.nicai.exception.MyCommonException;
+import com.nicai.exception.NicaiException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.FieldError;
@@ -38,7 +38,7 @@ public class ValidatorUtil {
                 printLog(error);
                 validateError.append(formatErrorMsg(error.getPropertyPath().toString(), error.getMessage(), error.getInvalidValue()));
             }
-            throw new MyCommonException(validateError.toString());
+            throw new NicaiException(validateError.toString());
         }
     }
 

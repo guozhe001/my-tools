@@ -2,7 +2,7 @@ package com.nicai.algorithm.sort;
 
 /**
  * MaoPaoSort
- * 冒泡排序：
+ * 冒泡排序-从右向左冒泡：
  * 1、从右向左分别对两个相邻的数字进行比较
  * 2、如果左边的数字大于右边的数字，则位置进行交换
  * 3、直到比较到数组的最左边，并把这一轮的最小的数字换到最左端
@@ -12,7 +12,7 @@ package com.nicai.algorithm.sort;
  * @author guozhe
  * @date 2020/08/14
  */
-public class BubbleSort implements Sort {
+public class BubbleSortStartFromRight extends AbstractBubbleSort {
 
     @Override
     public int[] sort(int[] nums) {
@@ -36,7 +36,7 @@ public class BubbleSort implements Sort {
              *
              */
             for (int j = nums.length - 1; j > i; j--) {
-                compareAndSwap(nums, j);
+                compareAndSwap(nums, j - 1, j);
             }
         }
         return nums;
@@ -44,22 +44,7 @@ public class BubbleSort implements Sort {
 
     @Override
     public String getName() {
-        return "冒泡排序";
-    }
-
-    /**
-     * 比较指定的下标和此下标前面的的两个数字，如果前面的数字大于当前的数字，则交换位置
-     *
-     * @param nums  需要比较的数组
-     * @param index 指定的下标
-     */
-    private void compareAndSwap(int[] nums, int index) {
-        int currentNum = nums[index];
-        int theNumBeforeCurrentNum = nums[index - 1];
-        if (currentNum < theNumBeforeCurrentNum) {
-            nums[index] = theNumBeforeCurrentNum;
-            nums[index - 1] = currentNum;
-        }
+        return "从右边开始的冒泡排序";
     }
 
 }

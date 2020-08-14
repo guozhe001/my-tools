@@ -12,7 +12,7 @@ package com.nicai.algorithm.sort;
  * @author guozhe
  * @date 2020/08/14
  */
-public class MaoPaoSort implements Sort {
+public class BubbleSort implements Sort {
 
     @Override
     public int[] sort(int[] nums) {

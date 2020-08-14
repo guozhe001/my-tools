@@ -21,7 +21,7 @@ public class SortTest {
     /**
      * 等待被测试的排序的实现类
      */
-    private static final List<Sort> TO_BE_TEST_SORT_TYPE = Lists.newArrayList(new MaoPaoSort());
+    private static final List<Sort> TO_BE_TEST_SORT_TYPE = Lists.newArrayList(new BubbleSort());
 
     /**
      * 待排序的数组

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Random;
+import java.util.stream.IntStream;
 
 /**
  * SortTest
@@ -34,14 +35,12 @@ public class SortTest {
     /**
      * 生成待排序数组的随机类
      */
-    private static final Random random = new Random(47);
+    private static final Random random = new Random();
 
     @BeforeClass
     public static void init() {
-        int length = TO_BE_SORTED_NUMS.length;
-        for (int i = 0; i < length; i++) {
-            TO_BE_SORTED_NUMS[i] = random.nextInt(length);
-        }
+        final int length = TO_BE_SORTED_NUMS.length;
+        IntStream.range(0, length).forEach(i -> TO_BE_SORTED_NUMS[i] = random.nextInt(length));
     }
 
     @Test
@@ -50,7 +49,7 @@ public class SortTest {
         for (Sort sort : TO_BE_TEST_SORT_TYPE) {
             log.info("sort name = {} ========================================================", sort.getName());
             int[] sorted = sort.sort(TO_BE_SORTED_NUMS);
-            log.info("TO_BE_SORTED_NUMS = {}", sorted);
+            log.info("sorted = {}", sorted);
             sortedAssert(sorted);
         }
     }

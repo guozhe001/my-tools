@@ -44,9 +44,12 @@ public class InsertSort implements Sort {
                     minNumIndex = j;
                 }
             }
-            int temp = nums[i];
-            nums[i] = minNum;
-            nums[minNumIndex] = temp;
+            // 如果最小数字的下标不是剩余数组的第一个的话，两个数字交换位置
+            if (minNumIndex != i) {
+                int temp = nums[i];
+                nums[i] = minNum;
+                nums[minNumIndex] = temp;
+            }
         }
         return nums;
     }

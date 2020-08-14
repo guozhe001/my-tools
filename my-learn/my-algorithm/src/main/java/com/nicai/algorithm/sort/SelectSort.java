@@ -17,7 +17,7 @@ package com.nicai.algorithm.sort;
  * @author guozhe
  * @date 2020/08/14
  */
-public class InsertSort implements Sort {
+public class SelectSort implements Sort {
 
     @Override
     public int[] sort(int[] nums) {

@@ -1,6 +1,8 @@
 package com.nicai.algorithm.sort;
 
 import cn.hutool.core.lang.Assert;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 
 /**
  * AbstractBubbleSort-冒泡排序
@@ -15,6 +17,7 @@ import cn.hutool.core.lang.Assert;
  * @author guozhe
  * @date 2020/08/14
  */
+@Slf4j
 public abstract class AbstractBubbleSort implements Sort {
 
     /**
@@ -33,6 +36,11 @@ public abstract class AbstractBubbleSort implements Sort {
             nums[bigIndex] = smallIndexNum;
             nums[smallIndex] = bigIndexNum;
         }
+    }
+
+    @Override
+    public Logger getLogger() {
+        return log;
     }
 
 }

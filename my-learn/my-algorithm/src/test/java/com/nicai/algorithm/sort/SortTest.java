@@ -25,7 +25,9 @@ public class SortTest {
     private static final List<Sort> TO_BE_TEST_SORT_TYPE = Lists.newArrayList(
             new BubbleSortStartFromLeft(),
             new BubbleSortStartFromRight(),
-            new SelectSort());
+            new SelectSort(),
+            new InsertSort()
+    );
 
     /**
      * 待排序的数组
@@ -45,11 +47,9 @@ public class SortTest {
 
     @Test
     public void sort() {
-        log.info("TO_BE_SORTED_NUMS = {}", TO_BE_SORTED_NUMS);
         for (Sort sort : TO_BE_TEST_SORT_TYPE) {
-            log.info("sort name = {} ========================================================", sort.getName());
-            int[] sorted = sort.sort(TO_BE_SORTED_NUMS);
-            log.info("sorted = {}", sorted);
+            log.info("===================================================");
+            int[] sorted = sort.sortAndPrint(TO_BE_SORTED_NUMS);
             sortedAssert(sorted);
         }
     }

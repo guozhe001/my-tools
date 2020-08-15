@@ -1,5 +1,8 @@
 package com.nicai.algorithm.sort;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+
 /**
  * InsertSort
  * 插入排序：
@@ -17,6 +20,7 @@ package com.nicai.algorithm.sort;
  * @author guozhe
  * @date 2020/08/14
  */
+@Slf4j
 public class SelectSort implements Sort {
 
     @Override
@@ -57,5 +61,11 @@ public class SelectSort implements Sort {
     @Override
     public String getName() {
         return "插入排序";
+    }
+
+
+    @Override
+    public Logger getLogger() {
+        return log;
     }
 }

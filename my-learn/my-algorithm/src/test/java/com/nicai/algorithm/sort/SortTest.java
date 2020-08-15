@@ -47,11 +47,7 @@ public class SortTest {
 
     @Test
     public void sort() {
-        for (Sort sort : TO_BE_TEST_SORT_TYPE) {
-            log.info("===================================================");
-            int[] sorted = sort.sortAndPrint(TO_BE_SORTED_NUMS);
-            sortedAssert(sorted);
-        }
+        TO_BE_TEST_SORT_TYPE.forEach(sort -> sortedAssert(sort.sortAndPrint(TO_BE_SORTED_NUMS)));
     }
 
     private void sortedAssert(int[] sorted) {

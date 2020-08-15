@@ -17,10 +17,11 @@ public interface Sort {
 
     default int[] sortAndPrint(int[] nums) {
         int[] numsCopy = Arrays.copyOfRange(nums, 0, nums.length);
+        getLogger().info("sort name = {} start=====================================================", getName());
         getLogger().info("source nums={}", nums);
-        getLogger().info("sort name = {}=====================================================", getName());
         int[] sorted = sort(numsCopy);
         getLogger().info("sorted nums={}", sorted);
+        getLogger().info("sort name = {} end=======================================================", getName());
         return sorted;
     }
 

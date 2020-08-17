@@ -42,11 +42,10 @@ public class MergeSort implements Sort {
 
     private void merge(int[] nums1, int[] nums2) {
         int[] ints = new int[nums1.length + nums2.length];
-        int nums1Index = 0;
-        int nums2Index = 0;
-        // 如果nums1里面的数字已经取完
-        if (nums1Index == nums1.length-1){
-            for (int i = ; i < ; i++) {
+        int nums1Index = 0, nums2Index = 0;
+        while (nums1Index < nums1.length || nums2Index < nums2.length) {
+            log.info("nums1Index={}, nums2Index, nums1Value={}, nums2Value={}", nums1Index, nums2Index, nums1[nums1Index], nums2[nums2Index]);
+            if (nums1Index == nums1.length-1){
 
             }
         }

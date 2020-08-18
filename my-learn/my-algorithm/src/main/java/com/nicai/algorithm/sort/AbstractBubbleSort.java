@@ -1,6 +1,5 @@
 package com.nicai.algorithm.sort;
 
-import cn.hutool.core.lang.Assert;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
@@ -19,24 +18,6 @@ import org.slf4j.Logger;
  */
 @Slf4j
 public abstract class AbstractBubbleSort implements Sort {
-
-    /**
-     * 比较指定的两个下标对应的数字，
-     * 如果较小的下标的数字大于较大的小表对应的数字，则交换两个数字的位置
-     *
-     * @param nums       需要比较的数组
-     * @param smallIndex 较小的下标
-     * @param bigIndex   较大的下标
-     */
-    protected void compareAndSwap(int[] nums, int smallIndex, int bigIndex) {
-        Assert.isTrue(smallIndex < bigIndex);
-        int bigIndexNum = nums[bigIndex];
-        int smallIndexNum = nums[smallIndex];
-        if (bigIndexNum < smallIndexNum) {
-            nums[bigIndex] = smallIndexNum;
-            nums[smallIndex] = bigIndexNum;
-        }
-    }
 
     @Override
     public Logger getLogger() {

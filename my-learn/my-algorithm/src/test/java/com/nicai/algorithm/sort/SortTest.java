@@ -51,6 +51,11 @@ public class SortTest {
         TO_BE_TEST_SORT_TYPE.forEach(sort -> sortedAssert(sort.sortAndPrint(TO_BE_SORTED_NUMS)));
     }
 
+    @Test
+    public void sortNull() {
+        TO_BE_TEST_SORT_TYPE.forEach(sort -> Assert.assertThrows(NullPointerException.class, () -> sort.sortAndPrint(null)));
+    }
+
     private void sortedAssert(int[] sorted) {
         Assert.assertEquals(TO_BE_SORTED_NUMS.length, sorted.length);
         for (int i = 0; i < sorted.length - 1; i++) {

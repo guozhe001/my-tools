@@ -3,8 +3,6 @@ package com.nicai.algorithm.sort;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
-import java.util.stream.IntStream;
-
 /**
  * MergeSort，归并排序
  *
@@ -20,7 +18,7 @@ public class MergeSort implements Sort {
         // 拆分数组，每个数字为一个单独的数组
         int[][] numsArray = new int[nums.length][];
         for (int i = 0; i < nums.length; i++) {
-            numsArray[0] = new int[]{nums[0]};
+            numsArray[i] = new int[]{nums[i]};
         }
         return mergeSort(numsArray)[0];
     }
@@ -34,21 +32,42 @@ public class MergeSort implements Sort {
             int nextIndex = i * 2 + 1;
             if (nextIndex >= numsArray.length) {
                 newNumsArray[i] = numsArray[i * 2];
+            } else {
+                newNumsArray[i] = merge(numsArray[i * 2], numsArray[nextIndex]);
             }
-            merge(numsArray[i * 2], numsArray[i * 2 + 1]);
         }
         return mergeSort(newNumsArray);
     }
 
-    private void merge(int[] nums1, int[] nums2) {
-        int[] ints = new int[nums1.length + nums2.length];
-        int nums1Index = 0, nums2Index = 0;
-        while (nums1Index < nums1.length || nums2Index < nums2.length) {
-            log.info("nums1Index={}, nums2Index, nums1Value={}, nums2Value={}", nums1Index, nums2Index, nums1[nums1Index], nums2[nums2Index]);
-            if (nums1Index == nums1.length-1){
-
+    private int[] merge(int[] nums1, int[] nums2) {
+        int nums1Length = nums1.length;
+        int nums2Length = nums2.length;
+        int[] newNums = new int[nums1Length + nums2Length];
+        int nums1Index = 0;
+        int nums2Index = 0;
+        while (nums1Index < nums1Length || nums2Index < nums2Length) {
+            // 如果第一个数组已经全部使用
+            if (nums1Index == nums1Length) {
+                for (int i = nums2Index; i < nums2Length; i++) {
+                    newNums[nums1Length + nums2Index] = nums2[nums2Index];
+                }
+                break;
+            }
+            if (nums2Index == nums2Length) {
+                for (int i = nums1Index; i < nums1Length; i++) {
+                    newNums[nums2Length + nums1Index] = nums1[nums1Index];
+                }
+                break;
+            }
+            if (nums1[nums1Index] < nums2[nums2Index]) {
+                newNums[nums1Index + nums2Index] = nums1[nums1Index];
+                nums1Index++;
+            } else {
+                newNums[nums1Index + nums2Index] = nums2[nums2Index];
+                nums2Index++;
             }
         }
+        return newNums;
     }
 
     @Override
@@ -61,9 +80,4 @@ public class MergeSort implements Sort {
         return log;
     }
 
-    public static void main(String[] args) {
-        IntStream.range(2, 15).forEach(
-                i -> log.info("length = {}, forloop = {},new index={}", i, i / 2 + i % 2, i / 2 + i % 2 - 1)
-        );
-    }
 }

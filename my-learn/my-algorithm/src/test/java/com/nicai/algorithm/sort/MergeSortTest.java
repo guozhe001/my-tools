@@ -29,6 +29,18 @@ public class MergeSortTest {
     }
 
     @Test
+    public void merge1() throws Exception {
+        MergeSort mergeSort = new MergeSort();
+        int[] merge = Whitebox.invokeMethod(mergeSort, "merge", new int[]{2, 4, 8, 9, 10}, new int[]{1, 3, 5});
+        log.info("merge={}", merge);
+        Assert.assertEquals(8, merge.length);
+        int[] expect = {1, 2, 3, 4, 5, 8, 9, 10};
+        for (int i = 0; i < expect.length; i++) {
+            Assert.assertEquals(expect[i], merge[i]);
+        }
+    }
+
+    @Test
     public void test() {
         IntStream.range(2, 15).forEach(
                 i -> log.info("length = {}, forloop = {},new index={}", i, i / 2 + i % 2, i / 2 + i % 2 - 1)

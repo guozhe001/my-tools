@@ -48,18 +48,16 @@ public class MergeSort implements Sort {
         while (nums1Index < nums1Length || nums2Index < nums2Length) {
             // 如果第一个数组已经全部使用
             if (nums1Index == nums1Length) {
-                for (int i = nums2Index; i < nums2Length; i++) {
+                while (nums2Index < nums2Length) {
                     newNums[nums1Length + nums2Index] = nums2[nums2Index];
+                    nums2Index++;
                 }
-                break;
-            }
-            if (nums2Index == nums2Length) {
-                for (int i = nums1Index; i < nums1Length; i++) {
+            } else if (nums2Index == nums2Length) {
+                while (nums1Index < nums1Length) {
                     newNums[nums2Length + nums1Index] = nums1[nums1Index];
+                    nums1Index++;
                 }
-                break;
-            }
-            if (nums1[nums1Index] < nums2[nums2Index]) {
+            } else if (nums1[nums1Index] < nums2[nums2Index]) {
                 newNums[nums1Index + nums2Index] = nums1[nums1Index];
                 nums1Index++;
             } else {

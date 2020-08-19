@@ -27,7 +27,8 @@ public class SortTest {
             new BubbleSortStartFromRight(),
             new SelectSort(),
             new InsertSort(),
-            new MergeSort()
+            new MergeSort(),
+            new FastSort()
     );
 
     /**

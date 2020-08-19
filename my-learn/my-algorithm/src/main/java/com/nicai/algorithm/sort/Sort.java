@@ -17,6 +17,12 @@ import java.util.Objects;
  */
 public interface Sort {
 
+    /**
+     * 排序并打印日志
+     *
+     * @param nums 待排序的数组
+     * @return 排好序的数组
+     */
     default int[] sortAndPrint(int[] nums) {
         Objects.requireNonNull(nums);
         int[] numsCopy = Arrays.copyOfRange(nums, 0, nums.length);

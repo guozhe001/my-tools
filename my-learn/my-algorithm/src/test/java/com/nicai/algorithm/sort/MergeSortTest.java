@@ -29,12 +29,24 @@ public class MergeSortTest {
     }
 
     @Test
-    public void merge1() throws Exception {
+    public void mergeLeftLengthBigThanRight() throws Exception {
         MergeSort mergeSort = new MergeSort();
         int[] merge = Whitebox.invokeMethod(mergeSort, "merge", new int[]{2, 4, 8, 9, 10}, new int[]{1, 3, 5});
         log.info("merge={}", merge);
         Assert.assertEquals(8, merge.length);
         int[] expect = {1, 2, 3, 4, 5, 8, 9, 10};
+        for (int i = 0; i < expect.length; i++) {
+            Assert.assertEquals(expect[i], merge[i]);
+        }
+    }
+
+    @Test
+    public void mergeLeftLengthSmallThanRight() throws Exception {
+        MergeSort mergeSort = new MergeSort();
+        int[] merge = Whitebox.invokeMethod(mergeSort, "merge", new int[]{2, 4, 8, 9, 10}, new int[]{1, 3, 5, 7, 7, 9, 11});
+        log.info("merge={}", merge);
+        Assert.assertEquals(12, merge.length);
+        int[] expect = {1, 2, 3, 4, 5, 7, 7, 8, 9, 9, 10, 11};
         for (int i = 0; i < expect.length; i++) {
             Assert.assertEquals(expect[i], merge[i]);
         }

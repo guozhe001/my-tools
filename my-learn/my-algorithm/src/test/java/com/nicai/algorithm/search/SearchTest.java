@@ -1,12 +1,12 @@
 package com.nicai.algorithm.search;
 
-import com.google.common.collect.Lists;
+import com.nicai.algorithm.sort.FastSort;
 import com.nicai.util.ArrayUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -20,36 +20,62 @@ public class SearchTest {
 
     private static final Random random = new Random();
 
-    private static final List<Search> TO_BE_TEST_LIST = Lists.newArrayList(
-//            new BinarySearch(),
-            new LinearSearch()
-    );
-
     @Test
-    public void searchHaveValue() {
+    public void linearSearchHaveValue() {
         IntStream.range(0, 10).forEach(i -> {
             int[] nums = ArrayUtil.randomNotRepeatIntArray(1000);
-            log.info("nums={}", nums);
             int expectIndex = random.nextInt(nums.length);
             int searchValue = nums[expectIndex];
-            log.info("searchValue={}, expectIndex={}", searchValue, expectIndex);
-            TO_BE_TEST_LIST.forEach(search -> {
-                Optional<Integer> optionalInteger = search.search(nums, searchValue);
-                Assert.assertTrue(optionalInteger.isPresent());
-                Assert.assertEquals(Integer.valueOf(expectIndex), optionalInteger.get());
-            });
+            searchAndCheck(new LinearSearch(), nums, searchValue, expectIndex);
         });
     }
 
     @Test
-    public void searchNoValue() {
+    public void linearSearchNoValue() {
         IntStream.range(0, 10).forEach(i -> {
             int[] nums = ArrayUtil.randomNotRepeatIntArray(1000);
-            TO_BE_TEST_LIST.forEach(search -> {
-                Optional<Integer> optionalInteger = search.search(nums, 1000);
-                Assert.assertFalse(optionalInteger.isPresent());
-            });
+            searchAndCheck(new LinearSearch(), nums, 1000, null);
         });
+    }
+
+    @Test
+    public void binarySearchHaveValue() {
+        IntStream.range(0, 10).forEach(i -> {
+            int[] nums = ArrayUtil.randomNotRepeatIntArray(1000);
+            int[] sorted = new FastSort().sort(nums);
+            int expectIndex = random.nextInt(sorted.length);
+            int searchValue = sorted[expectIndex];
+            searchAndCheck(new BinarySearch(), sorted, searchValue, expectIndex);
+        });
+    }
+
+    @Test
+    public void binarySearchNoValue() {
+        IntStream.range(0, 10).forEach(i -> {
+            int[] nums = ArrayUtil.randomNotRepeatIntArray(1000);
+            int[] sorted = new FastSort().sort(nums);
+            searchAndCheck(new BinarySearch(), sorted, 1000, null);
+        });
+    }
+
+    /**
+     * 查找并校验是否正确
+     *
+     * @param search 使用的查找类
+     * @param array  待查找的数组
+     * @param value  待查找的数值
+     * @param expect 期待的数值位置
+     */
+    private static void searchAndCheck(Search search, int[] array, int value, Integer expect) {
+        log.info("array={}", array);
+        log.info("search={}, value={}, expect={}", search.getClass().getName(), value, expect);
+        Optional<Integer> result = search.search(array, value);
+        if (Objects.isNull(expect)) {
+            Assert.assertFalse(result.isPresent());
+        } else {
+            Assert.assertTrue(result.isPresent());
+            Assert.assertEquals(expect, result.get());
+        }
     }
 
 }

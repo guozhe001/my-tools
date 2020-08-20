@@ -53,12 +53,9 @@ public class BinarySearch extends AbstractSearch {
         log.info("midIndex={}, midValue={}, value={}", midIndex, midValue, value);
         if (midValue == value) {
             return Optional.of(midIndex);
-        } else if (midValue < value) {
-            // 如果中间值小于查找的值，则继续在中间值后面的范围查找
-            return search(array, midIndex + 1, maxIndex, value);
         } else {
-            // 如果中间值大于查找的值，则继续在中间值前面的范围查找
-            return search(array, minIndex, maxIndex - 1, value);
+            // 如果中间值小于查找的值，则继续在中间值后面的范围查找; 否则继续在中间值前面的范围查找
+            return midValue < value ? search(array, midIndex + 1, maxIndex, value) : search(array, minIndex, maxIndex - 1, value);
         }
     }
 

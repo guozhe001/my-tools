@@ -3,6 +3,8 @@ package com.nicai.algorithm.sort;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
+import java.util.Objects;
+
 /**
  * 插入排序
  *
@@ -55,4 +57,65 @@ public class InsertSort implements Sort {
     public Logger getLogger() {
         return log;
     }
+
+    public Node sort(Node node) {
+        // 获取链表长度
+        int count = count(node);
+        for (int i = 0; i < count; i++) {
+            Node currentNode = getNode(node, i);
+            for (int j = i - 1; j >= 0; j--) {
+                Node beforeNode = getNode(node, j);
+                if (currentNode.getNum() < beforeNode.getNum()) {
+                    if (j == 0) {
+                        Node currentNextNode = currentNode.getNextNode();
+                        beforeNode.setNextNode(currentNextNode);
+                        node.setNextNode(beforeNode);
+                        node = currentNode;
+                    } else {
+                        Node node1 = getNode(node, j - 1);
+                        if (node1.getNum() < currentNode.getNum()) {
+                            node1.setNextNode(currentNode);
+                            Node currentNextNode = currentNode.getNextNode();
+                            currentNode.setNextNode(beforeNode.getNextNode());
+                            beforeNode.setNextNode(currentNextNode);
+                        }
+                    }
+                }
+            }
+        }
+        return node;
+    }
+
+    private static Node getNode(Node node, int index) {
+        int i = 0;
+        Node result = node;
+        while (i <= index) {
+            if (Objects.isNull(node)) {
+                throw new IndexOutOfBoundsException();
+            }
+            if (i == index) {
+                break;
+            }
+            i++;
+            result = result.getNextNode();
+        }
+        return result;
+    }
+
+    /**
+     * 获取链表长度
+     *
+     * @param node 链表
+     * @return 长度
+     */
+    private static int count(Node node) {
+        int count = 0;
+        Node tobeCounted = node;
+        while (Objects.nonNull(tobeCounted)) {
+            count++;
+            tobeCounted = tobeCounted.getNextNode();
+        }
+        return count;
+    }
+
 }

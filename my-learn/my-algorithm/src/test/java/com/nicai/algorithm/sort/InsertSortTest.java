@@ -23,17 +23,17 @@ public class InsertSortTest {
 
     @Test
     public void sort() {
-        commonAssert(new InsertSort().sort(getNode(ArrayUtil.randomIntArray(100), 0)));
+        commonAssert(new InsertSort().sort(getNode(ArrayUtil.randomIntArray(100), 0)), true);
     }
 
-    private void commonAssert(Node node) {
+    private void commonAssert(Node node, boolean check) {
         while (Objects.nonNull(node)) {
             int currentNum = node.getNum();
             log.info("num={}", node.getNum());
             node = node.getNextNode();
-//            if (Objects.nonNull(node)) {
-//                Assert.assertTrue(currentNum < node.getNum());
-//            }
+            if (check && Objects.nonNull(node)) {
+                Assert.assertTrue(currentNum < node.getNum());
+            }
         }
     }
 
@@ -46,7 +46,7 @@ public class InsertSortTest {
     @Test
     public void getNode() throws Exception {
         Node node = getNode(IntStream.range(0, 5).toArray(), 0);
-        commonAssert(node);
+        commonAssert(node, false);
         Node result = Whitebox.invokeMethod(insertSort, "getNode", node, 0);
         Assert.assertEquals(0, result.getNum());
     }

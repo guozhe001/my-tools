@@ -51,7 +51,12 @@ public class MapSearchTest {
     }
 
     @Test
-    public void search() {
+    public void haveValue() {
         TO_BE_TESTED.forEach(mapSearch -> Assert.assertTrue(mapSearch.haveValue(MAP, wuzhen, beijing)));
+    }
+
+    @Test
+    public void haveNoValue() {
+        TO_BE_TESTED.forEach(mapSearch -> Assert.assertFalse(mapSearch.haveValue(MAP, wuzhen, new Location("hello"))));
     }
 }

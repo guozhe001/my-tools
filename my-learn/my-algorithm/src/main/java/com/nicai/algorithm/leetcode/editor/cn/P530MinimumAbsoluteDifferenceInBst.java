@@ -61,22 +61,33 @@ public class P530MinimumAbsoluteDifferenceInBst {
          * @return 请你计算树中任意两节点的差的绝对值的最小值
          */
         public int getMinimumDifference(TreeNode root) {
-            // 1、遍历树，获取所有的数字
-            List<Integer> integerList = getAllVal(root);
-            return getMinValue(integerList);
+            // 遍历树，获取所有的数字，然后遍历所有数字进行两两相减获取绝对值最小的数字
+            return getMinValue(getAllVal(root));
         }
 
+        /**
+         * 列表中的数字两两相减，获取相减后绝对值最小的数字
+         *
+         * @param integerList 树节点的数值列表
+         * @return 任意两节点相减绝对值最小的数字
+         */
         private int getMinValue(List<Integer> integerList) {
             Integer result = null;
             for (int i = 0; i < integerList.size() - 1; i++) {
                 for (int j = i + 1; j < integerList.size(); j++) {
                     int abs = Math.abs((integerList.get(i) - integerList.get(j)));
-                    result = Objects.isNull(result) ? abs : getMin(result, abs);
+                    result = Objects.isNull(result) ? abs : Math.min(Math.abs(result), abs);
                 }
             }
             return result;
         }
 
+        /**
+         * 获取树的所有节点的值
+         *
+         * @param root root节点
+         * @return 所有节点的值列表
+         */
         private List<Integer> getAllVal(TreeNode root) {
             List<Integer> values = new ArrayList<>();
             queue.offer(root);
@@ -90,13 +101,14 @@ public class P530MinimumAbsoluteDifferenceInBst {
             return values;
         }
 
+        /**
+         * 把指定的树的子节点添加到队列
+         *
+         * @param treeNode 树
+         */
         private void addChildToQueue(TreeNode treeNode) {
             queue.offer(treeNode.left);
             queue.offer(treeNode.right);
-        }
-
-        private Integer getMin(Integer result, int i) {
-            return Math.abs(i) < result ? Math.abs(i) : result;
         }
 
     }

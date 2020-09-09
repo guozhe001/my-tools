@@ -42,7 +42,6 @@ public class P5LongestPalindromicSubstring {
               3. 传入的字符串只有一个字符
               2. 传入的字符串只有两个字符
               3. 传入的字符串没有重复的字符串/
-              ## 传入的字符串最大长度不超过1000，所以可以用
              */
             return solution1(s);
         }

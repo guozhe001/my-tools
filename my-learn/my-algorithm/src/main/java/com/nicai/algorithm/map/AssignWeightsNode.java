@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AssignWeightsNode<T, N extends Number> {
+public class AssignWeightsNode<T> {
     /**
      * 节点
      */
@@ -21,5 +21,5 @@ public class AssignWeightsNode<T, N extends Number> {
     /**
      * 权重
      */
-    private N weight;
+    private int weight;
 }

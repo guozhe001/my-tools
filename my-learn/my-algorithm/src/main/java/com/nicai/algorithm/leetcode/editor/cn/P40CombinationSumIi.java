@@ -33,8 +33,7 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 数组 回溯算法 
 // 👍 350 👎 0
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 组合总和 II
@@ -55,20 +54,25 @@ import java.util.List;
 public class P40CombinationSumIi {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        // key为target数值，value为数组中所有和为target的组合列表
+        Map<Integer, List<List<Integer>>> cache = new HashMap<>();
+
         /**
          * @param candidates 给定数组
          * @param target     目标数字
          * @return 所有数字只和为目标数字的列表
          */
         public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+            if (Objects.nonNull(cache.get(target))) {
+                return cache.get(target);
+            }
             /*
             1、如果组合中有数字等于target，则这个数字是一个组合
             2、如果组合中有数字可以被target整除，则整除结果次的数字列表是一个组合
             3、如果组合中有多个数字只和等于target，则这些数字是一个组合
              */
             List<List<Integer>> result = new ArrayList<>();
-            for (int i = 0; i < candidates.length; i++) {
-                int num = candidates[i];
+            for (int num : candidates) {
                 int newTarget = target - num;
                 if (newTarget <= 0) {
                     if (newTarget == 0) {
@@ -76,12 +80,12 @@ public class P40CombinationSumIi {
                     }
                     continue;
                 }
-
                 // 查找剩下的数组中和为target-num的组合列表
                 List<List<Integer>> lists = combinationSum2(candidates, newTarget);
                 lists.forEach(list -> list.add(num));
                 result.addAll(lists);
             }
+            cache.put(target, result);
             return result;
         }
 

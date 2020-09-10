@@ -55,18 +55,18 @@ public class MapSearchTest {
 
     @Test
     public void haveValue() {
-        TO_BE_TESTED.forEach(mapSearch -> Assert.assertTrue(invokeHaveValue(mapSearch, beijing)));
+        TO_BE_TESTED.forEach(mapSearch -> Assert.assertTrue(invokeSearch(mapSearch, beijing)));
     }
 
-    private boolean invokeHaveValue(MapSearch<Location> mapSearch, Location end) {
+    private boolean invokeSearch(MapSearch<Location> mapSearch, Location target) {
         log.info("mapSearch={}start=====================", mapSearch.getClass().getName());
-        boolean result = mapSearch.haveValue(MAP, wuzhen, end);
-        log.info("mapSearch={}end=======================", mapSearch.getClass().getName());
+        boolean result = mapSearch.search(MAP, wuzhen, target);
+        log.info("mapSearch={}target=======================", mapSearch.getClass().getName());
         return result;
     }
 
     @Test
     public void haveNoValue() {
-        TO_BE_TESTED.forEach(mapSearch -> Assert.assertFalse(invokeHaveValue(mapSearch, new Location("hello"))));
+        TO_BE_TESTED.forEach(mapSearch -> Assert.assertFalse(invokeSearch(mapSearch, new Location("hello"))));
     }
 }

@@ -13,7 +13,6 @@ import java.util.Stack;
  * 深度优先搜索，顺着某个节点一直往下查找，直到某个节点没有子节点再换另一个节点做同样的查找
  * 解决问题：
  * 1、是否有路径
- * 2、最短的路径
  *
  * @author guozhe
  * @date 2020/09/10
@@ -22,12 +21,7 @@ import java.util.Stack;
 public class DepthFirstSearch<K> implements MapSearch<K> {
 
     @Override
-    public List<K> search(Map<K, List<K>> map, K start, K end) {
-        return Lists.newArrayList();
-    }
-
-    @Override
-    public boolean haveValue(Map<K, List<K>> map, K start, K end) {
+    public boolean search(Map<K, List<K>> map, K start, K target) {
         // 用于存储候补节点的栈
         Stack<K> stack = new Stack<>();
         // 记录被搜索过的节点
@@ -42,7 +36,7 @@ public class DepthFirstSearch<K> implements MapSearch<K> {
             }
             log.info("pop={}", pop);
             // 如果当前元素是被查找的元素，则返回true
-            if (pop.equals(end)) {
+            if (pop.equals(target)) {
                 return true;
             } else {
                 // 把被搜索过的节点加入被搜索的列表中

@@ -18,13 +18,10 @@ import java.util.*;
 @Slf4j
 public class BreadthFirstSearch<K> implements MapSearch<K> {
 
-    /**
-     * 栈，存储待查找的元素
-     */
-    private final Queue<K> queue = new LinkedList<>();
-
     @Override
     public boolean haveValue(Map<K, List<K>> map, K start, K end) {
+        // 栈，存储待查找的元素
+        final Queue<K> queue = new LinkedList<>();
         Set<K> searched = Sets.newHashSet();
         // 把起始节点能够叨叨的节点全部放在队列
         map.get(start).forEach(queue::offer);

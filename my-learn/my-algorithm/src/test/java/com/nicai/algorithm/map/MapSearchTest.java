@@ -2,6 +2,7 @@ package com.nicai.algorithm.map;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,12 +16,14 @@ import java.util.Map;
  * @author guozhe
  * @date 2020/09/07
  */
+@Slf4j
 public class MapSearchTest {
 
     /**
      * 被测试类列表
      */
-    private static final List<MapSearch<Location>> TO_BE_TESTED = Lists.newArrayList(new BreadthFirstSearch<>());
+    private static final List<MapSearch<Location>> TO_BE_TESTED = Lists.newArrayList(new BreadthFirstSearch<>(),
+            new DepthFirstSearch<>());
 
     /**
      * 图：src/main/resources/map/图-基础.jpg
@@ -43,20 +46,27 @@ public class MapSearchTest {
     public static void initMap() {
         MAP.put(wuzhen, Lists.newArrayList(hangzhou));
         MAP.put(hangzhou, Lists.newArrayList(seoul, beijing, singapore));
-        MAP.put(seoul, Lists.newArrayList(hangzhou, beijing, tokyo));
-        MAP.put(beijing, Lists.newArrayList(hangzhou, seoul, tokyo, bangkok, singapore));
-        MAP.put(singapore, Lists.newArrayList(hangzhou, beijing, bangkok));
-        MAP.put(tokyo, Lists.newArrayList(seoul, beijing, bangkok));
-        MAP.put(bangkok, Lists.newArrayList(singapore, beijing, tokyo));
+        MAP.put(seoul, Lists.newArrayList(hangzhou, tokyo));
+        MAP.put(beijing, Lists.newArrayList(hangzhou));
+        MAP.put(singapore, Lists.newArrayList(hangzhou, bangkok));
+        MAP.put(tokyo, Lists.newArrayList(seoul));
+        MAP.put(bangkok, Lists.newArrayList(singapore));
     }
 
     @Test
     public void haveValue() {
-        TO_BE_TESTED.forEach(mapSearch -> Assert.assertTrue(mapSearch.haveValue(MAP, wuzhen, beijing)));
+        TO_BE_TESTED.forEach(mapSearch -> Assert.assertTrue(invokeHaveValue(mapSearch, beijing)));
+    }
+
+    private boolean invokeHaveValue(MapSearch<Location> mapSearch, Location end) {
+        log.info("mapSearch={}start=====================", mapSearch.getClass().getName());
+        boolean result = mapSearch.haveValue(MAP, wuzhen, end);
+        log.info("mapSearch={}end=======================", mapSearch.getClass().getName());
+        return result;
     }
 
     @Test
     public void haveNoValue() {
-        TO_BE_TESTED.forEach(mapSearch -> Assert.assertFalse(mapSearch.haveValue(MAP, wuzhen, new Location("hello"))));
+        TO_BE_TESTED.forEach(mapSearch -> Assert.assertFalse(invokeHaveValue(mapSearch, new Location("hello"))));
     }
 }

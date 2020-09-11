@@ -32,13 +32,13 @@ public class MapSearchTest {
      */
     private static final Map<Location, List<Location>> MAP = Maps.newHashMap();
 
-    private static final Location wuzhen = new Location("乌镇");
-    private static final Location hangzhou = new Location("杭州");
-    private static final Location seoul = new Location("首尔");
-    private static final Location beijing = new Location("北京");
-    private static final Location tokyo = new Location("东京");
-    private static final Location bangkok = new Location("曼谷");
-    private static final Location singapore = new Location("新加坡");
+    static final Location wuzhen = new Location("乌镇");
+    static final Location hangzhou = new Location("杭州");
+    static final Location seoul = new Location("首尔");
+    static final Location beijing = new Location("北京");
+    static final Location tokyo = new Location("东京");
+    static final Location bangkok = new Location("曼谷");
+    static final Location singapore = new Location("新加坡");
     // 从乌镇到北京
     final List<Location> FORM_WUZHEN_TO_BEIJING = Lists.newArrayList(hangzhou, beijing);
 

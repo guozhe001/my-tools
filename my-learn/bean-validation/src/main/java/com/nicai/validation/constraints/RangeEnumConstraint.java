@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE_USE, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {EnumValidator.class})
-public @interface ValidEnum {
+public @interface RangeEnumConstraint {
     String message() default "值不正确";
 
     Class<? extends Enum> value();

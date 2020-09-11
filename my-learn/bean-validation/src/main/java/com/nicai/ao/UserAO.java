@@ -1,7 +1,7 @@
 package com.nicai.ao;
 
 import com.nicai.enums.GenderEnum;
-import com.nicai.validation.constraints.ValidEnum;
+import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
@@ -58,7 +58,7 @@ public class UserAO {
      *
      */
     @NotBlank
-    @ValidEnum(value = GenderEnum.class)
+    @RangeEnumConstraint(value = GenderEnum.class)
     private String gender;
 
 

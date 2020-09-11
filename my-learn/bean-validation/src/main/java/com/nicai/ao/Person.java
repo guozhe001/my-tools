@@ -1,7 +1,7 @@
 package com.nicai.ao;
 
 import com.nicai.enums.GenderEnum;
-import com.nicai.validation.constraints.ValidEnum;
+import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.Data;
 
 import javax.validation.constraints.Min;
@@ -19,7 +19,7 @@ public class Person {
      * 有些人会对这里有些疑问，为什么有枚举类型{@code GenderEnum}不用而要用{@code String}类型呢
      * 可以演示：ValidationController#pushToPaySourceEnum
      */
-    @ValidEnum(value = GenderEnum.class)
+    @RangeEnumConstraint(value = GenderEnum.class)
     @NotNull
     private String gender;
     /**

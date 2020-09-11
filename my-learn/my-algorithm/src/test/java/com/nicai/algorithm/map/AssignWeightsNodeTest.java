@@ -37,7 +37,7 @@ public class AssignWeightsNodeTest {
          上学和放学，有时间权重的图，其中加权节点的node是地址，权重是时间（单位分钟）
          这里表示上学花费10mins，放学回家花费15mins
          */
-        Map<Location, AssignWeightsNode<Location, Integer>> map = Maps.newHashMap();
+        Map<Location, AssignWeightsNode<Location>> map = Maps.newHashMap();
         map.put(home, new AssignWeightsNode<>(school, 10));
         map.put(school, new AssignWeightsNode<>(home, 15));
         map.forEach((k, v) -> {

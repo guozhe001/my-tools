@@ -4,7 +4,7 @@ import com.nicai.ao.TransOutput;
 import com.nicai.ao.UserAO;
 import com.nicai.config.MethodValidationConfig;
 import com.nicai.enums.PaySource;
-import com.nicai.validation.constraints.ValidEnum;
+import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -64,7 +64,7 @@ public class ValidationController {
      */
     @ResponseBody
     @GetMapping(value = "/pushToPaySource")
-    public TransOutput pushToPaySource(@RequestParam("paySource") @ValidEnum(value = PaySource.class, message = "资金渠道不正确") @NotBlank String paySource) {
+    public TransOutput pushToPaySource(@RequestParam("paySource") @RangeEnumConstraint(value = PaySource.class, message = "资金渠道不正确") @NotBlank String paySource) {
         log.info("push bid to paySource {}", paySource);
         return new TransOutput(TransOutput.SUCCESS_CODE, String.format("have push bid to %s", paySource));
     }

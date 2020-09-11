@@ -2,7 +2,7 @@ package com.nicai.ao;
 
 import com.nicai.constant.Constants;
 import com.nicai.enums.PaySource;
-import com.nicai.validation.constraints.ValidEnum;
+import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -42,7 +42,7 @@ public class RequestAO {
      */
     @Size(min = 0, max = 3, message = "目标资金渠道的个数必须大于等于0小于等于3")
     @NotEmpty
-    private List<@ValidEnum(value = PaySource.class, message = "目标资金渠道的值不正确") String> targetSources;
+    private List<@RangeEnumConstraint(value = PaySource.class, message = "目标资金渠道的值不正确") String> targetSources;
 
     /**
      * 签约金额

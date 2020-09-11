@@ -1,6 +1,8 @@
 package com.nicai.algorithm.map;
 
+import cn.hutool.core.collection.CollUtil;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 
 import java.util.*;
 
@@ -20,27 +22,43 @@ public class BellmanFord<T> implements ShortestPath<T> {
         // 记录从start节点到某个节点的权重
         Map<T, Integer> nodeWeightMap = Maps.newHashMap();
         Queue<AssignWeightsNode<T>> queue = new LinkedList<>();
+        // 记录节点的父节点，如果从父节点到子节点已经搜过了，则下次不再做从子节点到父节点搜索了
+        Map<T, Set<T>> parentMap = Maps.newHashMap();
+        nodeWeightMap.put(start, 0);
         // 起点到起点的权重为0
         queue.offer(new AssignWeightsNode<>(start, 0));
         while (!queue.isEmpty()) {
             AssignWeightsNode<T> poll = queue.poll();
-            int currentWeight = poll.getWeight();
-            T node = poll.getNode();
-            // 获取node的当前的权重
-            Integer integer = nodeWeightMap.get(node);
-//            NodeWeight.put(node, Objects.isNull(integer) ? poll.getWeight() : integer + poll.getWeight());
-            map.get(node).forEach(nextNode -> {
-                int lineWeight = nextNode.getWeight();
-                Integer nextNodeWeight = nodeWeightMap.get(nextNode.getNode());
+            final T parentNode = poll.getNode();
+            // 获取当前节点的权重
+            int currentWeight = nodeWeightMap.get(parentNode);
+            // 遍历当前节点的所有子节点
+            for (AssignWeightsNode<T> assignWeightsNode : map.get(parentNode)) {
+                T childNode = assignWeightsNode.getNode();
+                // 获取当前节点的所有节点
+                Set<T> parents = parentMap.get(childNode);
+                // 如果当前节点的子节点也是当前节点的父节点，则不更新其父节点，直接跳过
+                if (CollUtil.isNotEmpty(parents) && parents.contains(parentNode)) {
+                    continue;
+                }
+                int lineWeight = assignWeightsNode.getWeight();
+                Integer nextNodeWeight = nodeWeightMap.get(childNode);
                 // 如果下一个节点的权重是null，说明是第一次找到，更新此节点的权重为当前节点权重+边的权重
                 if (Objects.isNull(nextNodeWeight)) {
-                    nodeWeightMap.put(lineWeight + );
+                    nodeWeightMap.put(childNode, lineWeight + currentWeight);
+                } else {
+                    // 如果下一个节点有权重，对比权重
+                    nodeWeightMap.put(childNode, nextNodeWeight > lineWeight + currentWeight ? lineWeight + currentWeight : nextNodeWeight);
                 }
-
-            });
-
+                queue.offer(assignWeightsNode);
+                if (CollUtil.isEmpty(parents)) {
+                    parentMap.put(childNode, Sets.newHashSet(parentNode));
+                } else {
+                    parents.add(parentNode);
+                }
+            }
         }
-        return NodeWeight.get(end);
+        return nodeWeightMap.get(end);
     }
 
 }

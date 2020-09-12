@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -19,12 +18,9 @@ import static com.nicai.algorithm.map.MapSearchTest.*;
  * @date 2020/09/11
  */
 @Slf4j
-public class ShortestPathTest {
+public class BaseShortestPathTest {
 
-    /**
-     * 待测试
-     */
-    private static final List<ShortestPath<Location>> TO_BE_TEST = Lists.newArrayList(new BellmanFord<>());
+    private final List<ShortestPath<Location>> shortestPaths = Lists.newArrayList(new BellmanFord<>(), new Dijkstra<Location>());
 
     /**
      * 待搜索的图
@@ -33,8 +29,8 @@ public class ShortestPathTest {
      */
     private static final Map<Location, List<AssignWeightsNode<Location>>> MAP = Maps.newHashMap();
 
-    @BeforeClass
-    public static void initMap() {
+    public void initMap() {
+        MAP.clear();
         MAP.put(wuzhen, Lists.newArrayList(new AssignWeightsNode<>(hangzhou, 1)));
         MAP.put(hangzhou, Lists.newArrayList(new AssignWeightsNode<>(seoul, 10), new AssignWeightsNode<>(beijing, 6), new AssignWeightsNode<>(singapore, 7)));
         MAP.put(seoul, Lists.newArrayList(new AssignWeightsNode<>(hangzhou, 10), new AssignWeightsNode<>(tokyo, 3)));
@@ -50,7 +46,7 @@ public class ShortestPathTest {
      */
     @Test
     public void search() {
-        TO_BE_TEST.forEach(locationShortestPath -> Assert.assertEquals(10, invokeSearch(locationShortestPath, hangzhou, tokyo)));
+        invokeAndAssert(10, hangzhou, tokyo);
     }
 
     /**
@@ -59,7 +55,7 @@ public class ShortestPathTest {
      */
     @Test
     public void search1() {
-        TO_BE_TEST.forEach(locationShortestPath -> Assert.assertEquals(10, invokeSearch(locationShortestPath, wuzhen, bangkok)));
+        invokeAndAssert(10, wuzhen, bangkok);
     }
 
     /**
@@ -68,7 +64,7 @@ public class ShortestPathTest {
      */
     @Test
     public void search2() {
-        TO_BE_TEST.forEach(locationShortestPath -> Assert.assertEquals(17, invokeSearch(locationShortestPath, singapore, seoul)));
+        invokeAndAssert(17, singapore, seoul);
     }
 
     /**
@@ -77,12 +73,19 @@ public class ShortestPathTest {
      */
     @Test
     public void search3() {
-        TO_BE_TEST.forEach(locationShortestPath -> Assert.assertEquals(15, invokeSearch(locationShortestPath, seoul, bangkok)));
+        invokeAndAssert(15, seoul, bangkok);
+    }
+
+    private void invokeAndAssert(int expect, Location start, Location end) {
+        for (ShortestPath<Location> shortestPath : shortestPaths) {
+            Assert.assertEquals(expect, invokeSearch(shortestPath, start, end));
+        }
     }
 
     private int invokeSearch(ShortestPath<Location> shortestPath, Location start, Location end) {
+        initMap();
         int search = shortestPath.search(MAP, start, end);
-        log.info("form {} to {} at least spend {} hours", start, end, search);
+        log.info("shortestPath={} form {} to {} at least spend {} hours", shortestPath, start, end, search);
         return search;
     }
 

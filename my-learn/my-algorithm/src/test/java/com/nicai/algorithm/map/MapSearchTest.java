@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -39,11 +38,9 @@ public class MapSearchTest {
     static final Location tokyo = new Location("东京");
     static final Location bangkok = new Location("曼谷");
     static final Location singapore = new Location("新加坡");
-    // 从乌镇到北京
-    final List<Location> FORM_WUZHEN_TO_BEIJING = Lists.newArrayList(hangzhou, beijing);
 
-    @BeforeClass
-    public static void initMap() {
+    public void initMap() {
+        MAP.clear();
         MAP.put(wuzhen, Lists.newArrayList(hangzhou));
         MAP.put(hangzhou, Lists.newArrayList(seoul, beijing, singapore));
         MAP.put(seoul, Lists.newArrayList(hangzhou, tokyo));
@@ -55,18 +52,24 @@ public class MapSearchTest {
 
     @Test
     public void haveValue() {
-        TO_BE_TESTED.forEach(mapSearch -> Assert.assertTrue(invokeSearch(mapSearch, beijing)));
+        invokeAndAssert(true, beijing);
+    }
+
+    @Test
+    public void haveNoValue() {
+        invokeAndAssert(false, new Location("hello"));
+    }
+
+    private void invokeAndAssert(final boolean expect, Location location) {
+        TO_BE_TESTED.forEach(mapSearch -> Assert.assertEquals(expect, invokeSearch(mapSearch, location)));
     }
 
     private boolean invokeSearch(MapSearch<Location> mapSearch, Location target) {
+        initMap();
         log.info("mapSearch={}start=====================", mapSearch.getClass().getName());
         boolean result = mapSearch.search(MAP, wuzhen, target);
         log.info("mapSearch={}target=======================", mapSearch.getClass().getName());
         return result;
     }
 
-    @Test
-    public void haveNoValue() {
-        TO_BE_TESTED.forEach(mapSearch -> Assert.assertFalse(invokeSearch(mapSearch, new Location("hello"))));
-    }
 }

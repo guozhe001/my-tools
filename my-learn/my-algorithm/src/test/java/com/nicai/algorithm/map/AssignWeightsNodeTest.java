@@ -40,9 +40,7 @@ public class AssignWeightsNodeTest {
         Map<Location, AssignWeightsNode<Location>> map = Maps.newHashMap();
         map.put(home, new AssignWeightsNode<>(school, 10));
         map.put(school, new AssignWeightsNode<>(home, 15));
-        map.forEach((k, v) -> {
-            log.info("form {} to {} need {} mins", k, v.getNode(), v.getWeight());
-        });
+        map.forEach((k, v) -> log.info("form {} to {} need {} mins", k, v.getNode(), v.getWeight()));
         Assert.assertTrue(true);
     }
 

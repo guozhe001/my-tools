@@ -18,9 +18,12 @@ import static com.nicai.algorithm.map.MapSearchTest.*;
  * @date 2020/09/11
  */
 @Slf4j
-public class BaseShortestPathTest {
+public class ShortestPathTest {
 
-    private final List<ShortestPath<Location>> shortestPaths = Lists.newArrayList(new BellmanFord<>(), new Dijkstra<Location>());
+    /**
+     * 待测试的算法类
+     */
+    private final List<ShortestPath<Location>> TO_BE_TESTED = Lists.newArrayList(new BellmanFord<>(), new Dijkstra<>());
 
     /**
      * 待搜索的图
@@ -77,7 +80,7 @@ public class BaseShortestPathTest {
     }
 
     private void invokeAndAssert(int expect, Location start, Location end) {
-        for (ShortestPath<Location> shortestPath : shortestPaths) {
+        for (ShortestPath<Location> shortestPath : TO_BE_TESTED) {
             Assert.assertEquals(expect, invokeSearch(shortestPath, start, end));
         }
     }

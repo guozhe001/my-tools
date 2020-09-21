@@ -13,6 +13,9 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // 
 // Related Topics 链表 数学
 
+import java.util.Objects;
+import java.util.Stack;
+
 /**
  * @author nijixucai
  */
@@ -21,7 +24,71 @@ class P2AddTwoNumbers {
 
     class Solution {
         ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-            return addTwoNumbers(l1, l2, false);
+            return addTwoNumbersByStack(l1, l2);
+        }
+
+        /**
+         * 使用栈解决问题
+         *
+         * @param l1 链表1
+         * @param l2 链表2
+         * @return 链表结果
+         */
+        ListNode addTwoNumbersByStack(ListNode l1, ListNode l2) {
+            Stack<Integer> stack1 = nodeToStack(l1);
+            Stack<Integer> stack2 = nodeToStack(l2);
+            Stack<Integer> result = new Stack<>();
+            while (!stack1.isEmpty() || !stack2.isEmpty()) {
+                Integer value1 = stack1.isEmpty() ? 0 : stack1.pop();
+                Integer value2 = stack2.isEmpty() ? 0 : stack2.pop();
+                int temp = value1 + value2;
+                if (temp >= 10) {
+                    result.push(temp % 10);
+                    if (stack1.isEmpty()) {
+                        stack1.push(1);
+                    } else {
+                        stack1.push(stack1.pop() + 1);
+                    }
+                } else {
+                    result.push(temp);
+                }
+            }
+            return stackToNode(result);
+        }
+
+        /**
+         * 栈转换成列表
+         *
+         * @param stack 保存结果的栈
+         * @return
+         */
+        private ListNode stackToNode(Stack<Integer> stack) {
+            ListNode result = new ListNode(stack.pop());
+            while (!stack.isEmpty()) {
+                ListNode listNode = new ListNode(stack.pop());
+                listNode.next = result;
+                result = listNode;
+            }
+            return result;
+        }
+
+        /**
+         * 获取链表的数值
+         *
+         * @param l1 链表主节点
+         * @return 整个链表的值
+         */
+        private Stack<Integer> nodeToStack(ListNode l1) {
+            Stack<Integer> stack = new Stack<>();
+            while (Objects.nonNull(l1)) {
+                stack.push(l1.val);
+                l1 = l1.next;
+            }
+            Stack<Integer> result = new Stack<>();
+            while (!stack.isEmpty()) {
+                result.push(stack.pop());
+            }
+            return result;
         }
 
         /**
@@ -109,12 +176,17 @@ class P2AddTwoNumbers {
     }
 
     //leetcode submit region end(Prohibit modification and deletion)
-
     class ListNode {
+        /**
+         * 当前的值
+         */
         int val;
+        /**
+         * 下一个值
+         */
         ListNode next;
 
-        ListNode(int x) {
+        public ListNode(int x) {
             val = x;
         }
     }

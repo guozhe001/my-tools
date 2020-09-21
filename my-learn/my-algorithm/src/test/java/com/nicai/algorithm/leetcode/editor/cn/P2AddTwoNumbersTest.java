@@ -3,6 +3,9 @@ package com.nicai.algorithm.leetcode.editor.cn;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
+import org.powermock.reflect.Whitebox;
+
+import java.util.Stack;
 
 /**
  * @author guozhe
@@ -99,6 +102,51 @@ public class P2AddTwoNumbersTest {
             ints[i] = Integer.valueOf(strings[i].trim());
         }
         return ints;
+    }
+
+    /**
+     * private int getValue(ListNode l1)
+     */
+    @Test
+    public void getValue() throws Exception {
+        Stack<Integer> stack = Whitebox.invokeMethod(solution, "nodeToStack", getListNode("2, 4, 3"));
+        Integer[] expect = new Integer[]{2, 4, 3};
+        for (Integer i : expect) {
+            Assert.assertEquals(i, stack.pop());
+        }
+    }
+
+    /**
+     * private int getValue(ListNode l1)
+     */
+    @Test
+    public void getValue1() throws Exception {
+        Stack<Integer> stack = Whitebox.invokeMethod(solution, "nodeToStack", getListNode("5, 6, 4"));
+        Integer[] expect = new Integer[]{5, 6, 4};
+        for (Integer i : expect) {
+            Assert.assertEquals(i, stack.pop());
+        }
+    }
+
+    /**
+     * private int getValue(ListNode l1)
+     */
+    @Test
+    public void stackToNode() throws Exception {
+        P2AddTwoNumbers.ListNode root = Whitebox.invokeMethod(solution, "stackToNode", getStack(new int[]{7, 0, 8}));
+        int[] expect = {7, 0, 8};
+        for (int i : expect) {
+            Assert.assertEquals(i, root.val);
+            root = root.next;
+        }
+    }
+
+    private Stack<Integer> getStack(int[] nums) {
+        Stack<Integer> stack = new Stack<>();
+        for (int i : nums) {
+            stack.push(i);
+        }
+        return stack;
     }
 
 }

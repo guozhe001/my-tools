@@ -3,6 +3,7 @@ package com.nicai.algorithm.datastructure;
 import com.nicai.exception.NicaiException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * 定容栈容量固定的栈
@@ -65,7 +66,7 @@ public class FixedCapacityStack<T> implements Stack<T> {
     }
 
     private class ReverseArrayIterator implements Iterator<T> {
-        int i = capacity;
+        private int i = capacity;
 
         @Override
         public boolean hasNext() {
@@ -74,7 +75,13 @@ public class FixedCapacityStack<T> implements Stack<T> {
 
         @Override
         public T next() {
-            return items[--i];
+            if (i > 0) {
+                i--;
+                return items[i];
+            } else {
+                throw new NoSuchElementException();
+            }
+
         }
 
         @Override

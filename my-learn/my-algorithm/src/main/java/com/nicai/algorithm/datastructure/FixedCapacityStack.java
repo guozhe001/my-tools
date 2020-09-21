@@ -2,27 +2,28 @@ package com.nicai.algorithm.datastructure;
 
 import com.nicai.exception.NicaiException;
 
+import java.util.Iterator;
+
 /**
- * 容量固定的栈
+ * 定容栈容量固定的栈
  *
  * @author guozhe
  * @date 2020/09/21
  */
-public class FixedCapacityStackOfStrings implements Stack<String> {
+public class FixedCapacityStack<T> implements Stack<T> {
 
     /**
-     * ¬
      * 保存集合的数组
      */
-    private final String[] strings;
+    private final T[] items;
 
     /**
      * 当前容量
      */
     private int capacity;
 
-    public FixedCapacityStackOfStrings(int size) {
-        this.strings = new String[size];
+    public FixedCapacityStack(int size) {
+        this.items = (T[]) new Object[size];
     }
 
     @Override
@@ -38,10 +39,10 @@ public class FixedCapacityStackOfStrings implements Stack<String> {
     }
 
     @Override
-    public void push(String item) {
+    public void push(T item) {
         // 如果当前的容量小于数组的长度，说明可以继续添加
-        if (capacity < strings.length) {
-            strings[capacity] = item;
+        if (capacity < items.length) {
+            items[capacity] = item;
             capacity++;
         } else {
             throw new NicaiException("栈已满，无法添加新的元素");
@@ -49,12 +50,36 @@ public class FixedCapacityStackOfStrings implements Stack<String> {
     }
 
     @Override
-    public String pop() {
+    public T pop() {
         if (capacity > 0) {
             capacity--;
-            return strings[capacity];
+            return items[capacity];
         } else {
             throw new NicaiException("栈已空，无法弹出元素");
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<T> {
+        int i = capacity;
+
+        @Override
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        @Override
+        public T next() {
+            return items[--i];
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
         }
     }
 }

@@ -17,7 +17,7 @@ public class FixedCapacityStackOfStringsTest {
      */
     public String[] reverse(String[] strings) {
         int length = strings.length;
-        FixedCapacityStackOfStrings fixedCapacityStackOfStrings = new FixedCapacityStackOfStrings(length);
+        FixedCapacityStack<String> fixedCapacityStackOfStrings = new FixedCapacityStack<>(length);
         for (String s : strings) {
             fixedCapacityStackOfStrings.push(s);
         }

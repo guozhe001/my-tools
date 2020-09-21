@@ -46,4 +46,16 @@ public class P7ReverseIntegerTest {
         int reverse = solution.reverse(120);
         Assert.assertEquals(21, reverse);
     }
+
+    /**
+     * 示例 4:
+     * <p>
+     * 输入: 负的2的31次幂
+     * 输出: 0
+     */
+    @Test
+    public void reverse4() {
+        int reverse = solution.reverse(Math.negateExact(Integer.MAX_VALUE));
+        Assert.assertEquals(0, reverse);
+    }
 }

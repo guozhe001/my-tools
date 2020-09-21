@@ -25,6 +25,9 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 数学 
 // 👍 2197 👎 0
 
+import java.util.Objects;
+import java.util.Stack;
+
 /**
  * 整数反转
  *
@@ -34,7 +37,31 @@ public class P7ReverseInteger {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int reverse(int x) {
-            return 0;
+            String s = String.valueOf(x);
+            Stack<Integer> stack = new Stack<>();
+            // 是否为负值
+            boolean negative = false;
+            for (char aChar : s.toCharArray()) {
+                if (Objects.equals('-', aChar)) {
+                    negative = true;
+                } else {
+                    stack.push(Integer.parseInt(String.valueOf(aChar)));
+                }
+            }
+            StringBuilder stringBuilder = new StringBuilder();
+            while (!stack.isEmpty()) {
+                Integer pop = stack.pop();
+                if (stringBuilder.length() == 0 && 0 == pop) {
+                    continue;
+                }
+                stringBuilder.append(pop);
+            }
+            try {
+                int i = Integer.parseInt(stringBuilder.toString());
+                return negative ? Math.negateExact(i) : i;
+            } catch (Exception e) {
+                return 0;
+            }
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

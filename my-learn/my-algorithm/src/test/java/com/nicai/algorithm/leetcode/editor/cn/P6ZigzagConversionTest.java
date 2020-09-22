@@ -16,7 +16,7 @@ public class P6ZigzagConversionTest {
     /**
      * 解决方法
      */
-    private P6ZigzagConversion.Solution solution = new P6ZigzagConversion().new Solution();
+    private final P6ZigzagConversion.Solution solution = new P6ZigzagConversion().new Solution();
 
     /**
      * 示例 1:

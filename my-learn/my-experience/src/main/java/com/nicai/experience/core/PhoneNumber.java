@@ -1,5 +1,9 @@
 package com.nicai.experience.core;
 
+import lombok.EqualsAndHashCode;
+
+import java.util.Objects;
+
 /**
  * Effective Java 第九条 覆盖equals时总要覆盖hashCode
  * 覆盖了equals但是没有覆盖hashCode测试
@@ -42,15 +46,16 @@ public class PhoneNumber {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         PhoneNumber that = (PhoneNumber) o;
         return areaCode == that.areaCode &&
                 prefix == that.prefix &&
                 lineNumber == that.lineNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(areaCode, prefix, lineNumber);
     }
 }

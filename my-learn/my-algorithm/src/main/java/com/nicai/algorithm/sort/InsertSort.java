@@ -47,17 +47,6 @@ public class InsertSort implements Sort {
         return nums;
     }
 
-
-    @Override
-    public String getName() {
-        return "插入排序";
-    }
-
-    @Override
-    public Logger getLogger() {
-        return log;
-    }
-
     public Node sort(Node node) {
         // 获取链表长度
         int count = count(node);
@@ -85,6 +74,17 @@ public class InsertSort implements Sort {
         }
         return node;
     }
+
+    @Override
+    public String getName() {
+        return "插入排序";
+    }
+
+    @Override
+    public Logger getLogger() {
+        return log;
+    }
+
 
     private static Node getNode(Node node, int index) {
         int i = 0;

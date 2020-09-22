@@ -28,6 +28,25 @@ class P2AddTwoNumbers {
         }
 
         /**
+         * 递归调用addTwoNumbers，直到两个链表的末尾并且上个数字之和小于0
+         *
+         * @param l1    链表1
+         * @param l2    链表2
+         * @param carry 是否进位
+         * @return 链表结果
+         */
+        ListNode addTwoNumbers(ListNode l1, ListNode l2, boolean carry) {
+            ListNode listNode = new ListNode(0);
+            if (isNull(l1) && isNull(l2) && !carry) {
+                return null;
+            }
+            int i = getVal(l1) + getVal(l2) + (carry ? 1 : 0);
+            listNode.val = i % 10;
+            listNode.next = addTwoNumbers(isNull(l1) ? null : l1.next, isNull(l2) ? null : l2.next, i >= 10);
+            return listNode;
+        }
+
+        /**
          * 使用栈解决问题
          *
          * @param l1 链表1
@@ -91,24 +110,6 @@ class P2AddTwoNumbers {
             return result;
         }
 
-        /**
-         * 递归调用addTwoNumbers，直到两个链表的末尾并且上个数字之和小于0
-         *
-         * @param l1    链表1
-         * @param l2    链表2
-         * @param carry 是否进位
-         * @return 链表结果
-         */
-        ListNode addTwoNumbers(ListNode l1, ListNode l2, boolean carry) {
-            ListNode listNode = new ListNode(0);
-            if (isNull(l1) && isNull(l2) && !carry) {
-                return null;
-            }
-            int i = getVal(l1) + getVal(l2) + (carry ? 1 : 0);
-            listNode.val = i % 10;
-            listNode.next = addTwoNumbers(isNull(l1) ? null : l1.next, isNull(l2) ? null : l2.next, i >= 10);
-            return listNode;
-        }
 
         int getVal(ListNode listNode) {
             return isNull(listNode) ? 0 : listNode.val;

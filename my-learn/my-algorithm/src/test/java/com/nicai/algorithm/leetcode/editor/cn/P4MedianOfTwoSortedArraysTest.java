@@ -45,7 +45,7 @@ public class P4MedianOfTwoSortedArraysTest {
      */
     @Test
     public void findMedianSortedArrays() {
-        findMedianSortedArrays(new int[]{1, 3}, new int[]{2}, 2.0);
+        invokeAndAssert(new int[]{1, 3}, new int[]{2}, 2.0);
     }
 
     /**
@@ -54,10 +54,10 @@ public class P4MedianOfTwoSortedArraysTest {
      */
     @Test
     public void findMedianSortedArrays1() {
-        findMedianSortedArrays(new int[]{1, 2}, new int[]{3, 4}, 2.5);
+        invokeAndAssert(new int[]{1, 2}, new int[]{3, 4}, 2.5);
     }
 
-    private void findMedianSortedArrays(int[] nums1, int[] nums2, double expect) {
+    private void invokeAndAssert(int[] nums1, int[] nums2, double expect) {
         double result = solution.findMedianSortedArrays(nums1, nums2);
         log.info("nums1 = {}, nums2 = {},result = {}", nums1, nums2, result);
         Assert.assertEquals(String.valueOf(expect), String.valueOf(result));

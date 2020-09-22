@@ -22,13 +22,6 @@ public abstract class AbstractSearch implements Search {
     }
 
     /**
-     * 检查数组是否满足查找的条件
-     *
-     * @param array 待查找的数组
-     */
-    abstract void check(int[] array);
-
-    /**
      * 在指定的范围内查找
      *
      * @param array    数组
@@ -38,5 +31,12 @@ public abstract class AbstractSearch implements Search {
      * @return 查询的结果, 目标数字所在的位置
      */
     abstract Optional<Integer> search(int[] array, int minIndex, int maxIndex, int value);
+
+    /**
+     * 检查数组是否满足查找的条件
+     *
+     * @param array 待查找的数组
+     */
+    abstract void check(int[] array);
 
 }

@@ -11,11 +11,14 @@ import org.junit.Test;
  */
 public class ReverseListTest {
 
-    private ReverseList.Solution solution = new ReverseList().new Solution();
+    /**
+     * 待测的解决方案
+     */
+    private static final ReverseList.Solution SOLUTION = new ReverseList().new Solution();
 
     @Test
     public void ReverseList() {
-        ReverseList.ListNode listNode = solution.reverse(getListNode(new int[]{1, 2, 3, 4, 5}, 0));
+        ReverseList.ListNode listNode = SOLUTION.reverse(getListNode(new int[]{1, 2, 3, 4, 5}, 0));
         int[] expect = new int[]{5, 4, 3, 2, 1};
         for (int i : expect) {
             Assert.assertEquals(i, listNode.val);
@@ -26,7 +29,7 @@ public class ReverseListTest {
     ReverseList.ListNode getListNode(int[] nums, int startIndex) {
         ReverseList.ListNode result = null;
         if (startIndex < nums.length) {
-            result = new ReverseList().new ListNode(nums[startIndex]);
+            result = new ReverseList.ListNode(nums[startIndex]);
             result.next = getListNode(nums, startIndex + 1);
         }
         return result;

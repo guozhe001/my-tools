@@ -6,7 +6,7 @@ package com.nicai.algorithm.datastructure;
  * @author guozhe
  * @date 2020/09/19
  */
-interface Stack<T> extends Iterable<T> {
+public interface Stack<T> extends Iterable<T> {
 
     /**
      * 添加一个元素

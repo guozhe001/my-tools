@@ -1,5 +1,6 @@
-package com.nicai.algorithm.datastructure;
+package com.nicai.algorithm.datastructure.impl;
 
+import com.nicai.algorithm.datastructure.Stack;
 import com.nicai.exception.NicaiException;
 
 import java.util.Iterator;

@@ -27,4 +27,24 @@ public class ResizingArrayStackTest {
             Assert.assertEquals(s, strings.pop());
         }
     }
+
+
+    @Test
+    public void stack() {
+        Stack<String> stringStack = new StackImpl<>();
+        for (char c : "hello world".toCharArray()) {
+            stringStack.push(String.valueOf(c));
+        }
+        for (String s : stringStack) {
+            log.info("s={}", s);
+        }
+        Assert.assertEquals(11, stringStack.size());
+        Assert.assertFalse(stringStack.isEmpty());
+        String[] expect = {"d", "l", "r", "o", "w", " ", "o", "l", "l", "e", "h"};
+        for (String s : expect) {
+            Assert.assertEquals(s, stringStack.pop());
+        }
+    }
+
+
 }

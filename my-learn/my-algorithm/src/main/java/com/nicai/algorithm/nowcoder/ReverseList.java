@@ -1,7 +1,5 @@
 package com.nicai.algorithm.nowcoder;
 
-import java.util.Objects;
-
 /**
  * 反转链表
  * https://www.nowcoder.com/practice/75e878df47f24fdc9dc3e400ec6058ca?tpId=188&&tqId=35464&rp=1&ru=/activity/oj&qru=/ta/job-code-high-week/question-ranking
@@ -13,11 +11,10 @@ public class ReverseList {
     public class Solution {
         public ListNode reverse(ListNode head) {
             ListNode result = null;
-            while (Objects.nonNull(head)) {
-                ListNode listNode = new ListNode(head.val);
+            for (ListNode node = head; node != null; node = node.next) {
+                ListNode listNode = new ListNode(node.val);
                 listNode.next = result;
                 result = listNode;
-                head = head.next;
             }
             return result;
         }

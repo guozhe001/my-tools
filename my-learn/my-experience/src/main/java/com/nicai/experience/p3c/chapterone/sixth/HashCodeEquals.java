@@ -1,14 +1,8 @@
 package com.nicai.experience.p3c.chapterone.sixth;
 
-import com.google.common.collect.Sets;
 import com.google.common.hash.HashCode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Set;
 
 /**
  * 阿里巴巴Java开发手册
@@ -21,31 +15,8 @@ import java.util.Set;
  * @author guozhe
  */
 @Slf4j
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class HashCodeEquals {
-
-    public static void main(String[] args) {
-        testDogWithEquals();
-        testPerson();
-    }
-
-    public static void testDogWithEquals() {
-        Set<Dog> dogs = Sets.newHashSet();
-        dogs.add(new Dog(1L, "huahua", 3));
-        dogs.add(new Dog(1L, "huahua", 3));
-        dogs.add(new Dog(2L, "dahuang", 2));
-        dogs.add(new Dog(3L, "mimi", 2));
-        log.info("dogs.size={}", dogs.size());
-    }
-
-    public static void testPerson() {
-        Set<Person> sets = Sets.newHashSet();
-        // 其实第一条和第二条应该是一样的
-        sets.add(new Person(1L, "zhangsan", 18));
-        sets.add(new Person(1L, "zhangsan", 18));
-        sets.add(new Person(2L, "lisi", 19));
-        sets.add(new Person(3L, "wangwu", 20));
-        log.info("sets.size={}", sets.size());
-    }
 
     @Setter
     @Getter

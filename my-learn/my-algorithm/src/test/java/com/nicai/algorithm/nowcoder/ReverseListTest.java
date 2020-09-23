@@ -1,5 +1,6 @@
 package com.nicai.algorithm.nowcoder;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -9,6 +10,7 @@ import org.junit.Test;
  * @author guozhe
  * @date 2020/09/21
  */
+@Slf4j
 public class ReverseListTest {
 
     /**
@@ -35,4 +37,15 @@ public class ReverseListTest {
         return result;
     }
 
+    public ReverseListTest() {
+        log.info("i'm construct method");
+    }
+
+    static {
+        log.info("i'm static method");
+    }
+
+    public static void main(String[] args) {
+        new ReverseListTest();
+    }
 }

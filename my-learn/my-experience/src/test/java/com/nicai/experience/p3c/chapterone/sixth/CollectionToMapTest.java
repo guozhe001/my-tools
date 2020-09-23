@@ -1,7 +1,6 @@
-package com.nicai.experience.p3c.chapterone.fourth;
+package com.nicai.experience.p3c.chapterone.sixth;
 
 import com.google.common.collect.Lists;
-import com.nicai.experience.p3c.chapterone.sixth.CollectionToMap;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -16,7 +15,7 @@ import java.util.Random;
  */
 public class CollectionToMapTest {
 
-    private static final List<CollectionToMap.Pair> PAIRS = Lists.newArrayList();
+    private static final List<Pair<String, Double>> PAIRS = Lists.newArrayList();
 
     private static final Random random = new Random();
 
@@ -27,9 +26,9 @@ public class CollectionToMapTest {
     @BeforeClass
     public static void initList() {
         PAIRS.clear();
-        PAIRS.add(new CollectionToMap.Pair(KEY1, random.nextDouble()));
-        PAIRS.add(new CollectionToMap.Pair(KEY2, random.nextDouble()));
-        PAIRS.add(new CollectionToMap.Pair(KEY2, random.nextDouble()));
+        PAIRS.add(new Pair<>(KEY1, random.nextDouble()));
+        PAIRS.add(new Pair<>(KEY2, random.nextDouble()));
+        PAIRS.add(new Pair<>(KEY2, random.nextDouble()));
     }
 
     /**
@@ -45,7 +44,7 @@ public class CollectionToMapTest {
      */
     @Test
     public void collectToMap() {
-        List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
+        List<Pair<String, Double>> myPairs = Lists.newArrayList(PAIRS);
         myPairs.remove(2);
         Map<String, Double> stringDoubleMap = CollectionToMap.collectToMap(myPairs);
         Assert.assertEquals(2, stringDoubleMap.size());
@@ -58,9 +57,9 @@ public class CollectionToMapTest {
      */
     @Test(expected = NullPointerException.class)
     public void collectToMapNullValue() {
-        List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
+        List<Pair<String, Double>> myPairs = Lists.newArrayList(PAIRS);
         myPairs.remove(2);
-        myPairs.add(new CollectionToMap.Pair(KEY3, null));
+        myPairs.add(new Pair<>(KEY3, null));
         CollectionToMap.collectToMap(myPairs);
     }
 
@@ -80,7 +79,7 @@ public class CollectionToMapTest {
      */
     @Test
     public void collectToMapMergeDuplicateKey() {
-        List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
+        List<Pair<String, Double>> myPairs = Lists.newArrayList(PAIRS);
         myPairs.remove(2);
         Map<String, Double> stringDoubleMap = CollectionToMap.collectToMapMergeDuplicateKey(myPairs);
         Assert.assertEquals(2, stringDoubleMap.size());
@@ -93,9 +92,9 @@ public class CollectionToMapTest {
      */
     @Test(expected = NullPointerException.class)
     public void collectToMapMergeDuplicateKeyNullValue() {
-        List<CollectionToMap.Pair> myPairs = Lists.newArrayList(PAIRS);
+        List<Pair<String, Double>> myPairs = Lists.newArrayList(PAIRS);
         myPairs.remove(2);
-        myPairs.add(new CollectionToMap.Pair(KEY3, null));
+        myPairs.add(new Pair<>(KEY3, null));
         CollectionToMap.collectToMapMergeDuplicateKey(myPairs);
     }
 

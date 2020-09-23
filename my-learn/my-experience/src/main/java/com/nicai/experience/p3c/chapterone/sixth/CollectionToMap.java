@@ -1,9 +1,5 @@
 package com.nicai.experience.p3c.chapterone.sixth;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -47,7 +43,7 @@ public class CollectionToMap {
      * @param pairs 列表
      * @return map
      */
-    public static Map<String, Double> collectToMap(List<Pair> pairs) {
+    public static Map<String, Double> collectToMap(List<Pair<String, Double>> pairs) {
         return pairs.stream().collect(Collectors.toMap(Pair::getVersion, Pair::getValue));
     }
 
@@ -59,16 +55,8 @@ public class CollectionToMap {
      * @param pairs 列表
      * @return map
      */
-    public static Map<String, Double> collectToMapMergeDuplicateKey(List<Pair> pairs) {
+    public static Map<String, Double> collectToMapMergeDuplicateKey(List<Pair<String, Double>> pairs) {
         return pairs.stream().collect(Collectors.toMap(Pair::getVersion, Pair::getValue, (v1, v2) -> v2));
-    }
-
-    @Data
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Pair {
-        private String version;
-        private Double value;
     }
 
 }

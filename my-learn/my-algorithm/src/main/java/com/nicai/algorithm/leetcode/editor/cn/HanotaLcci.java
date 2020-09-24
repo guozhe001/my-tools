@@ -29,32 +29,45 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 递归 
 // 👍 48 👎 0
 
-import java.util.ArrayList;
+import com.google.common.collect.Lists;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 /**
  * 汉诺塔问题
+ * 汉诺塔的时间复杂度：O(2的n次方-1)
+ * 1个盘子：T1 = 1 = 2
+ * 2个盘子：T2 = 3
+ * 3个盘子：T3 = T2 + T1 +T2 = 3+1+3 = 7
+ * 四个盘子：T4 = T3 + T1 + T3 = 7 + 1 +7 = 15
  *
  * @author nicai
  */
 public class HanotaLcci {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        public void hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
+        public List<Integer> hanota(List<Integer> A, List<Integer> B, List<Integer> C) {
             Stack<Integer> stackA = toStack(A);
             Stack<Integer> stackB = toStack(B);
             Stack<Integer> stackC = toStack(C);
-            hanota(stackA, stackB, stackC);
+            hanota(stackA, stackB, stackC, A.size());
+            A = toList(stackA);
+            B = toList(stackB);
             C = toList(stackC);
+            return C;
         }
 
         private List<Integer> toList(Stack<Integer> stack) {
-            List<Integer> list = new ArrayList<>(stack.size());
-            for (int i = stack.size(); i >= 0; i--) {
-                list.add(i, stack.pop());
+            if (stack.isEmpty()) {
+                return Lists.newArrayList();
             }
-            return list;
+            Integer[] array = new Integer[stack.size()];
+            for (int i = stack.size() - 1; i >= 0; i--) {
+                array[i] = stack.pop();
+            }
+            return Arrays.asList(array);
         }
 
         /*
@@ -64,15 +77,17 @@ public class HanotaLcci {
          * 4、循环以上步骤
          * 数据结构，因为汉诺塔一次只能移动一个盘子，并且只能移动柱子最顶端的盘子，和栈的结构完全一致
          */
-        public void hanota(Stack<Integer> A, Stack<Integer> B, Stack<Integer> C) {
-            if (A.size() == 1) {
+        public void hanota(Stack<Integer> A, Stack<Integer> B, Stack<Integer> C, int num) {
+            if (num == 1) {
                 C.push(A.pop());
-            } else if (A.size() == 2) {
+            } else if (num == 2) {
                 B.push(A.pop());
                 C.push(A.pop());
                 C.push(B.pop());
-            } else {
-
+            } else if (num >= 3) {
+                hanota(A, C, B, num - 1);
+                hanota(A, B, C, 1);
+                hanota(B, A, C, num - 1);
             }
         }
 
@@ -84,8 +99,8 @@ public class HanotaLcci {
          */
         private Stack<Integer> toStack(List<Integer> integers) {
             Stack<Integer> stack = new Stack<>();
-            for (int i = integers.size() - 1; i >= 0; i--) {
-                stack.push(integers.get(i));
+            for (int i : integers) {
+                stack.push(i);
             }
             return stack;
         }

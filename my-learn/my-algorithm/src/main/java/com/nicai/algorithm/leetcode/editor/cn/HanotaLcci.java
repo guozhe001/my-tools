@@ -85,8 +85,11 @@ public class HanotaLcci {
                 C.push(A.pop());
                 C.push(B.pop());
             } else if (num >= 3) {
+                // 要把num个盘子移动到C，先把num-1个盘子移动到B
                 hanota(A, C, B, num - 1);
+                // 把A柱上最后一个盘子移动到C
                 hanota(A, B, C, 1);
+                // 把B柱上num-1个盘子移动到C
                 hanota(B, A, C, num - 1);
             }
         }

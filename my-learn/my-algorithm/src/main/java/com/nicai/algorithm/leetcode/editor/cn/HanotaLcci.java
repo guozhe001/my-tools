@@ -1,9 +1,9 @@
 package com.nicai.algorithm.leetcode.editor.cn;
 //在经典汉诺塔问题中，有 3 根柱子及 N 个不同大小的穿孔圆盘，盘子可以滑入任意一根柱子。一开始，所有盘子自上而下按升序依次套在第一根柱子上(即每一个盘子只
 //能放在更大的盘子上面)。移动圆盘时受到以下限制: 
-//(1) 每次只能移动一个盘子; 
-//(2) 盘子只能从柱子顶端滑出移到下一根柱子; 
-//(3) 盘子只能叠在比它大的盘子上。 
+//(1) 每次只能移动一个盘子
+//(2) 盘子只能从柱子顶端滑出移到下一根柱子
+//(3) 盘子只能叠在比它大的盘子上。
 //
 // 请编写程序，用栈将所有盘子从第一根柱子移到最后一根柱子。 
 //
@@ -53,10 +53,7 @@ public class HanotaLcci {
             Stack<Integer> stackB = toStack(B);
             Stack<Integer> stackC = toStack(C);
             hanota(stackA, stackB, stackC, A.size());
-            A = toList(stackA);
-            B = toList(stackB);
-            C = toList(stackC);
-            return C;
+            return toList(stackC);
         }
 
         private List<Integer> toList(Stack<Integer> stack) {
@@ -77,20 +74,20 @@ public class HanotaLcci {
          * 4、循环以上步骤
          * 数据结构，因为汉诺塔一次只能移动一个盘子，并且只能移动柱子最顶端的盘子，和栈的结构完全一致
          */
-        public void hanota(Stack<Integer> A, Stack<Integer> B, Stack<Integer> C, int num) {
+        public void hanota(Stack<Integer> a, Stack<Integer> b, Stack<Integer> c, int num) {
             if (num == 1) {
-                C.push(A.pop());
+                c.push(a.pop());
             } else if (num == 2) {
-                B.push(A.pop());
-                C.push(A.pop());
-                C.push(B.pop());
+                b.push(a.pop());
+                c.push(a.pop());
+                c.push(b.pop());
             } else if (num >= 3) {
                 // 要把num个盘子移动到C，先把num-1个盘子移动到B
-                hanota(A, C, B, num - 1);
+                hanota(a, c, b, num - 1);
                 // 把A柱上最后一个盘子移动到C
-                hanota(A, B, C, 1);
+                hanota(a, b, c, 1);
                 // 把B柱上num-1个盘子移动到C
-                hanota(B, A, C, num - 1);
+                hanota(b, a, c, num - 1);
             }
         }
 

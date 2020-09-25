@@ -32,6 +32,10 @@ public class RecursiveMulitplyLcci {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int multiply(int A, int B) {
+            // 任意一个数乘以0都等于0
+            if (A == 0 || B == 0) {
+                return 0;
+            }
             /*
              * 最终使用A个B相加，在递归的过程中如果A太大会导致栈太高，所以如果A比B大时反转使用B作为栈的高度
              */
@@ -40,17 +44,15 @@ public class RecursiveMulitplyLcci {
                 B = A;
                 A = temp;
             }
-            if (A == 0 || B == 0) {
-                return 0;
-            } else if (A == 1) {
+            // 如果只有一个B相加，返回B
+            if (A == 1) {
                 return B;
-            } else {
-                int c = multiply(A - 1, B);
-                if (Integer.MAX_VALUE - c < B) {
-                    throw new IllegalArgumentException("数字太大乘法溢出");
-                }
-                return B + c;
             }
+            int c = multiply(A - 1, B);
+            if (Integer.MAX_VALUE - c < B) {
+                throw new IllegalArgumentException("数字太大乘法溢出");
+            }
+            return B + c;
         }
 
     }

@@ -76,8 +76,7 @@ public class QueueImpl<T> implements Queue<T> {
 
         @Override
         public boolean hasNext() {
-            i--;
-            return i >= 0;
+            return i > 0;
         }
 
         @Override
@@ -87,6 +86,7 @@ public class QueueImpl<T> implements Queue<T> {
             }
             T item = node.item;
             node = node.next;
+            i--;
             return item;
         }
     }

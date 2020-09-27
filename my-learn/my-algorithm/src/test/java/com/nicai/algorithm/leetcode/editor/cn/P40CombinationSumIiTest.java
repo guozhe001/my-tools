@@ -4,7 +4,9 @@
 //import lombok.extern.slf4j.Slf4j;
 //import org.junit.Assert;
 //import org.junit.Test;
+//import org.powermock.reflect.Whitebox;
 //
+//import java.util.Arrays;
 //import java.util.List;
 //
 ///**
@@ -39,71 +41,57 @@
 //    }
 //
 //    /**
-//     * 输入：candidates = [2,3,6,7], target = 7,
-//     * 所求解集为：
+//     * 输入: candidates =[2,5,2,1,2], target =5,
+//     * 所求解集为:
 //     * [
-//     * [7],
-//     * [2,2,3]
+//     * [1,2,2],
+//     * [5]
 //     * ]
 //     */
 //    @Test
 //    public void case2() {
 //        List<List<Integer>> expectList = Lists.newArrayList(
-//                Lists.newArrayList(7),
-//                Lists.newArrayList(2, 2, 3));
-//        invokeCombinationSum2(new int[]{2, 3, 6, 7}, 8, expectList);
+//                Lists.newArrayList(1, 2, 2),
+//                Lists.newArrayList(5));
+//        invokeCombinationSum2(new int[]{2, 5, 2, 1, 2}, 5, expectList);
 //    }
 //
-//    /**
-//     * 输入：candidates = [2,3,5], target = 8,
-//     * 所求解集为：
-//     * [
-//     * [2,2,2,2],
-//     * [2,3,3],
-//     * [3,5]
-//     * ]
-//     */
 //    @Test
-//    public void case3() {
-//        List<List<Integer>> expectList = Lists.newArrayList(
-//                Lists.newArrayList(2, 2, 2, 2),
-//                Lists.newArrayList(2, 3, 3),
-//                Lists.newArrayList(3, 5));
-//        invokeCombinationSum2(new int[]{2, 3, 5}, 8, expectList);
+//    public void getNewCandidatesIndex0() throws Exception {
+//        invokeGetNewCandidatesAndAssert(new int[]{1, 2, 3, 4, 5}, 0);
 //    }
 //
-//    /**
-//     * 输入：candidates = [1,2], target = 2,
-//     * 所求解集为：
-//     * [
-//     * [1,1],
-//     * [2]
-//     * ]
-//     */
 //    @Test
-//    public void case4() {
-//        List<List<Integer>> expectList = Lists.newArrayList(
-//                Lists.newArrayList(1, 1),
-//                Lists.newArrayList(2));
-//        invokeCombinationSum2(new int[]{1, 2}, 2, expectList);
+//    public void getNewCandidatesIndex1() throws Exception {
+//        invokeGetNewCandidatesAndAssert(new int[]{1, 2, 3, 4, 5}, 1);
 //    }
 //
-//    /**
-//     * 输入：candidates = [1,2], target = 4,
-//     * 所求解集为：
-//     * [
-//     * [1,1,1,1],
-//     * [1,1,2],
-//     * [2,2]
-//     * ]
-//     */
 //    @Test
-//    public void case5() {
-//        List<List<Integer>> expectList = Lists.newArrayList(
-//                Lists.newArrayList(1, 1, 1, 1),
-//                Lists.newArrayList(1, 1, 2),
-//                Lists.newArrayList(2, 2));
-//        invokeCombinationSum2(new int[]{1, 2}, 4, expectList);
+//    public void getNewCandidatesIndex2() throws Exception {
+//        invokeGetNewCandidatesAndAssert(new int[]{1, 2, 3, 4, 5}, 2);
+//    }
+//
+//    @Test
+//    public void getNewCandidatesIndex3() throws Exception {
+//        invokeGetNewCandidatesAndAssert(new int[]{1, 2, 3, 4, 5}, 3);
+//    }
+//
+//    @Test
+//    public void addNumToAllList1() throws Exception {
+//        invokeAddNumToAllList(3, getList(Lists.newArrayList(1, 2), Lists.newArrayList(1, 4, 5), Lists.newArrayList(2, 6, 5), Lists.newArrayList(2, 4, 6)));
+//    }
+//
+//    private List<List<Integer>> getList(List<Integer>... lists) {
+//        List<List<Integer>> result = Lists.newArrayList();
+//        result.addAll(Arrays.asList(lists));
+//        return result;
+//    }
+//
+//    private void invokeAddNumToAllList(final int num, List<List<Integer>> list) throws Exception {
+//        log.info("num={},oldList={}", num, list);
+//        Whitebox.invokeMethod(solution, "addNumToAllList", num, list);
+//        list.forEach(l -> Assert.assertTrue(l.contains(num)));
+//        log.info("newList={}", list);
 //    }
 //
 //    /**
@@ -127,5 +115,14 @@
 //     */
 //    private void commonAssert(List<List<Integer>> expectList, List<List<Integer>> actualList) {
 //        Assert.assertEquals(expectList.size(), actualList.size());
+//    }
+//
+//    private void invokeGetNewCandidatesAndAssert(int[] candidates, int index) throws Exception {
+//        int[] newCandidates = Whitebox.invokeMethod(solution, "getNewCandidatesAfterIndex", candidates, index);
+//        Assert.assertEquals(candidates.length - index - 1, newCandidates.length);
+//        log.info("newCandidates={}", newCandidates);
+//        for (int i = 0; i < newCandidates.length; i++) {
+//            Assert.assertEquals(candidates[i + index + 1], newCandidates[i]);
+//        }
 //    }
 //}

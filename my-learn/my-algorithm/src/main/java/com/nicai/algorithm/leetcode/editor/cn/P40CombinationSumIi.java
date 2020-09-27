@@ -33,7 +33,10 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 数组 回溯算法 
 // 👍 350 👎 0
 
-import java.util.*;
+import com.google.common.collect.Lists;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 组合总和 II
@@ -54,47 +57,58 @@ import java.util.*;
 public class P40CombinationSumIi {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
-        // key为target数值，value为数组中所有和为target的组合列表
-        Map<Integer, List<List<Integer>>> cache = new HashMap<>();
-
         /**
          * @param candidates 给定数组
          * @param target     目标数字
          * @return 所有数字只和为目标数字的列表
          */
         public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-            if (Objects.nonNull(cache.get(target))) {
-                return cache.get(target);
+            List<List<Integer>> result = new ArrayList<>();
+            if (candidates.length == 1) {
+                if (candidates[0] == target) {
+                    List<Integer> integers = Lists.newArrayList(candidates[0]);
+                    result.add(integers);
+                }
+                return result;
             }
             /*
-            1、如果组合中有数字等于target，则这个数字是一个组合
-            2、如果组合中有数字可以被target整除，则整除结果次的数字列表是一个组合
-            3、如果组合中有多个数字只和等于target，则这些数字是一个组合
+             * 1、如果组合中有数字等于target，则这个数字是一个组合
+             * 2、如果组合中有多个数字只和等于target，则这些数字是一个组合
              */
-            List<List<Integer>> result = new ArrayList<>();
-            for (int num : candidates) {
+            for (int i = 0; i < candidates.length - 1; i++) {
+                int num = candidates[i];
                 int newTarget = target - num;
-                if (newTarget <= 0) {
-                    if (newTarget == 0) {
-                        result.add(getNewList(num));
-                    }
-                    continue;
+                if (newTarget >= 1) {
+                    // 把i下标以后的数字组成一个新的数组
+                    addNumToAllList(num, combinationSum2(getNewCandidatesAfterIndex(candidates, i), newTarget));
+                } else {
+                    break;
                 }
-                // 查找剩下的数组中和为target-num的组合列表
-                List<List<Integer>> lists = combinationSum2(candidates, newTarget);
-                lists.forEach(list -> list.add(num));
-                result.addAll(lists);
             }
-            cache.put(target, result);
             return result;
         }
 
-        private List<Integer> getNewList(int... nums) {
-            List<Integer> integers = new ArrayList<>();
-            for (int num : nums) {
-                integers.add(num);
-            }
-            return integers;
+        /**
+         * 获取一个新的数组，数组的组成为下标大于index的candidates数组中的元素
+         *
+         * @param candidates 原始数组
+         * @param index      新生成的数组对应的原始数组的下标
+         * @return 新数组
+         */
+        private int[] getNewCandidatesAfterIndex(int[] candidates, int index) {
+            int[] newInts = new int[candidates.length - index - 1];
+            System.arraycopy(candidates, index + 1, newInts, 0, newInts.length);
+            return newInts;
+        }
+
+        /**
+         * 把数字加到子列表中
+         *
+         * @param n     数字
+         * @param lists 列表
+         */
+        private void addNumToAllList(int n, List<List<Integer>> lists) {
+            lists.forEach(list -> list.add(n));
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

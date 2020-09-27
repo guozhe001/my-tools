@@ -10,7 +10,7 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // 输出：[[".Q..","...Q","Q...","..Q."],["..Q.","Q...","...Q",".Q.."]]
 // 解释: 4 皇后问题存在如下两个不同的解法。
 //[
-// [".Q..",  // 解法 1
+// [".Q..",  // 解法 1: 1,3,0,2
 //  "...Q",
 //  "Q...",
 //  "..Q."],
@@ -19,6 +19,7 @@ package com.nicai.algorithm.leetcode.editor.cn;
 //  "Q...",
 //  "...Q",
 //  ".Q.."]
+//]
 //]
 // 
 // Related Topics 回溯算法 

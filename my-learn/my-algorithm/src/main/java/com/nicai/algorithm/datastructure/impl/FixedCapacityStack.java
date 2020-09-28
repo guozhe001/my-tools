@@ -66,6 +66,10 @@ public class FixedCapacityStack<T> implements Stack<T> {
         return new ReverseArrayIterator();
     }
 
+    public boolean isFull() {
+        return capacity == items.length;
+    }
+
     private class ReverseArrayIterator implements Iterator<T> {
         private int i = capacity;
 

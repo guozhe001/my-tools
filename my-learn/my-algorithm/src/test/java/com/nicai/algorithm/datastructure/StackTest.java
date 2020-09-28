@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * StackTest
@@ -67,5 +68,24 @@ public class StackTest {
         Assert.assertEquals("a", reverse[2]);
     }
 
+    /**
+     * algs4练习题：1.3.2
+     */
+    @Test
+    public void practice132() {
+        invoke(new String[]{"it", "was", "-", "the", "best", "-", "of", "times", "-", "-", "-", "it", "was", "-", "the", "-"});
+        Assert.assertTrue(true);
+    }
+
+    public void invoke(String[] strings) {
+        Stack<String> stack = new StackImpl<>();
+        for (String str : strings) {
+            if (Objects.equals("-", str)) {
+                log.info(stack.pop());
+            } else {
+                stack.push(str);
+            }
+        }
+    }
 
 }

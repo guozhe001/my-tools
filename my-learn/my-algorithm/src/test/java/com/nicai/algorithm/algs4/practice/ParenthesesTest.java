@@ -16,7 +16,17 @@ public class ParenthesesTest {
     private Parentheses parentheses;
 
     @Test
-    public void check() {
+    public void checkExpectTrue() {
         Assert.assertTrue(parentheses.check("{([]){}[()]}"));
+    }
+
+    @Test
+    public void checkExpectFalse1() {
+        Assert.assertFalse(parentheses.check("{([}){}[()]}"));
+    }
+
+    @Test
+    public void checkExpectFalse() {
+        Assert.assertFalse(parentheses.check("{{([]){}[()]}"));
     }
 }

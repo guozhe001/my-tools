@@ -42,6 +42,33 @@ public class P143ReorderList {
             if (Objects.isNull(head)) {
                 return;
             }
+            LinkedList<ListNode> listNodes = new LinkedList<>();
+            ListNode tempHead = head;
+            // 遍历第一遍，把数据从链表放在队列
+            while (Objects.nonNull(tempHead)) {
+                listNodes.offer(tempHead);
+                tempHead = tempHead.next;
+            }
+            tempHead = listNodes.removeFirst();
+            head = tempHead;
+            boolean fromStart = false;
+            while (!listNodes.isEmpty()) {
+                ListNode next = fromStart ? listNodes.removeFirst() : listNodes.removeLast();
+                if (Objects.isNull(next)) {
+                    // 如果是最后一个节点，则设置下个节点为null，防止编程循环链表
+                    tempHead.next = null;
+                    break;
+                }
+                tempHead.next = next;
+                tempHead = tempHead.next;
+                fromStart = !fromStart;
+            }
+        }
+
+        public void reorderListQueueAndStack(ListNode head) {
+            if (Objects.isNull(head)) {
+                return;
+            }
             Queue<ListNode> listNodeQueue = new LinkedList<>();
             Stack<ListNode> listNodeStack = new Stack<>();
             ListNode tempHead = head;

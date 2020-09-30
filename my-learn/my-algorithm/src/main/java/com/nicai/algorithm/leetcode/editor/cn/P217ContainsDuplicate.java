@@ -33,7 +33,66 @@ import java.util.Set;
 public class P217ContainsDuplicate {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        /**
+         * 判断是否有重复元素
+         * 实现方式3：与方法2的区别就是把for循环改成while循环
+         */
         public boolean containsDuplicate(int[] nums) {
+            int length = nums.length;
+            Set<Integer> set = new HashSet<>(length);
+            int i = 0;
+            int j = nums.length - 1;
+            while (i < j) {
+                int num = nums[i];
+                if (set.contains(num)) {
+                    return true;
+                }
+                set.add(num);
+                int num1 = nums[j];
+                if (set.contains(num1)) {
+                    return true;
+                }
+                set.add(num1);
+                i++;
+                j--;
+            }
+            return false;
+        }
+
+        /**
+         * 判断是否有重复元素
+         * 实现方式2：此方法比方法1循环的次数少一半
+         * 使用set保存已经出现过的数字
+         * 然后使用for循环遍历n/2次，每次都取正序和倒序遍历的两个数值，如果set中包含当前数字，则说明重复
+         */
+        public boolean containsDuplicateDouble(int[] nums) {
+            int length = nums.length;
+            Set<Integer> set = new HashSet<>(length);
+            for (int i = 0; i <= length / 2; i++) {
+                int j = length - 1 - i;
+                if (i != length / 2) {
+                    int num = nums[i];
+                    if (set.contains(num)) {
+                        return true;
+                    }
+                    set.add(num);
+                }
+                if (j > i) {
+                    int num1 = nums[j];
+                    if (set.contains(num1)) {
+                        return true;
+                    }
+                    set.add(num1);
+                }
+            }
+            return false;
+        }
+
+        /**
+         * 判断是否有重复元素
+         * 实现方式1：直接使用set保存已经出现过的数字，然后正序遍历数组，如果set中包含当前数字，则说明重复
+         */
+        public boolean containsDuplicateUseSet(int[] nums) {
             Set<Integer> set = new HashSet<>(nums.length);
             for (int n : nums) {
                 if (set.contains(n)) {

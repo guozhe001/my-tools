@@ -31,6 +31,16 @@ public class P136SingleNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int singleNumber(int[] nums) {
+            int sum = 0;
+            boolean add = Boolean.TRUE;
+            for (int i = 0; i < nums.length; i++) {
+                sum = add ? sum + nums[i] : sum - nums[i];
+                add = !add;
+            }
+            return Math.abs(sum);
+        }
+
+        public int singleNumberUseMap(int[] nums) {
             Map<Integer, Integer> numMap = new HashMap<>(nums.length);
             for (int i : nums) {
                 if (Objects.nonNull(numMap.get(i))) {
@@ -41,6 +51,7 @@ public class P136SingleNumber {
             }
             return numMap.keySet().stream().findAny().get();
         }
+
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

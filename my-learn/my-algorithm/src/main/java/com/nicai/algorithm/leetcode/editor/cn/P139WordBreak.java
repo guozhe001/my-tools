@@ -41,8 +41,18 @@ import java.util.List;
 public class P139WordBreak {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+        // TODO 答案错误
         public boolean wordBreak(String s, List<String> wordDict) {
-            return true;
+            if ("".equals(s) || wordDict.contains(s)) {
+                return true;
+            }
+            for (String str : wordDict) {
+                if (s.contains(str)) {
+                    String[] split = s.split(str, 2);
+                    return wordBreak(split[0], wordDict) && wordBreak(split[1], wordDict);
+                }
+            }
+            return false;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

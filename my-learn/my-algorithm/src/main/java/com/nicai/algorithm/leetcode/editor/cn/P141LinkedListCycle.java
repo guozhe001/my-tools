@@ -78,6 +78,24 @@ public class P141LinkedListCycle {
      */
     public class Solution {
         public boolean hasCycle(ListNode head) {
+            if (head == null || head.next == null) {
+                return false;
+            }
+            ListNode slow = head;
+            ListNode fast = head.next;
+            while (slow != fast) {
+                // 如果fast或者fast的下一个节点是null，说明走到了链表的尾部
+                if (fast == null || fast.next == null) {
+                    return false;
+                }
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            // 如果slow和fast相等的时候说明fast追上了slow，说明有循环
+            return true;
+        }
+
+        public boolean hasCycleUseSet(ListNode head) {
             Set<ListNode> listNodeSet = new HashSet<>();
             while (Objects.nonNull(head)) {
                 if (listNodeSet.contains(head)) {
@@ -88,7 +106,6 @@ public class P141LinkedListCycle {
             }
             return false;
         }
-
     }
 
     class ListNode {

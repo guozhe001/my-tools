@@ -27,17 +27,43 @@ public class P223RectangleArea {
             int area1 = computeArea(A, B, C, D);
             int area2 = computeArea(E, F, G, H);
             int allArea = area1 + area2;
+
             // 如果第一个矩形的右上小于等于第二个定点的左下,或者第一个矩形的左下大于等于第二个矩形的右上
-            if ((C <= E && D <= F) || (A >= G && B >= H)) {
+            if (notOverlap(A, B, C, D, E, F, G, H)) {
                 return allArea;
             }
-            int pointLeftDownX = Math.abs(A) < Math.abs(E) ? A : E;
-            int pointLeftDownY = Math.abs(B) < Math.abs(F) ? B : F;
-            int pointRightUpX = Math.abs(C) < Math.abs(G) ? C : G;
-            int pointRightUpY = Math.abs(D) < Math.abs(H) ? D : H;
-            int chongdie = computeArea(pointLeftDownX, pointLeftDownY, pointRightUpX, pointRightUpY);
-            System.out.println("area1:" + area1 + ", area2:" + area2 + ", chongdie:" + chongdie);
-            return allArea - chongdie;
+            int pointLeftDownX = Math.max(A, E);
+            int pointLeftDownY = Math.max(B, F);
+            int pointRightUpX = Math.min(C, G);
+            int pointRightUpY = Math.min(D, H);
+            System.out.println("overlap point info, pointLeftDownX:" + pointLeftDownX + ", pointLeftDownY:" + pointLeftDownY + ", pointRightUpX:" + pointRightUpX
+                    + ", pointRightUpY:" + pointRightUpY);
+            // 计算重叠部分的面积
+            int overlapArea = computeArea(pointLeftDownX, pointLeftDownY, pointRightUpX, pointRightUpY);
+            System.out.println("area1:" + area1 + ", area2:" + area2 + ", overlapArea:" + overlapArea);
+            return allArea - overlapArea;
+        }
+
+        private boolean notOverlap(int a, int b, int c, int d, int e, int f, int g, int h) {
+            boolean notOverlap = false;
+            // 有四种情况说明两个矩形不重叠，假设两个矩形分别为X和Y
+            // 0、X在Y的上方：X下边的Y大于等于Y的上边
+            if (b >= h) {
+                notOverlap = true;
+            }
+            // 1、X在Y的右方：X的左边大于等于Y的右边
+            if (a >= g) {
+                notOverlap = true;
+            }
+            // 2、X在Y的下方：X的上边的小于等于Y的下边
+            if (d <= f) {
+                notOverlap = true;
+            }
+            // 3、X在Y的左方：X的右边小于等于Y的左边
+            if (c <= e) {
+                notOverlap = true;
+            }
+            return notOverlap;
         }
 
         /**

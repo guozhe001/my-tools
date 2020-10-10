@@ -41,6 +41,15 @@ public class FixedCapacityStack<T> implements Stack<T> {
     }
 
     @Override
+    public T peek() {
+        if (capacity > 0) {
+            return items[capacity - 1];
+        } else {
+            throw new NoSuchElementException("栈已空，无法弹出元素");
+        }
+    }
+
+    @Override
     public void push(T item) {
         // 如果当前的容量小于数组的长度，说明可以继续添加
         if (capacity < items.length) {
@@ -57,7 +66,7 @@ public class FixedCapacityStack<T> implements Stack<T> {
             capacity--;
             return items[capacity];
         } else {
-            throw new NicaiException("栈已空，无法弹出元素");
+            throw new NoSuchElementException("栈已空，无法弹出元素");
         }
     }
 

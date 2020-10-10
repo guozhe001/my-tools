@@ -35,4 +35,11 @@ public interface Stack<T> extends Iterable<T> {
      * @return 栈中元素的数量
      */
     int size();
+
+    /**
+     * practice1.3.7　为Stack添加一个方法peek()，返回栈中最近添加的元素（而不弹出它）。
+     *
+     * @return 返回栈中最近添加的元素（而不弹出它）。
+     */
+    T peek();
 }

@@ -4,6 +4,7 @@ package com.nicai.algorithm.datastructure.impl;
 import com.nicai.algorithm.datastructure.Stack;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 /**
@@ -51,6 +52,11 @@ public class StackImpl<T> implements Stack<T> {
     }
 
     @Override
+    public T peek() {
+        return first.item;
+    }
+
+    @Override
     public Iterator<T> iterator() {
         return new StackIterator();
     }
@@ -68,9 +74,13 @@ public class StackImpl<T> implements Stack<T> {
 
         @Override
         public T next() {
-            T item = node.item;
-            node = node.next;
-            return item;
+            if (Objects.nonNull(node)) {
+                T item = node.item;
+                node = node.next;
+                return item;
+            } else {
+                throw new NoSuchElementException();
+            }
         }
     }
 

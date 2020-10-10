@@ -77,6 +77,21 @@ public class StackTest {
         Assert.assertTrue(true);
     }
 
+    /**
+     * algs4练习题：1.3.7
+     */
+    @Test
+    public void practice137() {
+        Stack<String> stack = new StackImpl<>();
+        for (String s : new String[]{"it", "was", "-", "the", "best", "-", "of", "times", "-", "-", "-", "it", "was", "-", "the", "-"}) {
+            stack.push(s);
+        }
+        int stackSize = stack.size();
+        String peek = stack.peek();
+        Assert.assertEquals(stackSize, stack.size());
+        Assert.assertEquals("-", peek);
+    }
+
     public void invoke(String[] strings) {
         Stack<String> stack = new StackImpl<>();
         for (String str : strings) {

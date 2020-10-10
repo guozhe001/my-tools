@@ -70,6 +70,11 @@ public class ResizingArrayStack<T> implements Stack<T> {
         return capacity;
     }
 
+    @Override
+    public T peek() {
+        return items[capacity - 1];
+    }
+
     /**
      * 调整数组大小
      *

@@ -44,7 +44,7 @@ public class P232ImplementQueueUsingStacks {
     //leetcode submit region begin(Prohibit modification and deletion)
     class MyQueue {
 
-        private Stack<Integer> stack;
+        private final Stack<Integer> stack;
 
         /**
          * Initialize your data structure here.

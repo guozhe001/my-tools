@@ -1,4 +1,4 @@
-package com.nicai.algorithm.algs4.practice;
+package com.nicai.algorithm.algs4.practice.one;
 
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;

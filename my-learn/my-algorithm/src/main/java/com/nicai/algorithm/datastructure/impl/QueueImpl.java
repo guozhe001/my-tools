@@ -48,6 +48,10 @@ public class QueueImpl<T> implements Queue<T> {
         Node oldFirst = first;
         first = first.next;
         size--;
+        // 如果当前移出队列的是最后一个元素，则把最后一个元素设置为null
+        if (oldFirst == end) {
+            end = null;
+        }
         return oldFirst.item;
     }
 

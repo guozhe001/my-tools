@@ -1,5 +1,6 @@
 package com.nicai.algorithm.algs4.practice;
 
+import com.nicai.algorithm.algs4.practice.one.Parentheses;
 import mockit.Tested;
 import org.junit.Assert;
 import org.junit.Test;

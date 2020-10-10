@@ -4,6 +4,7 @@ package com.nicai.algorithm.datastructure.impl;
 import com.nicai.algorithm.datastructure.Stack;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * StackImpl
@@ -54,17 +55,22 @@ public class StackImpl<T> implements Stack<T> {
         return new StackIterator();
     }
 
-    // TODO
+    /**
+     *
+     */
     private class StackIterator implements Iterator<T> {
+        ListNode<T> node = first;
 
         @Override
         public boolean hasNext() {
-            return false;
+            return Objects.nonNull(node);
         }
 
         @Override
         public T next() {
-            return null;
+            T item = node.item;
+            node = node.next;
+            return item;
         }
     }
 

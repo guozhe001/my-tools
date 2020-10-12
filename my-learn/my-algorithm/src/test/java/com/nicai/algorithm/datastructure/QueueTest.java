@@ -1,6 +1,9 @@
 package com.nicai.algorithm.datastructure;
 
+import com.google.common.collect.Lists;
+import com.nicai.algorithm.datastructure.impl.FixedCapacityQueue;
 import com.nicai.algorithm.datastructure.impl.QueueImpl;
+import com.nicai.algorithm.datastructure.impl.ResizingArrayQueue;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +20,10 @@ public class QueueTest {
 
     @Test
     public void queue() {
-        Queue<String> queue = new QueueImpl<>();
+        Lists.newArrayList(new QueueImpl<String>(), new FixedCapacityQueue<String>(4), new ResizingArrayQueue<String>()).forEach(this::queue);
+    }
+
+    public void queue(Queue<String> queue) {
         for (String string : STRINGS) {
             queue.enqueue(string);
         }

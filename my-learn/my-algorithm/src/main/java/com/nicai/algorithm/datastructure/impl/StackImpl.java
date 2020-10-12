@@ -53,7 +53,7 @@ public class StackImpl<T> implements Stack<T> {
 
     @Override
     public T peek() {
-        return first.item;
+        return Objects.isNull(first) ? null : first.item;
     }
 
     @Override

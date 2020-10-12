@@ -96,6 +96,27 @@ public class ListNodeTest {
         }
     }
 
+    @Test
+    public void find() {
+        Assert.assertTrue(find(getListNode(), "c"));
+    }
+
+    /**
+     * 1.3.21　编写一个方法find()，接受一条链表和一个字符串key作为参数。如果链表中的某个结点的item域的值为key，则方法返回true，否则返回false。
+     *
+     * @param first 链表的起始节点
+     * @param key   待查找的节点的值
+     */
+    public boolean find(ListNode<String> first, String key) {
+        while (Objects.nonNull(first)) {
+            if (Objects.equals(first.item, key)) {
+                return true;
+            }
+            first = first.next;
+        }
+        return false;
+    }
+
     private class ListNode<T> {
         T item;
         ListNode<T> next;

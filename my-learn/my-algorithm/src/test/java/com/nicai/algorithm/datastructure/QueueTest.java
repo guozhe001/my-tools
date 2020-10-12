@@ -3,6 +3,7 @@ package com.nicai.algorithm.datastructure;
 import com.google.common.collect.Lists;
 import com.nicai.algorithm.datastructure.impl.FixedCapacityQueue;
 import com.nicai.algorithm.datastructure.impl.QueueImpl;
+import com.nicai.algorithm.datastructure.impl.QueueWithCycleLinkedList;
 import com.nicai.algorithm.datastructure.impl.ResizingArrayQueue;
 import edu.princeton.cs.algs4.StdOut;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +27,12 @@ public class QueueTest {
 
     @Test
     public void queue() {
-        Lists.newArrayList(new QueueImpl<String>(), new FixedCapacityQueue<String>(4), new ResizingArrayQueue<String>()).forEach(this::queue);
+        Lists.newArrayList(new QueueImpl<String>(), new FixedCapacityQueue<String>(4), new ResizingArrayQueue<String>(),
+                new QueueWithCycleLinkedList<String>()).forEach(this::queue);
     }
 
     public void queue(Queue<String> queue) {
+        log.info("queue={}", queue.getClass().getName());
         for (String string : STRINGS) {
             queue.enqueue(string);
         }

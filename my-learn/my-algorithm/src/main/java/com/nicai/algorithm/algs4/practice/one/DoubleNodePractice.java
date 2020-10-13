@@ -1,5 +1,7 @@
 package com.nicai.algorithm.algs4.practice.one;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
 /**
@@ -23,11 +25,22 @@ public class DoubleNodePractice<T> {
     /**
      * 第一个节点
      */
+    @Getter
     private DoubleNode<T> first;
     /**
      * 最后一个节点
      */
+    @Getter
     private DoubleNode<T> end;
+
+    /**
+     * 大小
+     */
+    private int size;
+
+    public DoubleNodePractice() {
+        this.size = 0;
+    }
 
     /**
      * 在表头插入结点
@@ -45,6 +58,7 @@ public class DoubleNodePractice<T> {
             doubleNode.next = first;
         }
         first = doubleNode;
+        size++;
     }
 
     /**
@@ -63,6 +77,7 @@ public class DoubleNodePractice<T> {
             doubleNode.prefix = end;
         }
         end = doubleNode;
+        size++;
     }
 
     /**
@@ -78,6 +93,7 @@ public class DoubleNodePractice<T> {
                 end = null;
             }
             first = first.next;
+            size--;
         }
     }
 
@@ -94,6 +110,7 @@ public class DoubleNodePractice<T> {
                 first = null;
             }
             end = end.prefix;
+            size--;
         }
     }
 
@@ -109,6 +126,10 @@ public class DoubleNodePractice<T> {
         doubleNode.prefix = node.prefix;
         node.prefix = doubleNode;
         doubleNode.next = node;
+        if (node == first) {
+            first = doubleNode;
+        }
+        size++;
     }
 
     /**
@@ -123,6 +144,10 @@ public class DoubleNodePractice<T> {
         doubleNode.next = node.next;
         doubleNode.prefix = node;
         node.next = doubleNode;
+        if (node == end) {
+            end = doubleNode;
+        }
+        size++;
     }
 
     /**
@@ -143,9 +168,27 @@ public class DoubleNodePractice<T> {
         if (node == end) {
             end = node.prefix;
         }
+        size--;
     }
 
-    private class DoubleNode<T> {
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    /**
+     * 获取最早加入的元素
+     */
+    public T get() {
+        T item = first.item;
+        deleteHead();
+        return item;
+    }
+
+    public class DoubleNode<T> {
         /**
          * 当前元素的值
          */

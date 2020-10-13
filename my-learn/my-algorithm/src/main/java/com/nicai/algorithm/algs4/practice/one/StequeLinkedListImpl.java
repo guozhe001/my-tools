@@ -22,6 +22,10 @@ public class StequeLinkedListImpl<T> implements Steque<T> {
      */
     private int size;
 
+    public StequeLinkedListImpl() {
+        this.size = 0;
+    }
+
     @Override
     public void push(T item) {
         ListNode<T> node = new ListNode<>();

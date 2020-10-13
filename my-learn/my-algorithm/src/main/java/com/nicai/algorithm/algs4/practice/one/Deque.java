@@ -10,7 +10,7 @@ import java.util.Objects;
  * Deque能够存储一组元素并支持表1.3.9中的API：表1.3.9　泛型双向队列的API publicclassDeque<Item>implementsIterable<Item> 
  * Deque():创建空双向队列
  * boolean isEmpty():双向队列是否为空
- * intsize():双向队列中的元素数量
+ * int size():双向队列中的元素数量
  * void pushLeft(Item item):向左端添加一个新元素
  * void pushRight(Item item):向右端添加一个新元素
  * Item popLeft():从左端删除一个元素

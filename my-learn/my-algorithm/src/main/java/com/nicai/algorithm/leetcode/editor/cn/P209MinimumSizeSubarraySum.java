@@ -31,46 +31,54 @@ import java.util.Objects;
 public class P209MinimumSizeSubarraySum {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
+
         public int minSubArrayLen(int s, int[] nums) {
             if (Objects.isNull(nums) || nums.length == 0) {
                 return 0;
             }
-            int minSubArrayLen = 0;
-            for (int i = 0; i < nums.length; i++) {
-                int sum = nums[i];
-                if (sum >= s) {
-                    return 1;
+            int ans = Integer.MAX_VALUE;
+            int start = 0;
+            int end = 0;
+            int sum = 0;
+            while (end < nums.length) {
+                sum += nums[end];
+                while (sum >= s) {
+                    ans = Math.min(ans, end - start + 1);
+                    sum -= nums[start];
+                    start++;
                 }
-                for (int j = i + 1; j < nums.length; j++) {
-                    sum += nums[j];
-                    if (sum >= s) {
-                        int currentSubArrayLength = j - i + 1;
-                        minSubArrayLen = minSubArrayLen == 0 ? currentSubArrayLength : Math.min(minSubArrayLen, currentSubArrayLength);
-                    }
-                }
+                end++;
             }
-            return minSubArrayLen;
+            return ans == Integer.MAX_VALUE ? 0 : ans;
         }
 
-        public int minSubArrayLen1(int s, int[] nums) {
-            if (Objects.isNull(nums) || nums.length == 0) {
-                return 0;
-            }
+        /**
+         * 带查找范围的最小子串长度方法
+         * 二分查找
+         *
+         * @param s          目标数字
+         * @param nums       待查找的数组
+         * @param indexStart 查找数组的范围，起始下标
+         * @param indexEnd   查找数组的范围，结束下标
+         * @return 和大于等于s的最小子串长度
+         */
+        public int minSubArrayLenBinary(int s, int[] nums, int indexStart, int indexEnd) {
             int minSubArrayLen = 0;
-            if (sumBigThanTarget(nums, s)) {
+            int[] targetSubArray = sub(nums, indexStart, indexEnd - indexStart + 1);
+            if (sumBigThanTarget(targetSubArray, s)) {
                 minSubArrayLen = nums.length;
                 // 如果数组还能继续分割，则继续使用二分法分割获取子数组的最小长度
                 if (minSubArrayLen > 1) {
-                    int half = nums.length / 2;
-                    int leftSubArrayLen = minSubArrayLen(s, sub(nums, 0, half));
-                    int rightSubArrayLen = minSubArrayLen(s, sub(nums, half, nums.length - half));
+                    int halfIndex = (indexEnd - indexStart) / 2;
+                    int leftSubArrayLen = minSubArrayLenBinary(s, nums, indexStart, halfIndex);
+                    int rightSubArrayLen = minSubArrayLenBinary(s, nums, halfIndex + halfIndex, indexEnd);
                     if (leftSubArrayLen == 0 && rightSubArrayLen == 0) {
-                        int i = half / 2;
-                        leftSubArrayLen = minSubArrayLen(s, sub(nums, 0, half + i));
-                    } else {
-                        minSubArrayLen = leftSubArrayLen == 0 ? minSubArrayLen : Math.min(leftSubArrayLen, minSubArrayLen);
-                        minSubArrayLen = rightSubArrayLen == 0 ? minSubArrayLen : Math.min(rightSubArrayLen, minSubArrayLen);
+                        int i = halfIndex / 2;
+                        leftSubArrayLen = minSubArrayLenBinary(s, nums, indexStart, halfIndex + i);
+                        rightSubArrayLen = minSubArrayLenBinary(s, nums, indexStart + i, indexEnd);
                     }
+                    minSubArrayLen = leftSubArrayLen == 0 ? minSubArrayLen : Math.min(leftSubArrayLen, minSubArrayLen);
+                    minSubArrayLen = rightSubArrayLen == 0 ? minSubArrayLen : Math.min(rightSubArrayLen, minSubArrayLen);
                 }
             }
             return minSubArrayLen;
@@ -114,6 +122,34 @@ public class P209MinimumSizeSubarraySum {
                 }
             }
             return false;
+        }
+
+        /**
+         * 使用两个嵌套for循环的方式解决最小子串长度
+         *
+         * @param s    目标数字
+         * @param nums 待查找的数组
+         * @return 和大于等于s的最小子串长度
+         */
+        public int minSubArrayLenTwoForLoop(int s, int[] nums) {
+            if (Objects.isNull(nums) || nums.length == 0) {
+                return 0;
+            }
+            int minSubArrayLen = 0;
+            for (int i = 0; i < nums.length; i++) {
+                int sum = nums[i];
+                if (sum >= s) {
+                    return 1;
+                }
+                for (int j = i + 1; j < nums.length; j++) {
+                    sum += nums[j];
+                    if (sum >= s) {
+                        int currentSubArrayLength = j - i + 1;
+                        minSubArrayLen = minSubArrayLen == 0 ? currentSubArrayLength : Math.min(minSubArrayLen, currentSubArrayLength);
+                    }
+                }
+            }
+            return minSubArrayLen;
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

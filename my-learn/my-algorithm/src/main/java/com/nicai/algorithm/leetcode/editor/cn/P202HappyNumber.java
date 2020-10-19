@@ -21,6 +21,9 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 哈希表 数学 
 // 👍 464 👎 0
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 快乐数
  *
@@ -33,13 +36,58 @@ public class P202HappyNumber {
         private static final int TEN = 10;
         private static final int MAX_CYCLE_TIMES = 100;
 
+        /**
+         * 快慢双指针
+         *
+         * @param n
+         * @return
+         */
         public boolean isHappy(int n) {
+            // 定义快的指针，每次走两步
+            int fast = sumPow(n);
+            // 如果快指针达到1，或者快指针追上慢指针则停止循环
+            while (fast != ONE && fast != n) {
+                // 快指针每次走两步
+                fast = sumPow(sumPow(fast));
+                n = sumPow(n);
+            }
+            return fast == ONE;
+        }
+
+        /**
+         * 使用hashSet保存已经出现的数字，如果再次出现则说明出现循环
+         *
+         * @param n 判断是否happy的数字
+         * @return 是否happy
+         */
+        public boolean isHappyHashSet(int n) {
+            Set<Integer> set = new HashSet<>();
+            while (n != ONE) {
+                // 如果进入到循环中，则结束
+                if (set.contains(n)) {
+                    break;
+                }
+                set.add(n);
+                n = sumPow(n);
+            }
+            return n == ONE;
+        }
+
+        /**
+         * 循环100次或者回归到1
+         *
+         * @param n 判断是否happy的数字
+         * @return 是否happy
+         */
+        public boolean isHappyHundredTimes(int n) {
             int i = 0;
+            // 这种方法只有在确定一个数字的各个位数的平方和回归到1的时的循环次数小于100时才能用，否则不严谨
             while (n != ONE && i++ <= MAX_CYCLE_TIMES) {
                 n = sumPow(n);
             }
             return n == ONE;
         }
+
 
         /**
          * 数字的各个位上的数字的平方之和

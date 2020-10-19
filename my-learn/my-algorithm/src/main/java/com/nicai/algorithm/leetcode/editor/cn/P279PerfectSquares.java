@@ -20,7 +20,7 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 广度优先搜索 数学 动态规划 
 // 👍 636 👎 0
 
-import java.util.*;
+import java.util.Arrays;
 
 /**
  * 完全平方数
@@ -28,11 +28,12 @@ import java.util.*;
  * @author nicai
  */
 public class P279PerfectSquares {
+
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int numSquares(int n) {
             // 有哪些完全平方数小于n
-            Integer[] squares = initSquares(n).toArray(new Integer[]{});
+            int[] squares = initSquares(n);
             // 在完全平方数的数组中，有没有一个组合，使得组合的和等于n，如果这种组合存在，组合的数字最小的数字个数是多少
             return numSquares(n, squares);
         }
@@ -42,20 +43,21 @@ public class P279PerfectSquares {
          * @param squareArray 完全平方数字数组
          * @return 完全平方数字
          */
-        private int numSquares(int n, Integer[] squareArray) {
+        private int numSquares(int n, int[] squareArray) {
+            int[] dp = new int[n + 1];
+            Arrays.fill(dp, Integer.MAX_VALUE);
+            dp[0] = 0;
             // 动态规划
-            Map<Integer, Integer> map = new HashMap<>(n);
-            for (int j = squareArray.length - 1; j >= 0; j--) {
-                int square = squareArray[j];
-                for (int i = n; i >= 1; i--) {
-                    if (i >= square) {
-                        int num = i % square == 0 ? i / square : i / square + numSquares(i % square, squareArray);
-                        Integer integer = map.get(i);
-                        map.put(i, Objects.isNull(integer) ? num : Math.min(num, integer));
+            for (int i = 1; i <= n; i++) {
+                for (int square : squareArray) {
+                    if (i < square) {
+                        break;
                     }
+                    int num = i % square == 0 ? i / square : i / square + numSquares(i % square, squareArray);
+                    dp[i] = Math.min(num, dp[i]);
                 }
             }
-            return map.get(n);
+            return dp[n];
         }
 
         /**
@@ -64,17 +66,12 @@ public class P279PerfectSquares {
          * @param n 数字
          * @return 小于数字n的完全平方数列表
          */
-        private List<Integer> initSquares(int n) {
-            List<Integer> squares = new ArrayList<>();
+        private int[] initSquares(int n) {
+            int sqrt = (int) Math.sqrt(n);
+            int[] squares = new int[sqrt];
             int i = 1;
-            while (i <= n) {
-                // 此处可能溢出 TODO
-                int square = i * i;
-                if (square <= n) {
-                    squares.add(square);
-                } else {
-                    break;
-                }
+            while (i <= sqrt) {
+                squares[i - 1] = i * i;
                 i++;
             }
             return squares;

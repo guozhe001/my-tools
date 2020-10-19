@@ -36,6 +36,27 @@ public class P209MinimumSizeSubarraySum {
                 return 0;
             }
             int minSubArrayLen = 0;
+            for (int i = 0; i < nums.length; i++) {
+                int sum = nums[i];
+                if (sum >= s) {
+                    return 1;
+                }
+                for (int j = i + 1; j < nums.length; j++) {
+                    sum += nums[j];
+                    if (sum >= s) {
+                        int currentSubArrayLength = j - i + 1;
+                        minSubArrayLen = minSubArrayLen == 0 ? currentSubArrayLength : Math.min(minSubArrayLen, currentSubArrayLength);
+                    }
+                }
+            }
+            return minSubArrayLen;
+        }
+
+        public int minSubArrayLen1(int s, int[] nums) {
+            if (Objects.isNull(nums) || nums.length == 0) {
+                return 0;
+            }
+            int minSubArrayLen = 0;
             if (sumBigThanTarget(nums, s)) {
                 minSubArrayLen = nums.length;
                 // 如果数组还能继续分割，则继续使用二分法分割获取子数组的最小长度
@@ -45,7 +66,7 @@ public class P209MinimumSizeSubarraySum {
                     int rightSubArrayLen = minSubArrayLen(s, sub(nums, half, nums.length - half));
                     if (leftSubArrayLen == 0 && rightSubArrayLen == 0) {
                         int i = half / 2;
-                        leftSubArrayLen = minSubArrayLen(s, sub(nums, 0, half + half));
+                        leftSubArrayLen = minSubArrayLen(s, sub(nums, 0, half + i));
                     } else {
                         minSubArrayLen = leftSubArrayLen == 0 ? minSubArrayLen : Math.min(leftSubArrayLen, minSubArrayLen);
                         minSubArrayLen = rightSubArrayLen == 0 ? minSubArrayLen : Math.min(rightSubArrayLen, minSubArrayLen);

@@ -45,24 +45,24 @@ public class P139WordBreak {
         public boolean wordBreak(String s, List<String> wordDict) {
             char[] chars = s.toCharArray();
             //动态规划的数组，下标为字符串的长度，值为1的时候说明可以被拆分，值为0的时候说明不可以被拆分
-            int[] dp = new int[chars.length + 1];
+            boolean[] dp = new boolean[chars.length + 1];
             for (int i = 1; i <= chars.length; i++) {
                 if (wordDict.contains(String.valueOf(Arrays.copyOf(chars, i)))) {
-                    dp[i] = 1;
+                    dp[i] = true;
                 } else {
                     // 如果整个词不在单词列表中，则判断这个词的部分是否在单词列表中
                     int j = i - 1;
                     // 从后往前，分割字符串，判断是否有可以拆分的情况
                     while (j >= 1) {
-                        if (dp[j] == 1 && wordDict.contains(String.valueOf(Arrays.copyOfRange(chars, j, i)))) {
-                            dp[i] = 1;
+                        if (dp[j] && wordDict.contains(String.valueOf(Arrays.copyOfRange(chars, j, i)))) {
+                            dp[i] = true;
                             break;
                         }
                         j--;
                     }
                 }
             }
-            return dp[chars.length] == 1;
+            return dp[chars.length];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

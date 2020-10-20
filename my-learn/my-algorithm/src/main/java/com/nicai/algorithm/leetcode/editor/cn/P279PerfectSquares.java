@@ -53,8 +53,7 @@ public class P279PerfectSquares {
                     if (i < square) {
                         break;
                     }
-                    int num = i % square == 0 ? i / square : i / square + numSquares(i % square, squareArray);
-                    dp[i] = Math.min(num, dp[i]);
+                    dp[i] = Math.min(dp[i - square] + 1, dp[i]);
                 }
             }
             return dp[n];

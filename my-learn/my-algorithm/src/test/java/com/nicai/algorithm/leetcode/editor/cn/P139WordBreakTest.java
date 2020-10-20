@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * P139WordBreakTest
  *
@@ -12,7 +14,7 @@ import org.junit.Test;
  */
 public class P139WordBreakTest {
 
-    private P139WordBreak.Solution solution = new P139WordBreak().new Solution();
+    private final P139WordBreak.Solution solution = new P139WordBreak().new Solution();
 
     /**
      * 示例 1：
@@ -51,13 +53,20 @@ public class P139WordBreakTest {
     }
 
     /**
-     * 示例 4：
+     * 示例 5：
      * <p>
-     * 输入: s = "cars", wordDict = ["car","ca","rs"]
+     * 输入: s = "abcd", wordDict = ["a","abc","b","cd"]
      * 输出: true
      */
     @Test
-    public void wordBreak4() {
-        Assert.assertFalse(solution.wordBreak("cars", Lists.newArrayList("car", "ca", "rs")));
+    public void wordBreak5() {
+        Assert.assertTrue(solution.wordBreak("abcd", Lists.newArrayList("a", "abc", "b", "cd")));
+    }
+
+    @Test
+    public void testArraysCopyOfRange() {
+        char[] chars = "leetcode".toCharArray();
+        char[] chars1 = Arrays.copyOfRange(chars, 4, 8);
+        Assert.assertArrayEquals(new char[]{'c', 'o', 'd', 'e'}, chars1);
     }
 }

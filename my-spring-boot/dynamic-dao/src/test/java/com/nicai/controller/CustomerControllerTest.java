@@ -35,7 +35,7 @@ public class CustomerControllerTest {
 
     @Test
     public void add() throws Exception {
-        // 调用/api/assets/add但是不传入参数
+        // 调用add
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/add")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .param("name", "test")
@@ -48,6 +48,15 @@ public class CustomerControllerTest {
     }
 
     @Test
-    public void hello() {
+    public void hello() throws Exception {
+        // 调用add
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        log.info("response={}", JSON.toJSONString(response));
+        Assert.assertEquals(200, response.getStatus());
     }
 }

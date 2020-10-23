@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 
 /**
- * InsertSort
- * 插入排序：
+ * 选择排序：
  * 1、遍历数组，找到最小的数字，与第一个数字交换位置；比较次数=n-1
  * 2、遍历剩余的数组，找到最小的数字，与剩余数组的第一个数字交换位置；比较次数=n-2
  * <p>

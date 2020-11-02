@@ -41,17 +41,31 @@ public class P198HouseRobber {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public int rob(int[] nums) {
-            if (null == nums || nums.length == 0) {
-                return 0;
+            /*
+             * 初始化动态规划的数组，此时的数组中的值都是0
+             * 此数组的下标为偷取的前n个房屋的数量
+             * 此数组的值为偷取的前n个房屋可以偷取的金钱最大值
+             * 如果dp[5] = 100；表示偷取前面的5家房屋，最多可以偷取100刀
+             */
+            int[] dp = new int[nums.length + 1];
+            for (int i = 0; i < nums.length; i++) {
+                int dpIndex = i + 1;
+                // 如果只偷第一个房子
+                if (i == 0) {
+                    dp[dpIndex] = nums[i];
+                } else if (i == 1) {
+                    // 如果只偷前两个房子
+                    dp[dpIndex] = Math.max(nums[i], nums[i - 1]);
+                } else {
+                    /*
+                     * 此时有两种选择:1、偷当前的房屋；2、不偷当前的房屋，两种选择取最大值
+                     * 如果选择1，则要计算当前房屋的金钱与当前房屋前一个不相邻的所有房屋的金钱价值
+                     * 如果选择2，则直接取当前房屋之前的所有房屋能够偷的金钱最大值
+                     */
+                    dp[dpIndex] = Math.max(nums[i] + dp[i - 1], dp[i]);
+                }
             }
-            // 如果只有一个房子
-            if (nums.length == 1) {
-                return nums[0];
-            }
-            if (nums.length == 2) {
-                return Math.max(nums[0], nums[1]);
-            }
-            return 0;
+            return dp[nums.length];
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

@@ -1,5 +1,6 @@
 package com.nicai.algorithm.leetcode.editor.cn;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -22,7 +23,7 @@ public class P198HouseRobberTest {
      */
     @Test
     public void rob() {
-
+        invokeAndAssert(new int[]{1, 2, 3, 1}, 4);
     }
 
     /**
@@ -33,9 +34,17 @@ public class P198HouseRobberTest {
      * 解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。
      *      偷窃到的最高金额 = 2 + 9 + 1 = 12 。
      */
-
     @Test
     public void rob1() {
-
+        invokeAndAssert(new int[]{2, 7, 9, 3, 1}, 12);
     }
+
+    /**
+     * @param input  入参
+     * @param expect 期待的结果
+     */
+    private void invokeAndAssert(int[] input, int expect) {
+        Assert.assertEquals(expect, solution.rob(input));
+    }
+
 }

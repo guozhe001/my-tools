@@ -14,6 +14,7 @@ public class DynamicProgrammingPracticeTest {
     private static final DynamicProgrammingPractice.Product SPEAKER = new DynamicProgrammingPractice.Product("音响", 3000, 4);
     private static final DynamicProgrammingPractice.Product COMPUTER = new DynamicProgrammingPractice.Product("电脑", 2000, 3);
     private static final DynamicProgrammingPractice.Product IPHONE = new DynamicProgrammingPractice.Product("iphone", 2000, 1);
+    private static final DynamicProgrammingPractice.Product MP3 = new DynamicProgrammingPractice.Product("MP3", 1000, 1);
 
     @Tested
     private DynamicProgrammingPractice dynamicProgrammingPractice;
@@ -48,6 +49,17 @@ public class DynamicProgrammingPracticeTest {
         Assert.assertTrue(steal.contains(COMPUTER));
         Assert.assertTrue(steal.contains(IPHONE));
         Assert.assertEquals(4000, sumPrice(steal));
+    }
+
+    @Test
+    public void steal2() {
+        List<DynamicProgrammingPractice.Product> steal = dynamicProgrammingPractice.steal(
+                new DynamicProgrammingPractice.Product[]{GUITAR, SPEAKER, COMPUTER, IPHONE, MP3}, 4);
+        Assert.assertEquals(3, steal.size());
+        Assert.assertTrue(steal.contains(GUITAR));
+        Assert.assertTrue(steal.contains(IPHONE));
+        Assert.assertTrue(steal.contains(MP3));
+        Assert.assertEquals(4500, sumPrice(steal));
     }
 
     @Test

@@ -84,6 +84,15 @@ public class P5LongestPalindromicSubstringTest {
     }
 
 
+    /**
+     * 输入 aacabdkacaa
+     */
+    @Test
+    public void test() {
+        Assert.assertEquals("aca", solution.longestPalindrome("aacabdkacaa"));
+    }
+
+
     @Test
     public void testStringValueOf() {
         char[] chars = new char[]{'a', 'b', 'c', 'd', 'e', 'f'};

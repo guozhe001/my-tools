@@ -43,7 +43,53 @@ public class P5LongestPalindromicSubstring {
               2. 传入的字符串只有两个字符
               3. 传入的字符串没有重复的字符串/
              */
-            return solution1(s);
+            return solution(s);
+        }
+
+        // 最长公共字串的解法，但是不是最长的回文字串
+        private String solution(String s) {
+            char[] chars = s.toCharArray();
+            char[] reversalChars = reversal(chars);
+            int length = chars.length;
+            Map<Integer, int[]> map = new HashMap<>();
+            int maxLength = 0;
+            // 记录当前的回文字串的长度
+            int[][] dp = new int[length + 1][length + 1];
+            for (int i = 0; i < length; i++) {
+                for (int j = 0; j < length; j++) {
+                    if (chars[i] == reversalChars[j]) {
+                        int currentLength = dp[i][j] + 1;
+                        dp[i + 1][j + 1] = currentLength;
+                        if (currentLength > maxLength) {
+                            maxLength = currentLength;
+                            map.put(maxLength, new int[]{i + 1, j + 1});
+                        }
+                    } else {
+                        dp[i + 1][j + 1] = 0;
+                    }
+                    System.out.print(dp[i + 1][j + 1] + " ");
+                }
+                System.out.println();
+            }
+            int[] maxLengthCell = map.get(maxLength);
+            int i = maxLengthCell[0];
+            int j = maxLengthCell[1];
+            StringBuilder stringBuilder = new StringBuilder();
+            while (dp[i][j] > 0) {
+                stringBuilder.append(chars[i - 1]);
+                i--;
+                j--;
+            }
+            return stringBuilder.toString();
+        }
+
+        private char[] reversal(char[] chars) {
+            int length = chars.length;
+            char[] result = new char[length];
+            for (int i = 0; i < length; i++) {
+                result[i] = chars[length - 1 - i];
+            }
+            return result;
         }
 
         /**

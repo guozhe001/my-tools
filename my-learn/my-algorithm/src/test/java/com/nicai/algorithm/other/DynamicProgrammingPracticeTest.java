@@ -20,6 +20,33 @@ public class DynamicProgrammingPracticeTest {
     private DynamicProgrammingPractice dynamicProgrammingPractice;
 
     @Test
+    public void stealMaxPrice() {
+        Assert.assertEquals(3500, dynamicProgrammingPractice.stealMaxPrice(
+                new DynamicProgrammingPractice.Product[]{GUITAR, SPEAKER, COMPUTER}, 4));
+    }
+
+    @Test
+    public void stealMaxPrice1() {
+        Assert.assertEquals(4000, dynamicProgrammingPractice.stealMaxPrice(
+                new DynamicProgrammingPractice.Product[]{GUITAR, SPEAKER, COMPUTER, IPHONE}, 4));
+    }
+
+    @Test
+    public void stealMaxPrice2() {
+        Assert.assertEquals(4500, dynamicProgrammingPractice.stealMaxPrice(
+                new DynamicProgrammingPractice.Product[]{GUITAR, SPEAKER, COMPUTER, IPHONE, MP3}, 4));
+    }
+
+    /**
+     * 改变商品的顺序，验证结果是否正确
+     */
+    @Test
+    public void stealMaxPrice3() {
+        Assert.assertEquals(4500, dynamicProgrammingPractice.stealMaxPrice(
+                new DynamicProgrammingPractice.Product[]{SPEAKER, GUITAR, COMPUTER, IPHONE, MP3}, 4));
+    }
+
+    @Test
     public void steal() {
         List<DynamicProgrammingPractice.Product> steal = dynamicProgrammingPractice.steal(
                 new DynamicProgrammingPractice.Product[]{GUITAR, SPEAKER, COMPUTER}, 4);
@@ -27,17 +54,6 @@ public class DynamicProgrammingPracticeTest {
         Assert.assertTrue(steal.contains(GUITAR));
         Assert.assertTrue(steal.contains(COMPUTER));
         Assert.assertEquals(3500, sumPrice(steal));
-    }
-
-
-    /**
-     * 汇总商品列表的价格
-     *
-     * @param products 商品列表
-     * @return 商品列表的价格之和
-     */
-    private int sumPrice(List<DynamicProgrammingPractice.Product> products) {
-        return products.stream().map(product -> product.price).reduce(Integer::sum).orElse(0);
     }
 
 
@@ -60,6 +76,16 @@ public class DynamicProgrammingPracticeTest {
         Assert.assertTrue(steal.contains(IPHONE));
         Assert.assertTrue(steal.contains(MP3));
         Assert.assertEquals(4500, sumPrice(steal));
+    }
+
+    /**
+     * 汇总商品列表的价格
+     *
+     * @param products 商品列表
+     * @return 商品列表的价格之和
+     */
+    private int sumPrice(List<DynamicProgrammingPractice.Product> products) {
+        return products.stream().map(product -> product.price).reduce(Integer::sum).orElse(0);
     }
 
     @Test

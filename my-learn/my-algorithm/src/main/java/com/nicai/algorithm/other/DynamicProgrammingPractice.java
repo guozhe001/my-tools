@@ -3,6 +3,7 @@ package com.nicai.algorithm.other;
 import cn.hutool.core.util.StrUtil;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +18,38 @@ import java.util.Map;
  *
  * @author guozhe
  */
+@Slf4j
 public class DynamicProgrammingPractice {
 
     /**
-     * 给出商品列表和背包大小和背包的容量，请计算偷取哪些商品可以达到价格最大化
+     * 给出商品列表和背包的容量，请计算偷取哪些商品可以达到价格最大化，最大的价格是多少？
+     *
+     * @param products    商品列表
+     * @param bagCapacity 背包容量
+     * @return 能够偷取的商品最大的价格之和
+     */
+    public int stealMaxPrice(Product[] products, int bagCapacity) {
+        /*
+         * 二维数组，记录已经计算过的最大价格
+         * 二维数组比商品的个数多1，比背包的大小多1，原因是为了方便使用相同的公式，第0行和第0列的值都是0
+         */
+        int[][] table = new int[products.length + 1][bagCapacity + 1];
+        for (int j = 1; j <= products.length; j++) {
+            Product product = products[j - 1];
+            for (int currentBagCapacity = 1; currentBagCapacity <= bagCapacity; currentBagCapacity++) {
+                table[j][currentBagCapacity] = product.weight <= currentBagCapacity ?
+                        Math.max(product.price + table[j - 1][currentBagCapacity - product.weight], table[j - 1][currentBagCapacity])
+                        : table[j - 1][currentBagCapacity];
+            }
+        }
+        for (int[] row : table) {
+            log.info("{}", row);
+        }
+        return table[products.length][bagCapacity];
+    }
+
+    /**
+     * 给出商品列表和背包大小和背包的容量，请计算偷取哪些商品可以达到价格最大化，并返回价格之和最大的商品列表
      *
      * @param products    商品列表
      * @param bagCapacity 背包容量

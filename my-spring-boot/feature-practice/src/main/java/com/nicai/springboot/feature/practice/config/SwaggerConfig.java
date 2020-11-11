@@ -4,6 +4,7 @@ package com.nicai.springboot.feature.practice.config;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.RequestHandler;
@@ -19,12 +20,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * @author guozhe
  */
+@Slf4j
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
 
     @Bean
     public Docket userApi() {
+        log.info("hi, i'm SwaggerConfig");
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()

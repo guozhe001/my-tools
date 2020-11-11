@@ -15,6 +15,7 @@ public class TypeCheckingAO {
 
     /**
      * 年龄
+     * "@NotBlank" 只能用在字符上面，但是此处用了并没有在编译时报错，需要注意
      */
     @NotBlank
     private Integer age;

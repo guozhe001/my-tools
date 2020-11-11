@@ -43,6 +43,7 @@ public class InitApiModelProperty implements ApplicationContextAware {
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) {
+        log.info("hi, i'm InitApiModelProperty");
         Set<Class<?>> classes = ClassUtil.scanPackageByAnnotation("com.nicai.springboot.feature.practice.vo", ApiModelPropertyAdvance.class);
         try {
             for (Class<?> clazz : classes) {

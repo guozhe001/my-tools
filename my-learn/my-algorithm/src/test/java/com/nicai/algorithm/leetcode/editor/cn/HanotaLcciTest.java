@@ -29,7 +29,7 @@ public class HanotaLcciTest {
      */
     @Test
     public void hanotaOne() {
-        IntStream.range(1, 33).forEach(num -> {
+        IntStream.range(1, 20).forEach(num -> {
             log.info("圆盘个数={}===========================", num);
             List<Integer> toBeTest = Lists.newArrayList();
             for (int i = num - 1; i >= 0; i--) {

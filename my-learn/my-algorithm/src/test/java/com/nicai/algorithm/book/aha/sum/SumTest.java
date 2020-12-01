@@ -1,4 +1,4 @@
-package com.nicai.algorithm.aha.sum;
+package com.nicai.algorithm.book.aha.sum;
 
 import org.junit.Assert;
 import org.junit.Test;

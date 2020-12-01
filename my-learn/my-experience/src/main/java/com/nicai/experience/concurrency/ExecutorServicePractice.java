@@ -81,7 +81,6 @@ public class ExecutorServicePractice {
         log.info("shutdown result={}", shutdown);
     }
 
-
     /**
      * practice:
      * void shutdown();

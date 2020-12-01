@@ -1,4 +1,4 @@
-package com.nicai.algorithm.aha.paixu;
+package com.nicai.algorithm.book.aha.paixu;
 
 /**
  * 冒泡排序

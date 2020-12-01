@@ -1,4 +1,4 @@
-package com.nicai.algorithm.aha.paixu;
+package com.nicai.algorithm.book.aha.paixu;
 
 import java.util.Arrays;
 

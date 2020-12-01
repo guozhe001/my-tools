@@ -50,6 +50,12 @@ public class InsertSort implements Sort {
         return nums;
     }
 
+    /**
+     * 插入排序的链表版实现，未完成
+     *
+     * @param node
+     * @return
+     */
     public Node sort(Node node) {
         // 获取链表长度
         int count = count(node);

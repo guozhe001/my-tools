@@ -17,7 +17,7 @@ public class SortTest {
         assert false;
     };
 
-    private static final List<Sort<Integer>> SORT_IMPL = ImmutableList.of(new Selection<>(), new Insertion<>());
+    private static final List<Sort<Integer>> SORT_IMPL = ImmutableList.of(new Selection<>(), new Insertion<>(), new Merge<>());
 
     @Test
     public void testSort() {

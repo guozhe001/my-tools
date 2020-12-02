@@ -18,14 +18,14 @@ public interface Sort<T extends Comparable<T>> {
     void sort(T[] comparableArray);
 
     /**
-     * 判断v是否小于w，如果v小于w则返回true，否则返回false
+     * 判断v是否小于等于w，如果v小于等于w则返回true，否则返回false
      *
      * @param v 待比较的v
      * @param w 待比较的w
-     * @return 如果v小于w则返回true，否则返回false
+     * @return 如果v小于等于w则返回true，否则返回false
      */
     default boolean less(T v, T w) {
-        return v.compareTo(w) < 0;
+        return v.compareTo(w) <= 0;
     }
 
     /**

@@ -13,6 +13,14 @@ import org.slf4j.Logger;
 public class MergeSort implements Sort {
 
 
+    /**
+     * 此方法的实现与algs4中的实现相比有下面这些缺点：
+     * 1、 每次拆分都会新增两个数组，空间占比较大
+     * 2、 合并的算法写的不够优雅，比较混乱
+     *
+     * @param nums 待排序的数组
+     * @return
+     */
     @Override
     public int[] sort(int[] nums) {
         // 拆分数组，每个数字为一个单独的数组

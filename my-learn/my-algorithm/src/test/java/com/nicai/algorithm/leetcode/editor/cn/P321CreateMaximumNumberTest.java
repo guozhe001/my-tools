@@ -11,6 +11,29 @@ public class P321CreateMaximumNumberTest {
 
     private final P321CreateMaximumNumber.Solution solution = new P321CreateMaximumNumber().new Solution();
 
+    /**
+     * 示例 1:
+     * <p>
+     * 输入:
+     * nums1 = [3, 4, 6, 5]
+     * nums2 = [9, 1, 2, 5, 8, 3]
+     * k = 5
+     * 输出:
+     * [9, 8, 6, 5, 3]
+     */
+    @Test
+    public void maxNumber() {
+        invokeMaxNumber(new int[]{3, 4, 6, 5}, new int[]{9, 1, 2, 5, 8, 3}, 5, new int[]{9, 8, 6, 5, 3});
+    }
+
+    private void invokeMaxNumber(int[] m, int[] n, int k, int[] expect) {
+        int[] ints = solution.maxNumber(new int[]{3, 4, 6, 5}, new int[]{9, 1, 2, 5, 8, 3}, 5);
+        for (int i = 0; i < ints.length; i++) {
+            System.out.printf(ints[i] + " ");
+        }
+        Assert.assertArrayEquals(new int[]{9, 8, 6, 5, 3}, ints);
+    }
+
     @Test
     public void findMaxNumber() throws Exception {
         int[] nums = Whitebox.invokeMethod(solution, "findMaxNumber", new int[]{1, 3, 8, 7, 9, 3}, 3);
@@ -80,6 +103,18 @@ public class P321CreateMaximumNumberTest {
     public void merge2() throws Exception {
         int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{1, 3, 8}, new int[]{8, 7, 1}, 3);
         Assert.assertArrayEquals(new int[]{8, 8, 7}, nums);
+    }
+
+    @Test
+    public void getMax() throws Exception {
+        int[] nums = Whitebox.invokeMethod(solution, "getMax", ImmutableList.of(
+                new int[]{1, 0, 0},
+                new int[]{1, 0},
+                new int[]{2, 0},
+                new int[]{2, 0, 0},
+                new int[]{2, 0, 1}
+        ));
+        Assert.assertArrayEquals(new int[]{2, 0, 1}, nums);
     }
 
     private P321CreateMaximumNumber.Solution.UsedNumber getMaxNumber(int index, int value, boolean fromNums1) {

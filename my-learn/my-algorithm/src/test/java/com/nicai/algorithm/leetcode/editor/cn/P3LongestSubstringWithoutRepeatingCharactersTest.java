@@ -9,7 +9,7 @@ import java.util.Map;
 @Slf4j
 public class P3LongestSubstringWithoutRepeatingCharactersTest {
 
-    P3LongestSubstringWithoutRepeatingCharacters.Solution solution = new P3LongestSubstringWithoutRepeatingCharacters().new Solution();
+    private final P3LongestSubstringWithoutRepeatingCharacters.Solution solution = new P3LongestSubstringWithoutRepeatingCharacters().new Solution();
 
     @Test
     public void lengthOfLongestSubstring() {

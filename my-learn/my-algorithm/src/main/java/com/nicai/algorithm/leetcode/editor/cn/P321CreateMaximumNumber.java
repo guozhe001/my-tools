@@ -37,7 +37,10 @@ package com.nicai.algorithm.leetcode.editor.cn;
 
 import lombok.Data;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class P321CreateMaximumNumber {
@@ -54,8 +57,7 @@ public class P321CreateMaximumNumber {
             // 1、先算出nums1出1个数，2个数、3个数一直到min(k, nums1.length)个数时的最大值
             int[][] dp1 = dp(nums1, k);
             int[][] dp2 = dp(nums2, k);
-
-            return merge(dp1, dp2, k);
+            return dp1.length > dp2.length ? merge(dp1, dp2, k) : merge(dp2, dp1, k);
         }
 
         private int[][] dp(int[] nums1, int k) {
@@ -112,10 +114,54 @@ public class P321CreateMaximumNumber {
             return ints;
         }
 
-        private int[] merge(int[][] nums1, int[][] nums2, int length) {
-            int[] ints = new int[length];
-            // TODO 把这个实现了就完成了
-            return ints;
+        private int[] merge(int[][] longer, int[][] shorter, int length) {
+            /*
+             * nums1的长度和nums2的长度和length的关系有很多种
+             * longer.length, shorter.length, length
+             * 3,3,3
+             * 3,3,4
+             * 3,3,2
+             * 3,1,3
+             * 5,3,4
+             *
+             */
+            // max length array
+            int min = Math.max(longer.length - 1, length);
+            List<int[]> all = new ArrayList<>();
+            // i代表longer这个数组出几个数
+            for (int i = 0; i <= min; i++) {
+                int sub = length - i;
+                // 如果longer出i个数，但是剩下的数字无法从shorter从获得，则不计算
+                if (sub <= shorter.length - 1) {
+                    all.add(merge(longer[i], shorter[sub], length));
+                }
+            }
+            return getMax(all);
+        }
+
+        private int[] getMax(List<int[]> all) {
+            if (all.isEmpty()) {
+                return new int[]{};
+            }
+            if (all.size() == 1) {
+                return all.get(0);
+            }
+            int[] result = all.get(0);
+            for (int i = 1; i < all.size(); i++) {
+                int[] ints = all.get(i);
+                if (ints.length > result.length) {
+                    result = ints;
+                }
+                if (ints.length == result.length) {
+                    for (int j = 0; j < ints.length; j++) {
+                        if (ints[j] > result[j]) {
+                            result = ints;
+                            break;
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
         private int[] toArray(List<UsedNumber> numbers) {

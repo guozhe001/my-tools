@@ -35,13 +35,8 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 贪心算法 动态规划 
 // 👍 242 👎 0
 
-import lombok.Data;
-
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class P321CreateMaximumNumber {
     //leetcode submit region begin(Prohibit modification and deletion)
@@ -69,18 +64,6 @@ public class P321CreateMaximumNumber {
             return dp;
         }
 
-        private int[] toMaxNumberArray(List<UsedNumber> numbers) {
-            List<UsedNumber> numbers1 = new ArrayList<>();
-            List<UsedNumber> numbers2 = new ArrayList<>();
-            for (UsedNumber usedNumber : numbers) {
-                if (usedNumber.fromNums1) {
-                    numbers1.add(usedNumber);
-                } else {
-                    numbers2.add(usedNumber);
-                }
-            }
-            return merge(toArray(numbers1), toArray(numbers2), 1);
-        }
 
         private int[] merge(int[] nums1, int[] nums2, int length) {
             int[] ints = new int[length];
@@ -114,6 +97,7 @@ public class P321CreateMaximumNumber {
             return ints;
         }
 
+
         private int[] merge(int[][] longer, int[][] shorter, int length) {
             /*
              * nums1的长度和nums2的长度和length的关系有很多种
@@ -126,7 +110,7 @@ public class P321CreateMaximumNumber {
              *
              */
             // max length array
-            int min = Math.max(longer.length - 1, length);
+            int min = Math.min(longer.length - 1, length);
             List<int[]> all = new ArrayList<>();
             // i代表longer这个数组出几个数
             for (int i = 0; i <= min; i++) {
@@ -157,6 +141,8 @@ public class P321CreateMaximumNumber {
                         if (ints[j] > result[j]) {
                             result = ints;
                             break;
+                        } else if (ints[j] < result[j]) {
+                            break;
                         }
                     }
                 }
@@ -164,32 +150,10 @@ public class P321CreateMaximumNumber {
             return result;
         }
 
-        private int[] toArray(List<UsedNumber> numbers) {
-            int[] result = new int[numbers.size()];
-            List<UsedNumber> collect = numbers.stream().sorted(Comparator.comparing(UsedNumber::getIndex)).collect(Collectors.toList());
-            for (int j = 0; j < collect.size(); j++) {
-                result[j] = collect.get(j).getValue();
-            }
-            return result;
-        }
-
-
-        private int findMaxNumber(int[] nums1, Set<UsedNumber> numbers, boolean fromNums1) {
-            Set<Integer> collect = numbers.stream().filter(n -> n.fromNums1 == fromNums1).map(n -> n.index).collect(Collectors.toSet());
-            int result = -1;
-            if (collect.size() == nums1.length) {
-                return result;
-            }
-            for (int i = 0; i < nums1.length; i++) {
-                if (!collect.contains(i) && nums1[i] > result) {
-                    result = i;
-                }
-            }
-            return result;
-        }
-
-
         private int[] findMaxNumber(int[] nums1, int length) {
+            if (length == nums1.length) {
+                return nums1;
+            }
             int[] ints = new int[length];
             int index = 0;
             int searchMinIndex = 0;
@@ -207,13 +171,6 @@ public class P321CreateMaximumNumber {
             return ints;
         }
 
-
-        @Data
-        public class UsedNumber {
-            private int index;
-            private int value;
-            private boolean fromNums1;
-        }
     }
 //leetcode submit region end(Prohibit modification and deletion)
 

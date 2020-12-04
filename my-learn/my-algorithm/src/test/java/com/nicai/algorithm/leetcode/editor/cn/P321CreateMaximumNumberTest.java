@@ -26,12 +26,53 @@ public class P321CreateMaximumNumberTest {
         invokeMaxNumber(new int[]{3, 4, 6, 5}, new int[]{9, 1, 2, 5, 8, 3}, 5, new int[]{9, 8, 6, 5, 3});
     }
 
+    /**
+     * 示例 2:
+     * <p>
+     * 输入:
+     * nums1 = [6, 7]
+     * nums2 = [6, 0, 4]
+     * k = 5
+     * 输出:
+     * [6, 7, 6, 0, 4]
+     */
+    @Test
+    public void maxNumber1() {
+        invokeMaxNumber(new int[]{6, 7}, new int[]{6, 0, 4}, 5, new int[]{6, 7, 6, 0, 4});
+    }
+
+    /**
+     * 示例 3:
+     * <p>
+     * 输入:
+     * nums1 = [3, 9]
+     * nums2 = [8, 9]
+     * k = 3
+     * 输出:
+     * [9, 8, 9]
+     */
+    @Test
+    public void maxNumber2() {
+        invokeMaxNumber(new int[]{3, 9}, new int[]{8, 9}, 3, new int[]{9, 8, 9});
+    }
+
+    /**
+     * [5,5,1]
+     * [4,0,1]
+     * 3
+     * 期望结果:[5,5,4]
+     */
+    @Test
+    public void maxNumber3() {
+        invokeMaxNumber(new int[]{5, 5, 1}, new int[]{4, 0, 1}, 3, new int[]{5, 5, 4});
+    }
+
     private void invokeMaxNumber(int[] m, int[] n, int k, int[] expect) {
-        int[] ints = solution.maxNumber(new int[]{3, 4, 6, 5}, new int[]{9, 1, 2, 5, 8, 3}, 5);
+        int[] ints = solution.maxNumber(m, n, k);
         for (int i = 0; i < ints.length; i++) {
             System.out.printf(ints[i] + " ");
         }
-        Assert.assertArrayEquals(new int[]{9, 8, 6, 5, 3}, ints);
+        Assert.assertArrayEquals(expect, ints);
     }
 
     @Test
@@ -53,13 +94,11 @@ public class P321CreateMaximumNumberTest {
     }
 
     @Test
-    public void toArray() throws Exception {
-        int[] nums = Whitebox.invokeMethod(solution, "toArray", ImmutableList.of(
-                getMaxNumber(5, 9, false),
-                getMaxNumber(0, 3, false),
-                getMaxNumber(4, 5, true)));
-        Assert.assertArrayEquals(new int[]{3, 5, 9}, nums);
+    public void findMaxNumber4() throws Exception {
+        int[] nums = Whitebox.invokeMethod(solution, "findMaxNumber", new int[]{5, 5, 1}, 3);
+        Assert.assertArrayEquals(new int[]{5, 5, 1}, nums);
     }
+
 
     @Test
     public void dp() throws Exception {
@@ -75,34 +114,21 @@ public class P321CreateMaximumNumberTest {
     }
 
     @Test
-    public void toMaxNumberArray() throws Exception {
-        int[] nums = Whitebox.invokeMethod(solution, "toMaxNumberArray", ImmutableList.of(
-                getMaxNumber(5, 8, false),
-                getMaxNumber(0, 1, false),
-                getMaxNumber(4, 3, false),
-                getMaxNumber(1, 7, true),
-                getMaxNumber(0, 8, true),
-                getMaxNumber(2, 1, true)
-        ));
-        Assert.assertArrayEquals(new int[]{8, 7, 1, 3, 8, 1}, nums);
+    public void merge() throws Exception {
+        int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{8}, new int[]{8, 7}, 3);
+        Assert.assertArrayEquals(new int[]{8, 8, 7}, nums);
     }
 
     @Test
-    public void merge() throws Exception {
+    public void merge1() throws Exception {
         int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{1, 3, 8}, new int[]{8, 7, 1}, 6);
         Assert.assertArrayEquals(new int[]{8, 7, 1, 3, 8, 1}, nums);
     }
 
     @Test
-    public void merge1() throws Exception {
-        int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{1, 3, 8}, new int[]{8, 7, 1}, 5);
-        Assert.assertArrayEquals(new int[]{8, 7, 1, 3, 8}, nums);
-    }
-
-    @Test
     public void merge2() throws Exception {
-        int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{1, 3, 8}, new int[]{8, 7, 1}, 3);
-        Assert.assertArrayEquals(new int[]{8, 8, 7}, nums);
+        int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{3, 8}, new int[]{2, 7}, 4);
+        Assert.assertArrayEquals(new int[]{3, 8, 2, 7}, nums);
     }
 
     @Test
@@ -117,11 +143,4 @@ public class P321CreateMaximumNumberTest {
         Assert.assertArrayEquals(new int[]{2, 0, 1}, nums);
     }
 
-    private P321CreateMaximumNumber.Solution.UsedNumber getMaxNumber(int index, int value, boolean fromNums1) {
-        P321CreateMaximumNumber.Solution.UsedNumber usedNumber = solution.new UsedNumber();
-        usedNumber.setIndex(index);
-        usedNumber.setValue(value);
-        usedNumber.setFromNums1(fromNums1);
-        return usedNumber;
-    }
 }

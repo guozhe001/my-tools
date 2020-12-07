@@ -50,9 +50,13 @@ public class P321CreateMaximumNumber {
              * 3、再算merge到一起？
              */
             // 1、先算出nums1出1个数，2个数、3个数一直到min(k, nums1.length)个数时的最大值
-            int[][] dp1 = dp(nums1, k);
-            int[][] dp2 = dp(nums2, k);
-            return dp1.length > dp2.length ? merge(dp1, dp2, k) : merge(dp2, dp1, k);
+            if (k == nums1.length + nums2.length) {
+                return merge(nums1, nums2, k);
+            } else {
+                int[][] dp1 = dp(nums1, k);
+                int[][] dp2 = dp(nums2, k);
+                return dp1.length > dp2.length ? merge(dp1, dp2, k) : merge(dp2, dp1, k);
+            }
         }
 
         private int[][] dp(int[] nums1, int k) {
@@ -74,27 +78,38 @@ public class P321CreateMaximumNumber {
                     ints[i] = nums2[nums2Index++];
                 } else if (nums2Index >= nums2.length) {
                     ints[i] = nums1[nums1Index++];
-                } else if (nums1[nums1Index] > nums2[nums2Index]) {
+                } else if (nextValueMBigThanN(nums1, nums1Index, nums2, nums2Index)) {
                     ints[i] = nums1[nums1Index++];
-                } else if (nums1[nums1Index] < nums2[nums2Index]) {
-                    ints[i] = nums2[nums2Index++];
                 } else {
-                    if (nums1Index == nums1.length - 1 && nums2Index == nums2.length - 1) {
-                        ints[i] = nums2[nums2Index++];
-                    } else if (nums1Index == nums1.length - 1 && nums2Index < nums2.length - 1) {
-                        ints[i] = nums2[nums2Index++];
-                    } else if (nums1Index < nums1.length - 1 && nums2Index == nums2.length - 1) {
-                        ints[i] = nums1[nums1Index++];
-                    } else if (nums1Index < nums1.length - 1 && nums2Index <= nums2.length - 1) {
-                        if (nums1[nums1Index + 1] > nums2[nums2Index + 1]) {
-                            ints[i] = nums1[nums1Index++];
-                        } else {
-                            ints[i] = nums2[nums2Index++];
-                        }
-                    }
+                    ints[i] = nums2[nums2Index++];
                 }
             }
             return ints;
+        }
+
+        /**
+         * 判断m从下标mIndex开始是否比n从nIndex开始的值大
+         *
+         * @param m      数组m
+         * @param mIndex 数组m的起始下标
+         * @param n      数组n
+         * @param nIndex 数组n的起始下标
+         * @return
+         */
+        private boolean nextValueMBigThanN(int[] m, int mIndex, int[] n, int nIndex) {
+            // 如果m数组已经比较结束，则返回false，下一个数字从n中获取
+            if (mIndex == m.length) {
+                return false;
+            } else if (nIndex == n.length) {
+                return true;
+            }
+            if (m[mIndex] > n[nIndex]) {
+                return true;
+            } else if (m[mIndex] < n[nIndex]) {
+                return false;
+            } else {
+                return nextValueMBigThanN(m, mIndex + 1, n, nIndex + 1);
+            }
         }
 
 
@@ -155,18 +170,17 @@ public class P321CreateMaximumNumber {
                 return nums1;
             }
             int[] ints = new int[length];
+            // 数组ints的下标
             int index = 0;
-            int searchMinIndex = 0;
+            int maxValueIndex = 0;
             while (index < ints.length) {
                 int searchMaxIndex = nums1.length - (length - index);
-                int currentMax = nums1[searchMinIndex];
-                for (int i = searchMinIndex; i <= searchMaxIndex; i++) {
-                    if (nums1[i] >= currentMax) {
-                        currentMax = nums1[i];
-                        searchMinIndex = i + 1;
+                for (int i = maxValueIndex; i <= searchMaxIndex; i++) {
+                    if (nums1[i] > nums1[maxValueIndex]) {
+                        maxValueIndex = i;
                     }
                 }
-                ints[index++] = currentMax;
+                ints[index++] = nums1[maxValueIndex++];
             }
             return ints;
         }

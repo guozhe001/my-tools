@@ -67,7 +67,20 @@ public class P321CreateMaximumNumberTest {
         invokeMaxNumber(new int[]{5, 5, 1}, new int[]{4, 0, 1}, 3, new int[]{5, 5, 4});
     }
 
+    /**
+     * [2,1,7,8,0,1,7,3,5,8,9,0,0,7,0,2,2,7,3,5,5]
+     * [2,6,2,0,1,0,5,4,5,5,3,3,3,4]
+     * 35
+     * 期望结果:[2, 6, 2, 2, 1, 7, 8, 0, 1, 7, 3, 5, 8, 9, 0, 1, 0, 5, 4, 5, 5, 3, 3, 3, 4, 0, 0, 7, 0, 2, 2, 7, 3, 5, 5]
+     */
+    @Test
+    public void maxNumber4() {
+        invokeMaxNumber(new int[]{2, 1, 7, 8, 0, 1, 7, 3, 5, 8, 9, 0, 0, 7, 0, 2, 2, 7, 3, 5, 5}, new int[]{2, 6, 2, 0, 1, 0, 5, 4, 5, 5, 3, 3, 3, 4}, 35,
+                new int[]{2, 6, 2, 2, 1, 7, 8, 0, 1, 7, 3, 5, 8, 9, 0, 1, 0, 5, 4, 5, 5, 3, 3, 3, 4, 0, 0, 7, 0, 2, 2, 7, 3, 5, 5});
+    }
+
     private void invokeMaxNumber(int[] m, int[] n, int k, int[] expect) {
+        log.info("m.length={}, n.length={}", m.length, n.length);
         int[] ints = solution.maxNumber(m, n, k);
         for (int i = 0; i < ints.length; i++) {
             System.out.printf(ints[i] + " ");
@@ -99,6 +112,11 @@ public class P321CreateMaximumNumberTest {
         Assert.assertArrayEquals(new int[]{5, 5, 1}, nums);
     }
 
+    @Test
+    public void findMaxNumber1() throws Exception {
+        int[] nums = Whitebox.invokeMethod(solution, "findMaxNumber", new int[]{5, 5, 1}, 2);
+        Assert.assertArrayEquals(new int[]{5, 5}, nums);
+    }
 
     @Test
     public void dp() throws Exception {
@@ -129,6 +147,26 @@ public class P321CreateMaximumNumberTest {
     public void merge2() throws Exception {
         int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{3, 8}, new int[]{2, 7}, 4);
         Assert.assertArrayEquals(new int[]{3, 8, 2, 7}, nums);
+    }
+
+    @Test
+    public void merge3() throws Exception {
+        int[] nums = Whitebox.invokeMethod(solution, "merge", new int[]{5, 5, 1}, new int[]{4, 0, 1}, 3);
+        Assert.assertArrayEquals(new int[]{5, 5, 4}, nums);
+    }
+
+    @Test
+    public void merge4() throws Exception {
+        int[] nums = Whitebox.invokeMethod(solution, "merge",
+                new int[]{2, 1, 7, 8, 0, 1, 7, 3, 5, 8, 9, 0, 0, 7, 0, 2, 2, 7, 3, 5, 5}, new int[]{2, 6, 2, 0, 1, 0, 5, 4, 5, 5, 3, 3, 3, 4}, 35);
+        Assert.assertArrayEquals(new int[]{2, 6, 2, 2, 1, 7, 8, 0, 1, 7, 3, 5, 8, 9, 0, 1, 0, 5, 4, 5, 5, 3, 3, 3, 4, 0, 0, 7, 0, 2, 2, 7, 3, 5, 5}, nums);
+    }
+
+    @Test
+    public void nextValueMBigThanN() throws Exception {
+        boolean nextValueMBigThanN = Whitebox.invokeMethod(solution, "nextValueMBigThanN",
+                new int[]{2, 1, 7, 8, 0, 1, 7, 3, 5, 8, 9, 0, 0, 7, 0, 2, 2, 7, 3, 5, 5}, 0, new int[]{2, 6, 2, 0, 1, 0, 5, 4, 5, 5, 3, 3, 3, 4}, 0);
+        Assert.assertFalse(nextValueMBigThanN);
     }
 
     @Test

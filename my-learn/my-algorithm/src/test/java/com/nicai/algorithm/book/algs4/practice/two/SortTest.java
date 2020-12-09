@@ -11,17 +11,30 @@ import java.util.List;
 @Slf4j
 public class SortTest {
 
-    private static final Integer[] INTEGERS = {3, 2, 1};
+    static final Integer[] INTEGERS = {4, 3, 6, 5, 2, 7, 1, 3, 2, 9, 1, 2};
 
     private static final Sort<Integer> DEFAULT = comparableArray -> {
         assert false;
     };
 
-    private static final List<Sort<Integer>> SORT_IMPL = ImmutableList.of(new Selection<>(), new Insertion<>(), new Merge<>());
+    private static final List<Sort<Integer>> SORT_IMPL = ImmutableList.of(
+            new Selection<>(),
+            new Insertion<>(),
+            new Merge<>(),
+            new Quick<>(),
+            new Shell<>());
 
     @Test
     public void testSort() {
-        SORT_IMPL.forEach(this::invokeSortAndAssert);
+        SORT_IMPL.forEach(
+                sort -> {
+                    try {
+                        invokeSortAndAssert(sort);
+                    } catch (Exception e) {
+                        log.error("sort={} error, error message={}", sort.getClass().getSimpleName(), e.getMessage(), e);
+                    }
+                }
+        );
     }
 
     public void invokeSortAndAssert(Sort<Integer> sort) {
@@ -42,7 +55,7 @@ public class SortTest {
 
     @Test
     public void exch() {
-        Integer[] integers = Arrays.copyOf(INTEGERS, INTEGERS.length);
+        Integer[] integers = new Integer[]{3, 2, 1};
         DEFAULT.show(integers);
         DEFAULT.exch(integers, 0, 2);
         Assert.assertEquals(Integer.valueOf(1), integers[0]);

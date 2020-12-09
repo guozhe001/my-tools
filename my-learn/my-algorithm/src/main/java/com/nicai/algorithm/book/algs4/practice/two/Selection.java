@@ -12,8 +12,8 @@ public class Selection<T extends Comparable<T>> implements Sort<T> {
     public void sort(T[] comparableArray) {
         for (int i = 0; i < comparableArray.length; i++) {
             int min = i;
-            for (int j = i; j < comparableArray.length; j++) {
-                if (less(comparableArray[j], comparableArray[i])) {
+            for (int j = i + 1; j < comparableArray.length; j++) {
+                if (less(comparableArray[j], comparableArray[min])) {
                     min = j;
                 }
             }

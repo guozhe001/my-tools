@@ -45,6 +45,7 @@ public class P198HouseRobberTest {
      */
     private void invokeAndAssert(int[] input, int expect) {
         Assert.assertEquals(expect, solution.rob(input));
+        Assert.assertEquals(expect, solution.robRecursion(input));
     }
 
 }

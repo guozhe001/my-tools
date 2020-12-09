@@ -32,6 +32,9 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 动态规划 
 // 👍 1102 👎 0
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /**
  * 打家劫舍
  *
@@ -48,24 +51,40 @@ public class P198HouseRobber {
              * 如果dp[5] = 100；表示偷取前面的5家房屋，最多可以偷取100刀
              */
             int[] dp = new int[nums.length + 1];
-            for (int i = 0; i < nums.length; i++) {
-                int dpIndex = i + 1;
+            for (int i = 1; i <= nums.length; i++) {
+                int amountOfNumberI = nums[i - 1];
                 // 如果只偷第一个房子
-                if (i == 0) {
-                    dp[dpIndex] = nums[i];
-                } else if (i == 1) {
-                    // 如果只偷前两个房子
-                    dp[dpIndex] = Math.max(nums[i], nums[i - 1]);
+                if (i == 1) {
+                    dp[i] = amountOfNumberI;
                 } else {
                     /*
                      * 此时有两种选择:1、偷当前的房屋；2、不偷当前的房屋，两种选择取最大值
                      * 如果选择1，则要计算当前房屋的金钱与当前房屋前一个不相邻的所有房屋的金钱价值
                      * 如果选择2，则直接取当前房屋之前的所有房屋能够偷的金钱最大值
                      */
-                    dp[dpIndex] = Math.max(nums[i] + dp[i - 1], dp[i]);
+                    dp[i] = Math.max(amountOfNumberI + dp[i - 2], dp[i - 1]);
                 }
             }
             return dp[nums.length];
+        }
+
+
+        public int robRecursion(int[] nums) {
+            // 当没有房子时
+            if (Objects.isNull(nums) || nums.length == 0) {
+                return 0;
+            } else if (nums.length == 1) {
+                // 当只有一个房子时
+                return nums[0];
+            } else if (nums.length == 2) {
+                // 当只有两个房子时
+                return Math.max(nums[0], nums[1]);
+            } else {
+                // 其他情况
+                // total(n) = max(amount(n) + total(n-2), total(n-1))
+                return Math.max(nums[nums.length - 1] + robRecursion(Arrays.copyOf(nums, nums.length - 2)),
+                        robRecursion(Arrays.copyOf(nums, nums.length - 1)));
+            }
         }
     }
 //leetcode submit region end(Prohibit modification and deletion)

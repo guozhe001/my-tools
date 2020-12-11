@@ -56,4 +56,22 @@ public class ArrayUtil {
         return Arrays.copyOfRange(tempArray, 0, index);
     }
 
+    public static <T> boolean isSorted(Comparable<T>[] comparables) {
+        for (int i = 0; i < comparables.length - 1; i++) {
+            if (comparables[i].compareTo((T) comparables[i + 1]) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isSorted(int[] nums) {
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

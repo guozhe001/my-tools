@@ -41,4 +41,19 @@ public class ArrayUtilTest {
             Assert.assertEquals(integers.size(), nums.length);
         });
     }
+
+    @Test
+    public void isSorted() {
+        Assert.assertTrue(ArrayUtil.isSorted(new Integer[] { 0, 1, 2, 3, 4, 5 }));
+    }
+
+    @Test
+    public void isSorted0() {
+        Assert.assertTrue(ArrayUtil.isSorted(new int[] { 0, 1, 2, 3, 4, 5 }));
+    }
+
+    @Test
+    public void isSorted1() {
+        Assert.assertFalse(ArrayUtil.isSorted(new Integer[] { 0, 1, 2, 3, 4, 5, 1 }));
+    }
 }

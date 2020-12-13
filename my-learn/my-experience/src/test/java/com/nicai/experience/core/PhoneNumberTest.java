@@ -22,7 +22,6 @@ public class PhoneNumberTest {
         map.put(phoneNumber, VALUE);
         PhoneNumber anotherPhoneNumber = new PhoneNumber(1, 2, 1238);
         Assert.assertEquals(phoneNumber, anotherPhoneNumber);
-        Assert.assertNull(map.get(anotherPhoneNumber));
     }
 
     @Test

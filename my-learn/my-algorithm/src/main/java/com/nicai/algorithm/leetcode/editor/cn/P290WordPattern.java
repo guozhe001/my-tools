@@ -41,18 +41,26 @@ public class P290WordPattern {
             if (patternChars.length != words.length) {
                 return false;
             }
-            //key为pattern的字母，value为该字母对应的单词
+            //key为pattern的字母，value为该字母对应的word
             Map<String, String> patternMap = new HashMap<>(pattern.length());
+            // key为word，value为pattern的字母
+            Map<String, String> wordMap = new HashMap<>(pattern.length());
             for (int i = 0; i < patternChars.length; i++) {
+                String word = words[i];
                 String key = String.valueOf(patternChars[i]);
-                // 如果map中已经存在此key，则验证map中的value和当前的值是否相同
+                // 如果map中已经存在此key，则验证patternMap和wordMap保存的数据可以相互映射
                 if (patternMap.containsKey(key)) {
                     // 如果不相同，直接返回false
-                    if (!patternMap.get(key).equals(words[i])) {
+                    if (!patternMap.get(key).equals(word) || !key.equals(wordMap.get(word))) {
                         return false;
                     }
                 } else {
-                    patternMap.put(key, words[i]);
+                    // 如果单词key不存在，则key对应的word也不应该存在，如果存在则不符合规律
+                    if (wordMap.containsKey(word)) {
+                        return false;
+                    }
+                    patternMap.put(key, word);
+                    wordMap.put(word, key);
                 }
             }
             return true;

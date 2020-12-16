@@ -51,6 +51,16 @@ public class P290WordPatternTest {
         invoke("abba", "dog dog dog dog", false);
     }
 
+    /**
+     * 示例 5:
+     * 输入: pattern = "abc", str = "dog cat dog"
+     * 输出: false
+     */
+    @Test
+    public void wordPattern5() {
+        invoke("abc", "dog cat dog", false);
+    }
+
 
     private void invoke(String pattern, String str, boolean expect) {
         Assert.assertEquals(expect, solution.wordPattern(pattern, str));

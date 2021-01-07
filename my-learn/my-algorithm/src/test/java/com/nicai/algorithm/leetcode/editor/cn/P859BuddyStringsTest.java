@@ -6,7 +6,6 @@ import org.junit.Test;
 public class P859BuddyStringsTest {
     private final P859BuddyStrings.Solution solution = new P859BuddyStrings().new Solution();
 
-
     /**
      * 示例 1：
      * <p>
@@ -69,5 +68,27 @@ public class P859BuddyStringsTest {
     @Test
     public void buddyStrings5() {
         Assert.assertFalse(solution.buddyStrings("", "aa"));
+    }
+
+    /**
+     * 解答失败:
+     * 测试用例:"abcd" ,"badc"
+     * 测试结果:true
+     * 期望结果:false
+     */
+    @Test
+    public void buddyStrings6() {
+        Assert.assertFalse(solution.buddyStrings("abcd", "badc"));
+    }
+
+    /**
+     * 解答失败:
+     * 测试用例:"abcaa", "abcbb"
+     * 测试结果:true
+     * 期望结果:false
+     */
+    @Test
+    public void buddyStrings7() {
+        Assert.assertFalse(solution.buddyStrings("abcaa", "abcbb"));
     }
 }

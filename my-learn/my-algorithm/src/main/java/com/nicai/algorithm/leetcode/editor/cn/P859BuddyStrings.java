@@ -54,6 +54,9 @@ package com.nicai.algorithm.leetcode.editor.cn;
 // Related Topics 字符串 
 // 👍 122 👎 0
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class P859BuddyStrings {
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
@@ -61,10 +64,25 @@ public class P859BuddyStrings {
             if (A.length() != B.length()) {
                 return false;
             }
-            return buddyStrings(A.toCharArray(), B.toCharArray());
+            return A.equals(B) ? buddyStringsA(A.toCharArray(), B.toCharArray()) : buddyStrings(A.toCharArray(), B.toCharArray());
         }
 
         public boolean buddyStrings(char[] a, char[] b) {
+            List<Integer> unSameIndex = new ArrayList<>();
+            for (int i = 0; i < a.length; i++) {
+                if (a[i] != b[i]) {
+                    unSameIndex.add(i);
+                }
+            }
+            if (unSameIndex.size() != 2) {
+                return false;
+            } else {
+                swap(a, unSameIndex.get(0), unSameIndex.get(1));
+                return checkCompare(a, b);
+            }
+        }
+
+        public boolean buddyStringsA(char[] a, char[] b) {
             for (int i = 0; i < a.length - 1; i++) {
                 for (int j = i + 1; j < a.length; j++) {
                     swap(a, i, j);
@@ -94,6 +112,7 @@ public class P859BuddyStrings {
         }
 
     }
+
 //leetcode submit region end(Prohibit modification and deletion)
 
 }

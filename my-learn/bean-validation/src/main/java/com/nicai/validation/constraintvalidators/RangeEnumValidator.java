@@ -15,7 +15,7 @@ import java.util.Set;
  * @author guozhe
  * @date 2017/11/27
  */
-public class EnumValidator implements ConstraintValidator<RangeEnumConstraint, String> {
+public class RangeEnumValidator implements ConstraintValidator<RangeEnumConstraint, String> {
     /**
      * 枚举Class
      */

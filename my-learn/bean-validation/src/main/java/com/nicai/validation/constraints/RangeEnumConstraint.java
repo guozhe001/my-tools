@@ -1,6 +1,6 @@
 package com.nicai.validation.constraints;
 
-import com.nicai.validation.constraintvalidators.EnumValidator;
+import com.nicai.validation.constraintvalidators.RangeEnumValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.FIELD, ElementType.METHOD, ElementType.TYPE_USE, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {EnumValidator.class})
+@Constraint(validatedBy = {RangeEnumValidator.class})
 public @interface RangeEnumConstraint {
     String message() default "值不正确";
 

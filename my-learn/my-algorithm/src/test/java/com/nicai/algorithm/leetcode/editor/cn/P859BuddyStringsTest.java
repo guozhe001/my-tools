@@ -1,7 +1,10 @@
 package com.nicai.algorithm.leetcode.editor.cn;
 
+import com.google.common.collect.Maps;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.Map;
 
 public class P859BuddyStringsTest {
     private final P859BuddyStrings.Solution solution = new P859BuddyStrings().new Solution();

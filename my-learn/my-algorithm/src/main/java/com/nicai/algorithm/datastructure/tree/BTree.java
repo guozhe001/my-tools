@@ -1,4 +1,4 @@
-package com.nicai.algorithm.datastructure;
+package com.nicai.algorithm.datastructure.tree;
 // Searching a key on a B-tree in Java
 
 public class BTree {

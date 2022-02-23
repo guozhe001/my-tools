@@ -1,8 +1,5 @@
 package com.nicai.designpattern.interceptor;
 
-import com.nicai.designpattern.interceptor.Request;
-import com.nicai.designpattern.interceptor.Response;
-
 /**
  * 被拦截的接口
  *

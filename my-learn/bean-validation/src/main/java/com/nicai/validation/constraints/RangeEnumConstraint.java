@@ -20,7 +20,7 @@ import java.lang.annotation.Target;
 public @interface RangeEnumConstraint {
     String message() default "值不正确";
 
-    Class<? extends Enum> value();
+    Class<? extends Enum<?>> value();
 
     Class<?>[] groups() default {};
 

@@ -21,7 +21,7 @@ public class NumberEnumValidator implements ConstraintValidator<ValidNumberEnum,
     /**
      * 枚举Class
      */
-    private Class<? extends Enum> enumClass;
+    private Class<? extends Enum<?>> enumClass;
 
     @Override
     public void initialize(ValidNumberEnum constraintAnnotation) {
@@ -34,7 +34,7 @@ public class NumberEnumValidator implements ConstraintValidator<ValidNumberEnum,
             return true;
         }
         List<Integer> values = Lists.newArrayList();
-        for (Enum resultStatus : enumClass.getEnumConstants()) {
+        for (Enum<?> resultStatus : enumClass.getEnumConstants()) {
             if (resultStatus instanceof EnumTrait) {
                 values.add(((EnumTrait) resultStatus).getCode());
             }

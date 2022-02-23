@@ -21,7 +21,7 @@ public class StudentTest {
     /**
      * 性别和校验组对应关系
      */
-    private static final Map<String, Class> GROUP_MAP = Maps.newHashMap();
+    private static final Map<String, Class<?>> GROUP_MAP = Maps.newHashMap();
 
     @BeforeClass
     public static void initGroupMap() {

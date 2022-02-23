@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 public @interface ValidNumberEnum {
     String message() default "枚举值不正确";
 
-    Class<? extends Enum> value();
+    Class<? extends Enum<?>> value();
 
     Class<?>[] groups() default {};
 

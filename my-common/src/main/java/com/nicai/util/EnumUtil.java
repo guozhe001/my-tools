@@ -66,7 +66,7 @@ public class EnumUtil {
      * @param enumClass 枚举类型
      * @return 此类型的name列表
      */
-    public static Set<String> listAllNames(Class<? extends Enum> enumClass) {
+    public static Set<String> listAllNames(Class<? extends Enum<?>> enumClass) {
         return converterToName(enumClass.getEnumConstants());
     }
 
@@ -76,7 +76,7 @@ public class EnumUtil {
      * @param enums 枚举数组
      * @return 枚举数组的name列表
      */
-    private static Set<String> converterToName(Enum[] enums) {
+    private static Set<String> converterToName(Enum<?>[] enums) {
         return Arrays.stream(enums).map(Enum::name).collect(Collectors.toSet());
     }
 

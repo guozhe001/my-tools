@@ -19,7 +19,7 @@ public class RangeEnumValidator implements ConstraintValidator<RangeEnumConstrai
     /**
      * 枚举Class
      */
-    private Class<? extends Enum> enumClass;
+    private Class<? extends Enum<?>> enumClass;
 
     @Override
     public void initialize(RangeEnumConstraint constraintAnnotation) {

@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Guess",
+            "request": "launch",
+            "mainClass": "com.nicai.util.Guess",
+            "projectName": "my-common"
+        },
+        {
+            "type": "java",
             "name": "Launch BTree",
             "request": "launch",
             "mainClass": "com.nicai.algorithm.datastructure.BTree",

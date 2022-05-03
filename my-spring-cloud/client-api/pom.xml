@@ -8,9 +8,9 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>ribbon-consumer</artifactId>
-    <name>ribbon-consumer</name>
-    <description>ribbon-consumer test</description>
+    <artifactId>client-api</artifactId>
+    <name>client-api</name>
+    <description>ribbon test</description>
 
     <dependencies>
         <dependency>

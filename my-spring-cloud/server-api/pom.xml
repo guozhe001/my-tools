@@ -8,9 +8,9 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>eureka-client</artifactId>
-    <name>eureka-client</name>
-    <description>eureka-client test</description>
+    <artifactId>server-api</artifactId>
+    <name>server-api</name>
+    <description>server注册到eureka提供服务</description>
 
     <dependencies>
         <dependency>

@@ -7,5 +7,5 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 RUN mkdir -p /usr/src/app
 COPY target/server-api-1.0.jar /usr/src/app
 WORKDIR /usr/src/app
-EXPOSE 8888
-CMD ["java", "-Dspring.profiles.active=test", "-jar", "server-api-1.0.jar", "--server.port=8888"]
+EXPOSE 8889
+CMD ["java", "-Dspring.profiles.active=test", "-jar", "server-api-1.0.jar", "--server.port=8889"]

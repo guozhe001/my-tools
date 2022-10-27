@@ -60,6 +60,8 @@ public class P20ValidParentheses {
                     if (pair.containsKey(sub)) {
                         if (Objects.equals(pair.get(sub), strings.peek())) {
                             strings.pop();
+                        }else {
+                            strings.push(sub);
                         }
                     } else {
                         strings.push(sub);
@@ -71,9 +73,9 @@ public class P20ValidParentheses {
 
         private Map<String, String> pair() {
             HashMap<String, String> map = new HashMap<>();
-            map.put("(", ")");
-            map.put("{", "}");
-            map.put("[", "]");
+            map.put(")", "(");
+            map.put("}", "{");
+            map.put("]", "[");
             return map;
         }
 

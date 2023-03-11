@@ -2,7 +2,6 @@ package com.nicai.controller;
 
 import com.nicai.ao.TransOutput;
 import com.nicai.ao.UserAO;
-import com.nicai.config.MethodValidationConfig;
 import com.nicai.enums.PaySource;
 import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.extern.slf4j.Slf4j;

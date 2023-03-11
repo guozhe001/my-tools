@@ -430,12 +430,11 @@ public class TypeCheckingAO {
 
 ```
 1. 约束用在方法入参中，但是此约束并没有声明可以用在方法入参中而导致的约束不生效 ValidationController#pushToPaySource
+
 ```java
 package com.nicai.controller;
 
 import com.nicai.ao.TransOutput;
-import com.nicai.ao.UserAO;
-import com.nicai.config.MethodValidationConfig;
 import com.nicai.enums.PaySource;
 import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.extern.slf4j.Slf4j;
@@ -443,10 +442,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 
 /**
@@ -616,12 +612,11 @@ public class Student extends Person {
 ## 与spring配合使用
 
 ### 入参是基本数据类型的包装类校验：ValidationController#pushToPaySource
+
 ```java
 package com.nicai.controller;
 
 import com.nicai.ao.TransOutput;
-import com.nicai.ao.UserAO;
-import com.nicai.config.MethodValidationConfig;
 import com.nicai.enums.PaySource;
 import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.extern.slf4j.Slf4j;
@@ -629,7 +624,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -692,23 +686,18 @@ public class ValidationController {
 
 ```
 ### 入参是bean的校验：ValidationController#receiveUser
+
 ```java
 package com.nicai.controller;
 
 import com.nicai.ao.TransOutput;
 import com.nicai.ao.UserAO;
-import com.nicai.config.MethodValidationConfig;
-import com.nicai.enums.PaySource;
-import com.nicai.validation.constraints.RangeEnumConstraint;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 
 /**

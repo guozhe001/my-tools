@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = {RangeEnumValidator.class})
 public @interface RangeEnumConstraint {
-    String message() default "值不正确";
+    String message() default "{com.nicai.validation.constraints.RangeEnumConstraint.message}";
 
     Class<? extends Enum<?>> value();
 

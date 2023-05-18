@@ -49,15 +49,16 @@ public class P5LongestPalindromicSubstring {
         // 最长公共字串的解法，但是不是最长的回文字串
         private String solution(String s) {
             char[] chars = s.toCharArray();
-            char[] reversalChars = reversal(chars);
             int length = chars.length;
             Map<Integer, int[]> map = new HashMap<>();
             int maxLength = 0;
             // 记录当前的回文字串的长度
             int[][] dp = new int[length + 1][length + 1];
+            dp[1][1] = 1;
             for (int i = 0; i < length; i++) {
-                for (int j = 0; j < length; j++) {
-                    if (chars[i] == reversalChars[j]) {
+                String substring = s.substring(0, i + 1);
+                for (int j = substring.length() - 1; j >= 0; j--) {
+                    if (Objects.equals(substring.charAt(i), substring.charAt(j))) {
                         int currentLength = dp[i][j] + 1;
                         dp[i + 1][j + 1] = currentLength;
                         if (currentLength > maxLength) {
@@ -83,13 +84,14 @@ public class P5LongestPalindromicSubstring {
             return stringBuilder.toString();
         }
 
-        private char[] reversal(char[] chars) {
+        private String reversal(String string) {
+            char[] chars = string.toCharArray();
             int length = chars.length;
             char[] result = new char[length];
             for (int i = 0; i < length; i++) {
                 result[i] = chars[length - 1 - i];
             }
-            return result;
+            return String.valueOf(result);
         }
 
         /**

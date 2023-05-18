@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -78,6 +79,17 @@ public class EnumUtil {
      */
     private static Set<String> converterToName(Enum<?>[] enums) {
         return Arrays.stream(enums).map(Enum::name).collect(Collectors.toSet());
+    }
+
+
+    /**
+     * 把枚举值转换成name
+     *
+     * @param enums 枚举数组
+     * @return 枚举数组的name列表
+     */
+    private static Set<String> converterToCode(Enum<?>[] enums) {
+        return Arrays.stream(enums).filter(Objects::nonNull).map(Enum::name).collect(Collectors.toSet());
     }
 
 
